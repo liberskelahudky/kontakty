@@ -260,46 +260,11 @@
   {
    "id": "c8",
    "d": "marketing",
-   "name": "Lucie Králová",
+   "name": "Markéta Literová",
    "role": "marketingový manažer",
    "ph": [
     {
      "n": "731 198 894",
-     "t": ""
-    }
-   ],
-   "em": [
-    "kralova@liberskelahudky.cz"
-   ],
-   "photo": "",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
-   "id": "c9",
-   "d": "marketing",
-   "name": "Aneta Harenčáková",
-   "role": "specialista marketingového oddělení",
-   "ph": [],
-   "em": [
-    "harencakova@liberskelahudky.cz"
-   ],
-   "photo": "",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
-   "id": "c10",
-   "d": "marketing",
-   "name": "Markéta Literová",
-   "role": "digitální a online marketing",
-   "ph": [
-    {
-     "n": "777 735 420",
      "t": ""
     }
    ],
@@ -309,13 +274,18 @@
    "photo": "",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "wolt",
+    "televize",
+    "eshop",
+    "interní eshop"
+   ],
    "areas": ""
   },
   {
    "id": "c11",
    "d": "marketing",
-   "name": "Lucie Sedláčková",
+   "name": "Lenka Nehasilová",
    "role": "specialista marketingového oddělení",
    "ph": [
     {
@@ -324,7 +294,7 @@
     }
    ],
    "em": [
-    "sedlackova@liberskelahudky.cz"
+    "nehasilova@liberskelahudky.cz"
    ],
    "photo": "",
    "lead": false,
@@ -457,10 +427,13 @@
    "em": [
     "fetterlova@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c19-muz471n3.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "spolupráce",
+    "velkoobchod"
+   ],
    "areas": ""
   },
   {
@@ -481,7 +454,7 @@
    "em": [
     "objednavky@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c20-muz4734o.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -502,7 +475,7 @@
     "info@liberskelahudky.cz",
     "lisak@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c21-muz474cp.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -542,7 +515,7 @@
    "em": [
     "vedoucivyroby@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c23-muz475m6.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -739,13 +712,13 @@
   {
    "id": "c34",
    "d": "prodejny",
-   "name": "Olga Fritschová",
+   "name": "Taisa",
    "role": "provozní",
    "ph": [],
    "em": [
     "ostrovskeho@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c34-muz476u7.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -943,7 +916,7 @@
    "em": [
     "ruzyne@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c45-muz4782q.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1128,7 +1101,7 @@
    "em": [
     "elis.masa@seznam.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c55-muz479ag.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1148,7 +1121,7 @@
    "em": [
     "alch@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c56-muz47aeh.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1452,6 +1425,19 @@
    "em": [],
    "photo": "",
    "lead": true,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "cmuz3woya",
+   "d": "nakup",
+   "name": "Věra Malá",
+   "role": "",
+   "ph": [],
+   "em": [],
+   "photo": "fotky/cmuz3woya-muz47bqn.jpg",
+   "lead": false,
    "about": "",
    "topics": [],
    "areas": ""
