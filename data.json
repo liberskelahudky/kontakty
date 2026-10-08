@@ -396,7 +396,7 @@
    "em": [
     "ucetni@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c16-muz3t2oy.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -416,7 +416,7 @@
    "em": [
     "ucetni@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c17-muz3t3yd.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1439,6 +1439,19 @@
    "em": [],
    "photo": "",
    "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "cmuz3seox",
+   "d": "ucetni",
+   "name": "Anna Herdová",
+   "role": "finanční ředitelka",
+   "ph": [],
+   "em": [],
+   "photo": "",
+   "lead": true,
    "about": "",
    "topics": [],
    "areas": ""
