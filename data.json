@@ -1,0 +1,1539 @@
+{
+ "depts": [
+  {
+   "id": "vedeni",
+   "name": "Vedení a management",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "kancelar",
+   "name": "Kancelář, asistentky",
+   "note": "společný e-mail kancelar@liberskelahudky.cz",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "personalni",
+   "name": "Personální oddělení",
+   "note": "",
+   "about": "",
+   "teamTitle": "Jana a Sára mají na starosti",
+   "team": [
+    "zajištění inzerce",
+    "nábor zaměstnanců",
+    "komunikaci s oblastním vedoucím a vedoucími středisek",
+    "koordinaci výběrového procesu",
+    "administraci nástupu zaměstnance",
+    "pracovněprávní dokumentaci",
+    "personální změny v průběhu pracovního poměru",
+    "podporu vedoucích zaměstnanců v personálních otázkách",
+    "řešení absence a dalších personálních situací",
+    "ukončení pracovního poměru",
+    "související personální administrativu"
+   ]
+  },
+  {
+   "id": "ucetni",
+   "name": "Účetní oddělení",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "nakup",
+   "name": "Obchodní oddělení a nákup",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "marketing",
+   "name": "Marketing",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "vyroba",
+   "name": "Výroba a expedice",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "lahovice",
+   "name": "Pekárna Lahovice",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "kvalita",
+   "name": "Kontrola kvality MO",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "prodejny",
+   "name": "Prodejny a provozní",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  },
+  {
+   "id": "ridici",
+   "name": "Řidiči",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": []
+  }
+ ],
+ "contacts": [
+  {
+   "id": "c1",
+   "d": "kancelar",
+   "name": "Kamila Anna Linderová",
+   "role": "asistentka provozu",
+   "ph": [
+    {
+     "n": "703 636 921",
+     "t": ""
+    }
+   ],
+   "em": [
+    "asistentka@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c2",
+   "d": "kancelar",
+   "name": "Kateřina Vošahlíková",
+   "role": "asistentka vedení",
+   "ph": [
+    {
+     "n": "604 345 716",
+     "t": ""
+    }
+   ],
+   "em": [
+    "marketing.asistentka@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c3",
+   "d": "personalni",
+   "name": "Petra Dlouhá",
+   "role": "HR ředitelka",
+   "ph": [
+    {
+     "n": "777 072 804",
+     "t": ""
+    }
+   ],
+   "em": [
+    "dlouha@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": true,
+   "about": "Vedení personálního oddělení. Zastřešuje HR a personální záležitosti napříč firmou.",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c73",
+   "d": "personalni",
+   "name": "Jana Vaněk",
+   "role": "",
+   "ph": [],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [
+    "pracovní smlouva – nástup, odchod nebo změna",
+    "potvrzení pro úřady, banku apod.",
+    "osobní údaje a personální dokumenty",
+    "lékařská prohlídka",
+    "Munipolis nebo FABIS",
+    "nábor a volná pracovní místa"
+   ],
+   "areas": "Nábor • HR komunikace • pracovní dokumentace • personální systémy"
+  },
+  {
+   "id": "c4",
+   "d": "vedeni",
+   "name": "David Fendrych",
+   "role": "oblastní manažer",
+   "ph": [
+    {
+     "n": "602 146 771",
+     "t": "S"
+    }
+   ],
+   "em": [
+    "fendrych@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c5",
+   "d": "vedeni",
+   "name": "Richard Sviták",
+   "role": "oblastní manažer",
+   "ph": [
+    {
+     "n": "799 025 506",
+     "t": ""
+    }
+   ],
+   "em": [
+    "svitak@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c6",
+   "d": "vedeni",
+   "name": "Anna Herdová",
+   "role": "finanční manažer",
+   "ph": [],
+   "em": [
+    "herdova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c7",
+   "d": "marketing",
+   "name": "Jitka Hallerová",
+   "role": "marketing a PR",
+   "ph": [
+    {
+     "n": "603 276 276",
+     "t": ""
+    }
+   ],
+   "em": [
+    "hallerova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c8",
+   "d": "marketing",
+   "name": "Lucie Králová",
+   "role": "marketingový manažer",
+   "ph": [
+    {
+     "n": "731 198 894",
+     "t": ""
+    }
+   ],
+   "em": [
+    "kralova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c9",
+   "d": "marketing",
+   "name": "Aneta Harenčáková",
+   "role": "specialista marketingového oddělení",
+   "ph": [],
+   "em": [
+    "harencakova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c10",
+   "d": "marketing",
+   "name": "Markéta Literová",
+   "role": "digitální a online marketing",
+   "ph": [
+    {
+     "n": "777 735 420",
+     "t": ""
+    }
+   ],
+   "em": [
+    "literova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c11",
+   "d": "marketing",
+   "name": "Lucie Sedláčková",
+   "role": "specialista marketingového oddělení",
+   "ph": [
+    {
+     "n": "603 757 151",
+     "t": ""
+    }
+   ],
+   "em": [
+    "sedlackova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c12",
+   "d": "personalni",
+   "name": "Sandra Rafflerová",
+   "role": "personální administrativa",
+   "ph": [
+    {
+     "n": "733 125 025",
+     "t": ""
+    }
+   ],
+   "em": [
+    "rafflerova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c13",
+   "d": "personalni",
+   "name": "Aneta Řezníčková",
+   "role": "mzdy Vestec a Lahovice",
+   "ph": [
+    {
+     "n": "728 423 080",
+     "t": ""
+    }
+   ],
+   "em": [
+    "reznickova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [
+    "mzda – Vestec a Lahovice",
+    "docházka nebo docházkový čip",
+    "PowerKey",
+    "MultiSport",
+    "Edenred",
+    "masáže",
+    "jazykové kurzy",
+    "příspěvek na penzijní spoření",
+    "slevová karta pro rodinného příslušníka"
+   ],
+   "areas": ""
+  },
+  {
+   "id": "c14",
+   "d": "personalni",
+   "name": "Lenka Bobrušková",
+   "role": "mzdy prodejny",
+   "ph": [
+    {
+     "n": "776 880 117",
+     "t": ""
+    }
+   ],
+   "em": [
+    "bobruskova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c15",
+   "d": "personalni",
+   "name": "Daniela Horčičková",
+   "role": "nábor",
+   "ph": [
+    {
+     "n": "731 110 010",
+     "t": ""
+    }
+   ],
+   "em": [
+    "horcickova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c16",
+   "d": "ucetni",
+   "name": "Tereza Nováková",
+   "role": "fakturant",
+   "ph": [
+    {
+     "n": "734 233 713",
+     "t": ""
+    }
+   ],
+   "em": [
+    "ucetni@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c17",
+   "d": "ucetni",
+   "name": "Simona Zoulíková",
+   "role": "fakturant",
+   "ph": [
+    {
+     "n": "734 233 713",
+     "t": ""
+    }
+   ],
+   "em": [
+    "ucetni@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c18",
+   "d": "ucetni",
+   "name": "Monika Šalanská",
+   "role": "skladové hospodářství prodejny",
+   "ph": [
+    {
+     "n": "604 881 582",
+     "t": ""
+    }
+   ],
+   "em": [
+    "salanska@liberskelahudky.cz",
+    "info@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c19",
+   "d": "nakup",
+   "name": "Lenka Fetterlová",
+   "role": "nákupčí",
+   "ph": [
+    {
+     "n": "777 599 727",
+     "t": ""
+    }
+   ],
+   "em": [
+    "fetterlova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c20",
+   "d": "nakup",
+   "name": "Lenka Kmentová, Věra Malá",
+   "role": "objednávkové oddělení",
+   "ph": [
+    {
+     "n": "734 449 901",
+     "t": ""
+    },
+    {
+     "n": "241 941 901",
+     "t": ""
+    }
+   ],
+   "em": [
+    "objednavky@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c21",
+   "d": "vyroba",
+   "name": "Jan Lisák",
+   "role": "vedoucí expedice / info linka",
+   "ph": [
+    {
+     "n": "731 151 314",
+     "t": ""
+    }
+   ],
+   "em": [
+    "info@liberskelahudky.cz",
+    "lisak@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c22",
+   "d": "vyroba",
+   "name": "Roman Sláma",
+   "role": "vedoucí expedice / info linka",
+   "ph": [
+    {
+     "n": "731 463 812",
+     "t": "S"
+    }
+   ],
+   "em": [
+    "slama@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c23",
+   "d": "vyroba",
+   "name": "Dominik Matouš",
+   "role": "vedoucí výroby denní směny",
+   "ph": [
+    {
+     "n": "604 884 798",
+     "t": ""
+    }
+   ],
+   "em": [
+    "vedoucivyroby@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c24",
+   "d": "vyroba",
+   "name": "Vladimír Šrámek",
+   "role": "vedoucí výroby noční směny",
+   "ph": [
+    {
+     "n": "737 798 434",
+     "t": ""
+    }
+   ],
+   "em": [
+    "vedoucivyroby@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c25",
+   "d": "vyroba",
+   "name": "Pavel Nechvátal",
+   "role": "vedoucí skladu",
+   "ph": [
+    {
+     "n": "737 800 653",
+     "t": ""
+    }
+   ],
+   "em": [
+    "sklad@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c26",
+   "d": "vyroba",
+   "name": "David Kalina, Jiří Miko",
+   "role": "sklad Vestec",
+   "ph": [
+    {
+     "n": "737 419 369",
+     "t": ""
+    }
+   ],
+   "em": [
+    "sklad@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c27",
+   "d": "vyroba",
+   "name": "Jan Rovenský",
+   "role": "expedient",
+   "ph": [
+    {
+     "n": "734 233 711",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c28",
+   "d": "vyroba",
+   "name": "Milan Rozšafný",
+   "role": "expedient",
+   "ph": [
+    {
+     "n": "737 863 186",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c29",
+   "d": "vyroba",
+   "name": "Mykhailo Shikiria",
+   "role": "expedient",
+   "ph": [
+    {
+     "n": "774 086 114",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c30",
+   "d": "lahovice",
+   "name": "Martin Kolankiewicz",
+   "role": "vedoucí provozu",
+   "ph": [
+    {
+     "n": "731 294 002",
+     "t": ""
+    }
+   ],
+   "em": [
+    "lahovice@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": true,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c31",
+   "d": "lahovice",
+   "name": "Věra Sluková",
+   "role": "zástupce vedoucího",
+   "ph": [
+    {
+     "n": "603 868 999",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c32",
+   "d": "lahovice",
+   "name": "Zdeněk Balcar",
+   "role": "řidič Lahovice",
+   "ph": [
+    {
+     "n": "732 119 077",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c33",
+   "d": "lahovice",
+   "name": "Petr Švec",
+   "role": "řidič Lahovice",
+   "ph": [
+    {
+     "n": "774 400 751",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c34",
+   "d": "prodejny",
+   "name": "Olga Fritschová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "ostrovskeho@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Smíchov – Ostrovského",
+   "no": "50",
+   "sp": "731 151 313"
+  },
+  {
+   "id": "c35",
+   "d": "prodejny",
+   "name": "Gabriela Dvořáková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "palmovka@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Palmovka",
+   "no": "51",
+   "sp": "731 151 317"
+  },
+  {
+   "id": "c36",
+   "d": "prodejny",
+   "name": "Jitka Kosíková, Erika Sýkorová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "dukelskychhrdinu@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Letná",
+   "no": "52",
+   "sp": "739 047 959"
+  },
+  {
+   "id": "c37",
+   "d": "prodejny",
+   "name": "Marie Navrátilová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "vodickova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Vodičkova",
+   "no": "53",
+   "sp": "733 766 054"
+  },
+  {
+   "id": "c38",
+   "d": "prodejny",
+   "name": "Ivona Skrbková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "hlavak@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Hlavní nádraží",
+   "no": "54",
+   "sp": "731 259 525"
+  },
+  {
+   "id": "c39",
+   "d": "prodejny",
+   "name": "Kateřina Pavelková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "prodejnaliber@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Libeř",
+   "no": "57",
+   "sp": "739 642 680"
+  },
+  {
+   "id": "c40",
+   "d": "prodejny",
+   "name": "Kateřina Pavelková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "jesenice@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Jesenice",
+   "no": "58",
+   "sp": "731 151 311"
+  },
+  {
+   "id": "c41",
+   "d": "prodejny",
+   "name": "Radka Přibylová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "krc@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Krč",
+   "no": "60",
+   "sp": "734 233 714"
+  },
+  {
+   "id": "c42",
+   "d": "prodejny",
+   "name": "Věra Málková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "porici@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Poříčí",
+   "no": "64",
+   "sp": "734 233 715"
+  },
+  {
+   "id": "c43",
+   "d": "prodejny",
+   "name": "Farzanh Yazdaniová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "budejovicka@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Budějovická",
+   "no": "65",
+   "sp": "734 233 712"
+  },
+  {
+   "id": "c44",
+   "d": "prodejny",
+   "name": "Monika Mihalová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "modrany@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Modřany",
+   "no": "66",
+   "sp": "731 344 934"
+  },
+  {
+   "id": "c45",
+   "d": "prodejny",
+   "name": "Jakub Hermánek",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "ruzyne@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Ruzyně",
+   "no": "67",
+   "sp": "703 635 650"
+  },
+  {
+   "id": "c46",
+   "d": "prodejny",
+   "name": "Lucie Murtingerová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "haje@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Háje",
+   "no": "68",
+   "sp": "703 636 919"
+  },
+  {
+   "id": "c47",
+   "d": "prodejny",
+   "name": "Veronika Hromková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "arkady@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Arkády",
+   "no": "69",
+   "sp": "703 635 653"
+  },
+  {
+   "id": "c48",
+   "d": "prodejny",
+   "name": "Erszébet Rápová",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "dbk@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "DBK",
+   "no": "70",
+   "sp": "703 635 637"
+  },
+  {
+   "id": "c49",
+   "d": "prodejny",
+   "name": "Petr Šindelář",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "dejvice@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Dejvická",
+   "no": "71",
+   "sp": "703 635 658"
+  },
+  {
+   "id": "c50",
+   "d": "prodejny",
+   "name": "Jaroslava Krejčí",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "vysocany@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Vysočany",
+   "no": "72",
+   "sp": "604 271 071"
+  },
+  {
+   "id": "c51",
+   "d": "prodejny",
+   "name": "Miroslava Smuk",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "holesovice@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Holešovice",
+   "no": "73",
+   "sp": "605 549 235"
+  },
+  {
+   "id": "c52",
+   "d": "prodejny",
+   "name": "Zdenka Pavlíková",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "cb.krajinska@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "České Budějovice",
+   "no": "74",
+   "sp": "603 755 230"
+  },
+  {
+   "id": "c53",
+   "d": "prodejny",
+   "name": "Tetiana Kravets",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "ippavlova@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "I. P. Pavlova",
+   "no": "75",
+   "sp": "604 786 462"
+  },
+  {
+   "id": "c54",
+   "d": "prodejny",
+   "name": "Iryna Palinchak",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "novysmichov@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "OC Nový Smíchov",
+   "no": "76",
+   "sp": "734 569 346"
+  },
+  {
+   "id": "c55",
+   "d": "kvalita",
+   "name": "Mariya Elišáková",
+   "role": "kvalita výroby MO prodejen",
+   "ph": [
+    {
+     "n": "723 260 398",
+     "t": ""
+    }
+   ],
+   "em": [
+    "elis.masa@seznam.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c56",
+   "d": "kvalita",
+   "name": "Oksana Alch",
+   "role": "kvalita výroby MO prodejen",
+   "ph": [
+    {
+     "n": "737 898 699",
+     "t": ""
+    }
+   ],
+   "em": [
+    "alch@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c57",
+   "d": "ridici",
+   "name": "Jiří Vejvoda",
+   "role": "České Budějovice",
+   "ph": [
+    {
+     "n": "604 136 405",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "vejvoda@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c58",
+   "d": "ridici",
+   "name": "Zdeněk Kučera",
+   "role": "Libeř, Krč",
+   "ph": [
+    {
+     "n": "734 251 736",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c59",
+   "d": "ridici",
+   "name": "Jaroslav Černohlávek",
+   "role": "Poříčí, Holešovice + Makro",
+   "ph": [
+    {
+     "n": "734 233 717",
+     "t": "P"
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c60",
+   "d": "ridici",
+   "name": "Vaskul Volodymyr",
+   "role": "Jesenice, Vysočany",
+   "ph": [
+    {
+     "n": "608 830 116",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c61",
+   "d": "ridici",
+   "name": "Martin Novotný",
+   "role": "Arkády",
+   "ph": [
+    {
+     "n": "776 195 799",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c62",
+   "d": "ridici",
+   "name": "Stanislav Talich",
+   "role": "Ruzyně",
+   "ph": [
+    {
+     "n": "724 859 924",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c63",
+   "d": "ridici",
+   "name": "Michal Rak",
+   "role": "Smíchov, Dejvice, Vodičkova",
+   "ph": [
+    {
+     "n": "606 424 514",
+     "t": "S"
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c64",
+   "d": "ridici",
+   "name": "Jiří Kučera",
+   "role": "Budějovická",
+   "ph": [
+    {
+     "n": "728 432 110",
+     "t": "S"
+    },
+    {
+     "n": "737 786 463",
+     "t": "P"
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c65",
+   "d": "ridici",
+   "name": "Tomáš Ondráček",
+   "role": "Modřany poliklinika",
+   "ph": [
+    {
+     "n": "731 473 934",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c66",
+   "d": "ridici",
+   "name": "Zdeněk Adámek",
+   "role": "zástup",
+   "ph": [
+    {
+     "n": "739 449 326",
+     "t": "S"
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c67",
+   "d": "ridici",
+   "name": "Jan Češka",
+   "role": "E-shop",
+   "ph": [],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c68",
+   "d": "ridici",
+   "name": "Karel Šťáva",
+   "role": "E-shop",
+   "ph": [
+    {
+     "n": "705 630 635",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c69",
+   "d": "ridici",
+   "name": "Jiří Kaplan",
+   "role": "E-shop",
+   "ph": [
+    {
+     "n": "775 911 011",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c70",
+   "d": "ridici",
+   "name": "Lukáš Nájemník",
+   "role": "E-shop",
+   "ph": [
+    {
+     "n": "733 553 639",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c71",
+   "d": "ridici",
+   "name": "Peter Ozorák",
+   "role": "E-shop",
+   "ph": [
+    {
+     "n": "605 283 371",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "c72",
+   "d": "ridici",
+   "name": "Zdeněk Holý",
+   "role": "pulty",
+   "ph": [
+    {
+     "n": "775 301 929",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  }
+ ],
+ "quick": [
+  {
+   "id": "q1",
+   "t": "Benefity",
+   "d": "MultiSport, Edenred, masáže, jazykové kurzy, penzijní spoření, slevová karta pro rodinu",
+   "who": "c13"
+  },
+  {
+   "id": "q2",
+   "t": "Mzda – Vestec a Lahovice",
+   "d": "",
+   "who": "c13"
+  },
+  {
+   "id": "q3",
+   "t": "Docházka a čip",
+   "d": "docházkový čip, PowerKey",
+   "who": "c13"
+  },
+  {
+   "id": "q4",
+   "t": "Mzda – prodejny",
+   "d": "",
+   "who": "c14"
+  },
+  {
+   "id": "q5",
+   "t": "Pracovní smlouva",
+   "d": "nástup, odchod nebo změna smlouvy",
+   "who": "c73"
+  },
+  {
+   "id": "q6",
+   "t": "Potvrzení",
+   "d": "pro úřady, banku apod.",
+   "who": "c73"
+  },
+  {
+   "id": "q7",
+   "t": "Nábor a volná místa",
+   "d": "",
+   "who": "c73"
+  },
+  {
+   "id": "q8",
+   "t": "Munipolis a FABIS",
+   "d": "",
+   "who": "c73"
+  }
+ ],
+ "pinHash": "1lzkljfz95j1xpfjp4sicp",
+ "updated": "2026-10-07"
+}

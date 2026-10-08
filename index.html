@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kontakty LL</title>
+<meta name="description" content="Kdo je kdo v Libeřských lahůdkách – kontakty, oddělení a na koho se obrátit.">
+<meta name="theme-color" content="#f6f2ee">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kontakty LL">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+<style id="st">
+/* Layout: adresář podle organizační struktury. Nahoře „Co potřebujete vyřešit?“ (téma → člověk), pod tím oddělení s popisem; lidé jako velké fotokarty (2 sloupce na mobilu), vedoucí a lidé s tématy jako široké karty */
+:root{
+  --bg:#f6f2ee; --surface:#ffffff; --surface-2:#efe8e1; --fg:#1d1411; --muted:#80705f; --line:#e7ded4;
+  --accent:#6e3326; --accent-fg:#ffffff; --accent-soft:#f3e3da; --gold:#b08a5a;
+  --work:#2f6b45; --work-soft:#e3f1e7; --priv:#a0521c; --priv-soft:#fbeadb; --danger:#b3392c;
+  --glass:rgba(246,242,238,.88); --shadow:0 1px 2px rgba(60,30,20,.06),0 8px 24px rgba(60,30,20,.07);
+  --font:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#130f0e; --surface:#1d1716; --surface-2:#29211f; --fg:#f5ede8; --muted:#a8968a; --line:#2f2624;
+  --accent:#e2a48f; --accent-fg:#1d1210; --accent-soft:#3a2521; --gold:#d2ae7c;
+  --work:#8fd3a5; --work-soft:#1d3226; --priv:#f0b07e; --priv-soft:#3b2919; --danger:#f08a7c;
+  --glass:rgba(19,15,14,.88); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#130f0e; --surface:#1d1716; --surface-2:#29211f; --fg:#f5ede8; --muted:#a8968a; --line:#2f2624;
+  --accent:#e2a48f; --accent-fg:#1d1210; --accent-soft:#3a2521; --gold:#d2ae7c;
+  --work:#8fd3a5; --work-soft:#1d3226; --priv:#f0b07e; --priv-soft:#3b2919; --danger:#f08a7c;
+  --glass:rgba(19,15,14,.88); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3); color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+svg{display:block}
+.page{max-width:1240px;margin:0 auto;padding-inline:16px}
+.top{padding-block:24px 4px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.eyebrow{font-size:.8rem;font-weight:600;color:var(--accent)}
+h1{margin:2px 0 0;font-size:2.1rem;line-height:1.05;font-weight:800;letter-spacing:-.035em}
+.updated{font-size:.75rem;color:var(--muted);margin-top:5px}
+.icon-btn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--fg)}
+.icon-btn svg{width:19px;height:19px}
+.sticky{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--glass);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);padding-block:10px 8px;margin-inline:-16px;padding-inline:16px}
+.searchbox{position:relative}
+.searchbox svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.search{width:100%;height:48px;border-radius:16px;border:1px solid var(--line);background:var(--surface);padding:0 14px 0 42px;font-size:16px;color:var(--fg);outline:none}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-top:10px;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:.86rem;font-weight:500;cursor:pointer;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+main{padding-block:4px 120px}
+/* quick topics */
+.quick{margin-top:18px}
+.q-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 2px 10px}
+.q-h h2{margin:0;font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.q-h span{font-size:.8rem;color:var(--muted)}
+@media (max-width:640px){.q-h span{display:none}}
+.q-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px;padding-bottom:4px;scroll-snap-type:x mandatory}
+.q-row::-webkit-scrollbar{display:none}
+.qcard{flex:none;width:224px;scroll-snap-align:start;background:var(--surface);border:0;border-radius:18px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;gap:10px;text-align:left;cursor:pointer;color:var(--fg)}
+.qcard .qt{font-weight:700;font-size:1.02rem;line-height:1.2}
+.qcard .qd{font-size:.8rem;color:var(--muted);line-height:1.35;flex:1}
+.qcard .qw{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--line);font-size:.85rem;font-weight:600}
+.qcard .qw img,.qcard .qw .mono{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;font-size:.75rem}
+.qcard .qw .arrow{margin-left:auto;color:var(--accent);font-size:1.1rem}
+.qcard.add-q{box-shadow:none;border:2px dashed var(--line);justify-content:center;align-items:center;color:var(--accent);font-weight:600}
+@media (min-width:900px){.q-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;margin-inline:0;padding-inline:0}.qcard{width:auto}}
+/* departments */
+.dept{margin-top:34px}
+#out>.dept:first-child{margin-top:12px}
+.d-top{display:flex;align-items:flex-start;gap:10px;margin:0 2px 12px}
+.d-top .tt{flex:1;min-width:0}
+.d-top h2{margin:0;font-size:1.45rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.d-top .ab{font-size:.88rem;color:var(--muted);margin-top:4px;max-width:62ch}
+.d-top .cnt{flex:none;font-size:.75rem;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:3px 9px;font-variant-numeric:tabular-nums;margin-top:6px}
+.d-edit{flex:none;height:32px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-size:.78rem;font-weight:600;padding:0 10px;cursor:pointer;color:var(--accent)}
+details.team{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);margin:0 0 12px;overflow:hidden}
+details.team summary{list-style:none;cursor:pointer;padding:13px 16px;font-weight:600;font-size:.92rem;display:flex;align-items:center;gap:8px}
+details.team summary::-webkit-details-marker{display:none}
+details.team summary::after{content:"+";margin-left:auto;font-size:1.2rem;color:var(--accent);font-weight:500}
+details.team[open] summary::after{content:"–"}
+details.team ul{margin:0;padding:0 16px 14px 34px;columns:2 260px;column-gap:28px;font-size:.88rem;color:var(--fg)}
+details.team li{break-inside:avoid;padding:2px 0}
+details.team li::marker{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}}
+@media (min-width:980px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1180px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+/* person tile */
+.tile{position:relative;background:var(--surface);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0;cursor:pointer;text-align:left;border:0;padding:0;color:var(--fg)}
+.ph{position:relative;aspect-ratio:4/5;background:var(--surface-2);overflow:hidden}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mono{display:grid;place-items:center;font-weight:800;letter-spacing:-.02em}
+.ph .mono{position:absolute;inset:0;font-size:2.6rem}
+.ph.np .shade{display:none}.ph.np .cap{color:var(--fg)}.ph.np .mono{padding-bottom:22%}
+.ph .shade{position:absolute;inset:auto 0 0 0;height:58%;background:linear-gradient(to top,rgba(20,10,8,.86),rgba(20,10,8,0));pointer-events:none}
+.ph .cap{position:absolute;left:12px;right:12px;bottom:11px;color:#fff}
+.ph .cap .nm{font-weight:700;font-size:1.02rem;line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+.ph .cap .rl{font-size:.78rem;opacity:.85;line-height:1.25;margin-top:2px}
+.badge{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);color:#5a2a20;font-size:.68rem;font-weight:700;padding:4px 8px;border-radius:999px;letter-spacing:.02em}
+.storeno{position:absolute;top:10px;left:10px;min-width:44px;height:44px;padding:0 8px;border-radius:14px;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-weight:800;font-size:1.2rem;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.tbar{display:flex;gap:6px;padding:8px}
+.act{flex:1;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;border:0;cursor:pointer;font-size:.8rem;font-weight:600;min-width:0}
+.act svg{width:16px;height:16px;flex:none}
+.act.call{background:var(--accent);color:var(--accent-fg)}
+.act.soft{background:var(--accent-soft);color:var(--accent)}
+.act.mail{flex:0 0 38px;background:var(--accent-soft);color:var(--accent)}
+.act.none{background:var(--surface-2);color:var(--muted);cursor:default}
+.edit-flag{position:absolute;top:10px;right:10px;background:var(--fg);color:var(--bg);font-size:.72rem;font-weight:600;border-radius:999px;padding:4px 10px}
+
+.oacts{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:8px;z-index:2}
+.oa{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;box-shadow:0 4px 14px rgba(20,10,8,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .12s}
+.oa:active{transform:scale(.92)}
+.oa svg{width:20px;height:20px}
+.oa.call{background:var(--accent);color:var(--accent-fg)}
+.oa.mail{background:rgba(255,255,255,.92);color:#6e3326}
+.tile:not(.wide) .oa{width:40px;height:40px}.tile:not(.wide) .oa svg{width:18px;height:18px}.tile:not(.wide) .oacts{top:8px;right:8px;gap:6px}
+/* wide tile */
+.tile.wide{grid-column:1/-1}
+.tile.wide .body{padding:14px 14px 4px;display:flex;flex-direction:column;gap:8px}
+.tile.wide .ph{aspect-ratio:4/3}
+.tile.wide .about{font-size:.88rem;color:var(--fg)}
+.k{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.topics{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.topics li{display:flex;gap:8px;font-size:.9rem;line-height:1.35}
+.topics li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:.5em}
+.areas{font-size:.78rem;color:var(--muted)}
+@media (min-width:640px){
+  .tile.wide{grid-column:span 2;flex-direction:row}
+  .tile.wide .ph{aspect-ratio:auto;width:46%;min-height:100%;flex:none}
+  .tile.wide .right{flex:1;min-width:0;display:flex;flex-direction:column}
+  .tile.wide .body{flex:1}
+}
+@media (min-width:980px){.tile.wide{grid-column:span 2}}
+.addtile{border:2px dashed var(--line);border-radius:20px;background:transparent;color:var(--accent);font-weight:600;cursor:pointer;min-height:160px;display:grid;place-items:center;padding:12px}
+.none{text-align:center;color:var(--muted);padding:60px 16px}
+.legend{margin-top:34px;font-size:.8rem;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.pill.P{background:var(--work-soft);color:var(--work)}
+.pill.S{background:var(--priv-soft);color:var(--priv)}
+
+/* home + navigation */
+.crumb{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.crumb .icon-btn{width:42px;height:42px}
+.back{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--fg)}
+.back svg{width:20px;height:20px}
+.cr-t{min-width:0}.cr-n{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.home-depts{margin-top:28px}
+.dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:700px){.dgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.dgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.dtile{background:var(--surface);border:0;border-radius:20px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;cursor:pointer;color:var(--fg);min-height:132px}
+.dtile .dn{font-weight:700;font-size:1rem;line-height:1.2;margin-top:auto;text-wrap:balance}
+.dtile .dc{font-size:.8rem;color:var(--muted)}
+.stack{display:flex;margin-bottom:10px}
+.sf{width:40px;height:40px;border-radius:50%;overflow:hidden;position:relative;border:2px solid var(--surface);margin-left:-10px;background:var(--surface-2)}
+.sf:first-child{margin-left:0}
+.sf img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.sf .mono{position:absolute;inset:0;font-size:.8rem}
+@media (max-width:639px){
+  .ph{aspect-ratio:1/1}
+  .tile.wide .ph{aspect-ratio:5/4}
+  .tbar .act{height:42px}
+  .act.call{font-size:.85rem}
+  .grid.stores .ph{aspect-ratio:1/1}
+}
+
+.pinf{align-items:stretch;text-align:center;padding-bottom:4px}
+.pin-ic{width:56px;height:56px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin:4px auto 0}
+.pin-ic svg{width:24px;height:24px}
+.pin-t{margin:-6px 0 0;color:var(--muted);font-size:.9rem}
+.pin-in{height:56px;border-radius:14px;border:1px solid var(--line);background:var(--bg);text-align:center;font-size:1.6rem;letter-spacing:.5em;padding:0 0 0 .5em;width:100%;outline:none;font-variant-numeric:tabular-nums}
+.pin-in:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.pinf .f label{text-align:left}
+.pin-err{min-height:1.2em;color:var(--danger);font-size:.88rem;font-weight:500}
+.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}}
+/* sheet */
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(15,8,6,.5);display:flex;align-items:flex-end;justify-content:center;animation:fade .18s ease}
+.sheet{background:var(--surface);color:var(--fg);width:100%;max-width:540px;max-height:94vh;overflow-y:auto;border-radius:26px 26px 0 0;padding:0 0 calc(22px + env(safe-area-inset-bottom,0px));animation:up .24s cubic-bezier(.2,.8,.2,1)}
+.sheet .pad{padding:0 20px}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:10px auto}
+@media (min-width:760px){.scrim{align-items:center;padding:24px}.sheet{border-radius:26px;padding-bottom:22px}}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.hero-ph{position:relative;margin:0 20px;aspect-ratio:1/1;max-height:340px;width:calc(100% - 40px);border-radius:22px;overflow:hidden;background:var(--surface-2)}
+.hero-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-ph .mono{position:absolute;inset:0;font-size:4rem}
+.hero-ph .storeno{width:60px;height:60px;font-size:1.6rem;top:14px;left:14px;border-radius:18px}
+.s-nm{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-top:16px}
+.s-rl{color:var(--muted);font-size:.92rem;margin-top:3px}
+.s-sec{margin-top:18px}
+.s-sec .k{margin:0 0 6px 2px}
+.card2{background:var(--surface-2);border-radius:16px;overflow:hidden}
+.line{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;border-top:1px solid var(--line);min-width:0}
+.line:first-child{border-top:0}
+.line .v{flex:1;min-width:0}
+.line .v a{color:var(--fg);text-decoration:none;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.line .v .kk{display:flex;gap:6px;align-items:center;font-size:.75rem;color:var(--muted);margin-top:2px}
+.mini{flex:none;height:34px;padding:0 12px;border-radius:10px;border:0;background:var(--surface);color:var(--fg);font-size:.8rem;font-weight:600;cursor:pointer}
+.empty{padding:12px 14px;color:var(--muted);font-size:.9rem}
+.s-box{background:var(--surface-2);border-radius:16px;padding:14px}
+.foot{display:flex;gap:8px;margin-top:20px}
+.btn{flex:1;height:50px;border-radius:15px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-weight:600;cursor:pointer;padding:0 16px;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.btn.primary{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn.danger{color:var(--danger);background:transparent;width:100%;flex:none;margin-top:8px}
+/* form */
+.form{display:flex;flex-direction:column;gap:14px;padding:4px 20px 0}
+.form h3{margin:0;font-size:1.35rem;font-weight:800;letter-spacing:-.03em}
+.f{display:flex;flex-direction:column;gap:5px;min-width:0}
+.f label,.flabel{font-size:.75rem;font-weight:600;color:var(--muted)}
+.f input,.f select,.f textarea{border-radius:12px;border:1px solid var(--line);background:var(--bg);padding:0 12px;font-size:16px;min-width:0;width:100%;outline:none}
+.f input,.f select{height:46px}
+.f textarea{padding:10px 12px;min-height:110px;resize:vertical;line-height:1.4}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.f .hint{font-size:.75rem;color:var(--muted)}
+.chk{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.92rem}
+.chk input{width:22px;height:22px;accent-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.phrow{display:grid;grid-template-columns:minmax(0,1fr) 124px;gap:8px}
+.group{background:var(--surface-2);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.photo-ed{display:flex;align-items:center;gap:14px}
+.photo-ed .pv{width:92px;height:115px;border-radius:14px;overflow:hidden;position:relative;background:var(--surface);flex:none}
+.photo-ed .pv img{width:100%;height:100%;object-fit:cover}
+.photo-ed .pv .mono{position:absolute;inset:0;font-size:1.8rem}
+.photo-ed .b{display:flex;flex-direction:column;gap:8px}
+/* save bar + toast */
+.savebar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;max-width:620px;margin:0 auto;background:var(--fg);color:var(--bg);border-radius:18px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.savebar .msg{flex:1;font-size:.86rem;line-height:1.3;min-width:0}
+.savebar button{height:40px;border-radius:12px;border:0;padding:0 14px;font-weight:600;cursor:pointer}
+.savebar .ghost{background:transparent;color:var(--bg);opacity:.75}
+.savebar .go{background:var(--bg);color:var(--fg)}
+.savebar .go:disabled{opacity:.4}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:60;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:.88rem;font-weight:500;opacity:0;transition:opacity .2s;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:380px){.two,.phrow{grid-template-columns:1fr}.ph .cap .nm{font-size:.95rem}}
+@media (prefers-reduced-motion:reduce){.scrim,.sheet{animation:none}.toast{transition:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="application/json" id="ll-data">{"depts":[{"id":"vedeni","name":"Vedení a management","note":"","about":"","teamTitle":"","team":[]},{"id":"kancelar","name":"Kancelář, asistentky","note":"společný e-mail kancelar@liberskelahudky.cz","about":"","teamTitle":"","team":[]},{"id":"personalni","name":"Personální oddělení","note":"","about":"","teamTitle":"Jana a Sára mají na starosti","team":["zajištění inzerce","nábor zaměstnanců","komunikaci s oblastním vedoucím a vedoucími středisek","koordinaci výběrového procesu","administraci nástupu zaměstnance","pracovněprávní dokumentaci","personální změny v průběhu pracovního poměru","podporu vedoucích zaměstnanců v personálních otázkách","řešení absence a dalších personálních situací","ukončení pracovního poměru","související personální administrativu"]},{"id":"ucetni","name":"Účetní oddělení","note":"","about":"","teamTitle":"","team":[]},{"id":"nakup","name":"Obchodní oddělení a nákup","note":"","about":"","teamTitle":"","team":[]},{"id":"marketing","name":"Marketing","note":"","about":"","teamTitle":"","team":[]},{"id":"vyroba","name":"Výroba a expedice","note":"","about":"","teamTitle":"","team":[]},{"id":"lahovice","name":"Pekárna Lahovice","note":"","about":"","teamTitle":"","team":[]},{"id":"kvalita","name":"Kontrola kvality MO","note":"","about":"","teamTitle":"","team":[]},{"id":"prodejny","name":"Prodejny a provozní","note":"","about":"","teamTitle":"","team":[]},{"id":"ridici","name":"Řidiči","note":"","about":"","teamTitle":"","team":[]}],"contacts":[{"id":"c1","d":"kancelar","name":"Kamila Anna Linderová","role":"asistentka provozu","ph":[{"n":"703 636 921","t":""}],"em":["asistentka@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c2","d":"kancelar","name":"Kateřina Vošahlíková","role":"asistentka vedení","ph":[{"n":"604 345 716","t":""}],"em":["marketing.asistentka@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c3","d":"personalni","name":"Petra Dlouhá","role":"HR ředitelka","ph":[{"n":"777 072 804","t":""}],"em":["dlouha@liberskelahudky.cz"],"photo":"","lead":true,"about":"Vedení personálního oddělení. Zastřešuje HR a personální záležitosti napříč firmou.","topics":[],"areas":""},{"id":"c73","d":"personalni","name":"Jana Vaněk","role":"","ph":[],"em":[],"photo":"","lead":false,"about":"","topics":["pracovní smlouva – nástup, odchod nebo změna","potvrzení pro úřady, banku apod.","osobní údaje a personální dokumenty","lékařská prohlídka","Munipolis nebo FABIS","nábor a volná pracovní místa"],"areas":"Nábor • HR komunikace • pracovní dokumentace • personální systémy"},{"id":"c4","d":"vedeni","name":"David Fendrych","role":"oblastní manažer","ph":[{"n":"602 146 771","t":"S"}],"em":["fendrych@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c5","d":"vedeni","name":"Richard Sviták","role":"oblastní manažer","ph":[{"n":"799 025 506","t":""}],"em":["svitak@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c6","d":"vedeni","name":"Anna Herdová","role":"finanční manažer","ph":[],"em":["herdova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c7","d":"marketing","name":"Jitka Hallerová","role":"marketing a PR","ph":[{"n":"603 276 276","t":""}],"em":["hallerova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c8","d":"marketing","name":"Lucie Králová","role":"marketingový manažer","ph":[{"n":"731 198 894","t":""}],"em":["kralova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c9","d":"marketing","name":"Aneta Harenčáková","role":"specialista marketingového oddělení","ph":[],"em":["harencakova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c10","d":"marketing","name":"Markéta Literová","role":"digitální a online marketing","ph":[{"n":"777 735 420","t":""}],"em":["literova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c11","d":"marketing","name":"Lucie Sedláčková","role":"specialista marketingového oddělení","ph":[{"n":"603 757 151","t":""}],"em":["sedlackova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c12","d":"personalni","name":"Sandra Rafflerová","role":"personální administrativa","ph":[{"n":"733 125 025","t":""}],"em":["rafflerova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c13","d":"personalni","name":"Aneta Řezníčková","role":"mzdy Vestec a Lahovice","ph":[{"n":"728 423 080","t":""}],"em":["reznickova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":["mzda – Vestec a Lahovice","docházka nebo docházkový čip","PowerKey","MultiSport","Edenred","masáže","jazykové kurzy","příspěvek na penzijní spoření","slevová karta pro rodinného příslušníka"],"areas":""},{"id":"c14","d":"personalni","name":"Lenka Bobrušková","role":"mzdy prodejny","ph":[{"n":"776 880 117","t":""}],"em":["bobruskova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c15","d":"personalni","name":"Daniela Horčičková","role":"nábor","ph":[{"n":"731 110 010","t":""}],"em":["horcickova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c16","d":"ucetni","name":"Tereza Nováková","role":"fakturant","ph":[{"n":"734 233 713","t":""}],"em":["ucetni@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c17","d":"ucetni","name":"Simona Zoulíková","role":"fakturant","ph":[{"n":"734 233 713","t":""}],"em":["ucetni@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c18","d":"ucetni","name":"Monika Šalanská","role":"skladové hospodářství prodejny","ph":[{"n":"604 881 582","t":""}],"em":["salanska@liberskelahudky.cz","info@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c19","d":"nakup","name":"Lenka Fetterlová","role":"nákupčí","ph":[{"n":"777 599 727","t":""}],"em":["fetterlova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c20","d":"nakup","name":"Lenka Kmentová, Věra Malá","role":"objednávkové oddělení","ph":[{"n":"734 449 901","t":""},{"n":"241 941 901","t":""}],"em":["objednavky@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c21","d":"vyroba","name":"Jan Lisák","role":"vedoucí expedice / info linka","ph":[{"n":"731 151 314","t":""}],"em":["info@liberskelahudky.cz","lisak@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c22","d":"vyroba","name":"Roman Sláma","role":"vedoucí expedice / info linka","ph":[{"n":"731 463 812","t":"S"}],"em":["slama@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c23","d":"vyroba","name":"Dominik Matouš","role":"vedoucí výroby denní směny","ph":[{"n":"604 884 798","t":""}],"em":["vedoucivyroby@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c24","d":"vyroba","name":"Vladimír Šrámek","role":"vedoucí výroby noční směny","ph":[{"n":"737 798 434","t":""}],"em":["vedoucivyroby@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c25","d":"vyroba","name":"Pavel Nechvátal","role":"vedoucí skladu","ph":[{"n":"737 800 653","t":""}],"em":["sklad@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c26","d":"vyroba","name":"David Kalina, Jiří Miko","role":"sklad Vestec","ph":[{"n":"737 419 369","t":""}],"em":["sklad@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c27","d":"vyroba","name":"Jan Rovenský","role":"expedient","ph":[{"n":"734 233 711","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c28","d":"vyroba","name":"Milan Rozšafný","role":"expedient","ph":[{"n":"737 863 186","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c29","d":"vyroba","name":"Mykhailo Shikiria","role":"expedient","ph":[{"n":"774 086 114","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c30","d":"lahovice","name":"Martin Kolankiewicz","role":"vedoucí provozu","ph":[{"n":"731 294 002","t":""}],"em":["lahovice@liberskelahudky.cz"],"photo":"","lead":true,"about":"","topics":[],"areas":""},{"id":"c31","d":"lahovice","name":"Věra Sluková","role":"zástupce vedoucího","ph":[{"n":"603 868 999","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c32","d":"lahovice","name":"Zdeněk Balcar","role":"řidič Lahovice","ph":[{"n":"732 119 077","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c33","d":"lahovice","name":"Petr Švec","role":"řidič Lahovice","ph":[{"n":"774 400 751","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c34","d":"prodejny","name":"Olga Fritschová","role":"provozní","ph":[],"em":["ostrovskeho@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Smíchov – Ostrovského","no":"50","sp":"731 151 313"},{"id":"c35","d":"prodejny","name":"Gabriela Dvořáková","role":"provozní","ph":[],"em":["palmovka@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Palmovka","no":"51","sp":"731 151 317"},{"id":"c36","d":"prodejny","name":"Jitka Kosíková, Erika Sýkorová","role":"provozní","ph":[],"em":["dukelskychhrdinu@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Letná","no":"52","sp":"739 047 959"},{"id":"c37","d":"prodejny","name":"Marie Navrátilová","role":"provozní","ph":[],"em":["vodickova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Vodičkova","no":"53","sp":"733 766 054"},{"id":"c38","d":"prodejny","name":"Ivona Skrbková","role":"provozní","ph":[],"em":["hlavak@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Hlavní nádraží","no":"54","sp":"731 259 525"},{"id":"c39","d":"prodejny","name":"Kateřina Pavelková","role":"provozní","ph":[],"em":["prodejnaliber@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Libeř","no":"57","sp":"739 642 680"},{"id":"c40","d":"prodejny","name":"Kateřina Pavelková","role":"provozní","ph":[],"em":["jesenice@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Jesenice","no":"58","sp":"731 151 311"},{"id":"c41","d":"prodejny","name":"Radka Přibylová","role":"provozní","ph":[],"em":["krc@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Krč","no":"60","sp":"734 233 714"},{"id":"c42","d":"prodejny","name":"Věra Málková","role":"provozní","ph":[],"em":["porici@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Poříčí","no":"64","sp":"734 233 715"},{"id":"c43","d":"prodejny","name":"Farzanh Yazdaniová","role":"provozní","ph":[],"em":["budejovicka@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Budějovická","no":"65","sp":"734 233 712"},{"id":"c44","d":"prodejny","name":"Monika Mihalová","role":"provozní","ph":[],"em":["modrany@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Modřany","no":"66","sp":"731 344 934"},{"id":"c45","d":"prodejny","name":"Jakub Hermánek","role":"provozní","ph":[],"em":["ruzyne@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Ruzyně","no":"67","sp":"703 635 650"},{"id":"c46","d":"prodejny","name":"Lucie Murtingerová","role":"provozní","ph":[],"em":["haje@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Háje","no":"68","sp":"703 636 919"},{"id":"c47","d":"prodejny","name":"Veronika Hromková","role":"provozní","ph":[],"em":["arkady@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Arkády","no":"69","sp":"703 635 653"},{"id":"c48","d":"prodejny","name":"Erszébet Rápová","role":"provozní","ph":[],"em":["dbk@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"DBK","no":"70","sp":"703 635 637"},{"id":"c49","d":"prodejny","name":"Petr Šindelář","role":"provozní","ph":[],"em":["dejvice@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Dejvická","no":"71","sp":"703 635 658"},{"id":"c50","d":"prodejny","name":"Jaroslava Krejčí","role":"provozní","ph":[],"em":["vysocany@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Vysočany","no":"72","sp":"604 271 071"},{"id":"c51","d":"prodejny","name":"Miroslava Smuk","role":"provozní","ph":[],"em":["holesovice@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"Holešovice","no":"73","sp":"605 549 235"},{"id":"c52","d":"prodejny","name":"Zdenka Pavlíková","role":"provozní","ph":[],"em":["cb.krajinska@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"České Budějovice","no":"74","sp":"603 755 230"},{"id":"c53","d":"prodejny","name":"Tetiana Kravets","role":"provozní","ph":[],"em":["ippavlova@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"I. P. Pavlova","no":"75","sp":"604 786 462"},{"id":"c54","d":"prodejny","name":"Iryna Palinchak","role":"provozní","ph":[],"em":["novysmichov@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":"","place":"OC Nový Smíchov","no":"76","sp":"734 569 346"},{"id":"c55","d":"kvalita","name":"Mariya Elišáková","role":"kvalita výroby MO prodejen","ph":[{"n":"723 260 398","t":""}],"em":["elis.masa@seznam.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c56","d":"kvalita","name":"Oksana Alch","role":"kvalita výroby MO prodejen","ph":[{"n":"737 898 699","t":""}],"em":["alch@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c57","d":"ridici","name":"Jiří Vejvoda","role":"České Budějovice","ph":[{"n":"604 136 405","t":"P"}],"em":["vejvoda@liberskelahudky.cz"],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c58","d":"ridici","name":"Zdeněk Kučera","role":"Libeř, Krč","ph":[{"n":"734 251 736","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c59","d":"ridici","name":"Jaroslav Černohlávek","role":"Poříčí, Holešovice + Makro","ph":[{"n":"734 233 717","t":"P"}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c60","d":"ridici","name":"Vaskul Volodymyr","role":"Jesenice, Vysočany","ph":[{"n":"608 830 116","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c61","d":"ridici","name":"Martin Novotný","role":"Arkády","ph":[{"n":"776 195 799","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c62","d":"ridici","name":"Stanislav Talich","role":"Ruzyně","ph":[{"n":"724 859 924","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c63","d":"ridici","name":"Michal Rak","role":"Smíchov, Dejvice, Vodičkova","ph":[{"n":"606 424 514","t":"S"}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c64","d":"ridici","name":"Jiří Kučera","role":"Budějovická","ph":[{"n":"728 432 110","t":"S"},{"n":"737 786 463","t":"P"}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c65","d":"ridici","name":"Tomáš Ondráček","role":"Modřany poliklinika","ph":[{"n":"731 473 934","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c66","d":"ridici","name":"Zdeněk Adámek","role":"zástup","ph":[{"n":"739 449 326","t":"S"}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c67","d":"ridici","name":"Jan Češka","role":"E-shop","ph":[],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c68","d":"ridici","name":"Karel Šťáva","role":"E-shop","ph":[{"n":"705 630 635","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c69","d":"ridici","name":"Jiří Kaplan","role":"E-shop","ph":[{"n":"775 911 011","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c70","d":"ridici","name":"Lukáš Nájemník","role":"E-shop","ph":[{"n":"733 553 639","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c71","d":"ridici","name":"Peter Ozorák","role":"E-shop","ph":[{"n":"605 283 371","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""},{"id":"c72","d":"ridici","name":"Zdeněk Holý","role":"pulty","ph":[{"n":"775 301 929","t":""}],"em":[],"photo":"","lead":false,"about":"","topics":[],"areas":""}],"quick":[{"id":"q1","t":"Benefity","d":"MultiSport, Edenred, masáže, jazykové kurzy, penzijní spoření, slevová karta pro rodinu","who":"c13"},{"id":"q2","t":"Mzda – Vestec a Lahovice","d":"","who":"c13"},{"id":"q3","t":"Docházka a čip","d":"docházkový čip, PowerKey","who":"c13"},{"id":"q4","t":"Mzda – prodejny","d":"","who":"c14"},{"id":"q5","t":"Pracovní smlouva","d":"nástup, odchod nebo změna smlouvy","who":"c73"},{"id":"q6","t":"Potvrzení","d":"pro úřady, banku apod.","who":"c73"},{"id":"q7","t":"Nábor a volná místa","d":"","who":"c73"},{"id":"q8","t":"Munipolis a FABIS","d":"","who":"c73"}],"pinHash":"1lzkljfz95j1xpfjp4sicp","updated":"2026-10-07"}</script>
+<script id="app">
+(function(){
+const LT='<';
+const RESET=':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,sans-serif;background:#faf9f7}img{max-width:100%}[hidden]{display:none!important}';
+const FONTS='https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap';
+let data=JSON.parse(document.getElementById('ll-data').textContent);
+data.quick=data.quick||[];
+let draft=null, dirty=0, art=1, readOnly=false, view='home', q='', sheet=null;
+const root=document.getElementById('root');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ');
+const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const I={
+ tel:svg('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>'),
+ mail:svg('<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/>'),
+ search:svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'),
+ lock:svg('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+ back:svg('<path d="M15 18l-6-6 6-6"/>'),
+ pen:svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>')
+};
+const TONES=[['#ecd6c9','#6e3326'],['#dfe7da','#3a5733'],['#ece0c8','#6f511a'],['#dde1ec','#38456a'],['#eed9dd','#753241'],['#d9e8e6','#2b5a56']];
+const DTONES=[['#3a2620','#f0bfa9'],['#24301f','#b4d3a8'],['#352b1a','#e6c88f'],['#232838','#b3c0e3'],['#36222a','#ebb2c0'],['#1d2f2d','#9fd5cf']];
+const isDark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;};
+function hash(s){let h=0;for(const ch of String(s))h=(h*31+ch.charCodeAt(0))|0;return Math.abs(h);}
+const initials=n=>String(n||'?').split(/[\s,]+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'?';
+function face(c){
+  if(c.photo) return `<img src="${esc(c.photo)}" alt="${esc(c.name)}" loading="lazy">`;
+  const t=(isDark()?DTONES:TONES)[hash(c.name)%TONES.length];
+  return `<span class="mono" style="background:${t[0]};color:${t[1]}" aria-hidden="true">${esc(initials(c.name))}</span>`;
+}
+const tel=n=>'tel:+420'+String(n).replace(/\D/g,'').replace(/^420/,'');
+const TAGN={P:'pracovní',S:'soukromý'};
+const D=()=>draft||data;
+const phonesOf=c=>(c.ph||[]).filter(p=>p.n);
+const firstName=n=>String(n||'').split(/[\s,]+/)[0]||'';
+function personPhone(c){const p=phonesOf(c);return (p.find(x=>x.t!=='S')||p[0]||{}).n||'';}
+const isStore=c=>c.d==='prodejny';
+const isWide=c=>!isStore(c)&&(c.lead||(c.topics||[]).length>0);
+
+/* ---------- tiles ---------- */
+function actions(c){
+  if(draft) return '';
+  const em=(c.em||[])[0];
+  const pp=isStore(c)?(c.sp||personPhone(c)):personPhone(c);
+  const who=isStore(c)?('prodejnu '+(c.place||'')):c.name;
+  if(!pp&&!em) return '';
+  return `<div class="oacts">${em&&!isStore(c)?`<a class="oa mail" href="mailto:${esc(em)}" data-stop aria-label="Napsat e-mail: ${esc(who)}">${I.mail}</a>`:''}${pp?`<a class="oa call" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(who)}">${I.tel}</a>`:''}</div>`;
+}
+function tile(c){
+  const flag=draft?'<span class="edit-flag">Upravit</span>':'';
+  if(isStore(c)){
+    return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}<span class="storeno">${esc(c.no||'–')}</span><span class="shade"></span><div class="cap"><div class="nm">${esc(c.place||'Prodejna')}</div><div class="rl">${esc(c.name||'provozní nevyplněna')}</div></div>${flag}${actions(c)}</div></div>`;
+  }
+  const cap=`<span class="shade"></span><div class="cap"><div class="nm">${esc(c.name)}</div>${c.role?`<div class="rl">${esc(c.role)}</div>`:''}</div>`;
+  const badge=c.lead?'<span class="badge">Vede oddělení</span>':'';
+  if(isWide(c)){
+    const t=(c.topics||[]);
+    return `<div class="tile wide" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${badge}${cap}${flag}${actions(c)}</div><div class="right"><div class="body">${c.about?`<div class="about">${esc(c.about)}</div>`:''}${t.length?`<div class="k">Obraťte se, když řešíte</div><ul class="topics">${t.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${c.areas?`<div class="areas">${esc(c.areas)}</div>`:''}</div></div></div>`;
+  }
+  return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${badge}${cap}${flag}${actions(c)}</div></div>`;
+}
+function qcard(x){
+  const c=D().contacts.find(k=>k.id===x.who);
+  return `<button class="qcard" data-quick="${esc(x.id)}"><div class="qt">${esc(x.t)}</div><div class="qd">${esc(x.d||'')}</div><div class="qw">${c?`${face(c)}<span>${esc(c.name)}</span>`:'<span style="color:var(--muted)">nepřiřazeno</span>'}<span class="arrow">${draft?'✎':'→'}</span></div></button>`;
+}
+const STOP=new Set('potrebuju potrebuji potrebuje chci chtel chtela resim resit vyresit hledam hledat kdo kde jak co mam mit na se si s o k ke v ve do pro a i u za je to ten ta ktery ktera kdo resi'.split(' '));
+function toks(nq){return nq.split(/[^a-z0-9@.]+/).filter(t=>t&&!STOP.has(t));}
+function hit(text,nq){const h=norm(text),ts=toks(nq);if(!ts.length)return false;return ts.every(t=>h.includes(t)||(t.length>4&&h.includes(t.slice(0,-2))));}
+function matches(c,nq,dg){
+  const d=D().depts.find(x=>x.id===c.d)||{};
+  const hay=norm([c.name,c.role,c.place,c.no,d.name,c.about,c.areas,(c.topics||[]).join(' '),(c.em||[]).join(' ')].join(' '));
+  const nums=[c.sp,...(c.ph||[]).map(p=>p.n)].join(' ').replace(/\D/g,'');
+  return hit(hay,nq)||(dg.length>=3&&nums.includes(dg));
+}
+function deptSection(d,nq,dg,forceOpen){
+  let list=D().contacts.filter(c=>c.d===d.id);
+  if(d.id==='prodejny') list.sort((a,b)=>(+a.no||999)-(+b.no||999));
+  else list.sort((a,b)=>(b.lead?1:0)-(a.lead?1:0));
+  const deptHit=nq&&hit(d.name+' '+d.about+' '+(d.team||[]).join(' '),nq);
+  if(nq&&!deptHit) list=list.filter(c=>matches(c,nq,dg));
+  if(!list.length&&!draft) return {html:'',n:0};
+  const team=(d.team||[]).length?`<details class="team"${forceOpen||(nq&&deptHit)?' open':''}><summary>${esc(d.teamTitle||'Co oddělení řeší')}</summary><ul>${d.team.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:'';
+  const ab=[d.about,d.note].filter(Boolean).join(' · ');
+  const showTop=nq||ab||draft;
+  return {n:list.length,html:`<section class="dept"><div class="d-top"${showTop?'':' hidden'}><div class="tt">${nq?`<h2>${esc(d.name)}</h2>`:''}${ab?`<div class="ab">${esc(ab)}</div>`:''}</div>${draft?`<button class="d-edit" data-dedit="${esc(d.id)}">Upravit oddělení</button>`:''}</div>${team}<div class="grid${d.id==='prodejny'?' stores':''}">${list.map(tile).join('')}${draft?`<button class="addtile" data-add="${esc(d.id)}">+ Přidat ${d.id==='prodejny'?'prodejnu':'člověka'}</button>`:''}</div></section>`};
+}
+function faces(d){
+  const list=D().contacts.filter(c=>c.d===d.id).sort((a,b)=>(b.photo?1:0)-(a.photo?1:0)||(b.lead?1:0)-(a.lead?1:0)).slice(0,4);
+  return `<div class="stack">${list.map(c=>`<span class="sf">${face(c)}</span>`).join('')}</div>`;
+}
+function render(){
+  const nq=norm(q.trim()), dg=nq.replace(/\D/g,'');
+  const head=document.getElementById('crumb');
+  let out='';
+  if(nq){
+    let total=0;
+    const qs=D().quick.filter(x=>hit(x.t+' '+x.d,nq));
+    if(qs.length){out+=`<section class="quick"><div class="q-h"><h2>Na tohle je</h2></div><div class="q-row">${qs.map(qcard).join('')}</div></section>`;total+=qs.length;}
+    for(const d of D().depts){const r=deptSection(d,nq,dg,false);if(r.n){total+=r.n;out+=r.html;}}
+    if(!total) out=`<p class="none">Nic jsme nenašli.<br>Zkuste jméno, prodejnu, téma (třeba „multisport“) nebo část čísla.</p>`;
+    head.hidden=true;document.getElementById('top').hidden=false;
+  } else if(view==='home'){
+    const qs=D().quick;
+    if(qs.length||draft) out+=`<section class="quick"><div class="q-h"><h2>Co potřebujete vyřešit?</h2></div><div class="q-row">${qs.map(qcard).join('')}${draft?'<button class="qcard add-q" data-addq>+ Přidat téma</button>':''}</div></section>`;
+    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}">${faces(d)}<span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
+    head.hidden=true;document.getElementById('top').hidden=false;
+  } else {
+    const d=D().depts.find(x=>x.id===view);
+    if(!d){view='home';return render();}
+    head.hidden=false;document.getElementById('top').hidden=true;
+    head.innerHTML=`<button class="back" data-go="home" aria-label="Zpět na přehled">${I.back}</button><div class="cr-t" style="flex:1"><div class="cr-n">${esc(d.name)}</div></div><button class="icon-btn" data-et aria-label="Upravit kontakty" title="Upravit kontakty"${!art||readOnly||draft?' hidden':''}>${I.pen}</button>`;
+    out+=deptSection(d,'','',false).html||'<p class="none">Zatím tu nikdo není.</p>';
+  }
+  document.getElementById('out').innerHTML=out;
+  bar();
+}
+function shell(){
+  root.innerHTML=`<div class="page">
+   <header class="top" id="top"><div><div class="eyebrow">Libeřské lahůdky</div><h1>Kdo je kdo</h1><div class="updated" id="upd"></div></div><button class="icon-btn" id="editToggle" aria-label="Upravit kontakty" title="Upravit kontakty" hidden>${I.pen}</button></header>
+   <div class="sticky"><div class="crumb" id="crumb" hidden></div><div class="searchbox">${I.search}<input id="q" class="search" type="search" placeholder="Jméno, prodejna nebo co řešíte" autocomplete="off" aria-label="Hledat"></div></div>
+   <main><div id="out"></div><div class="legend"><span class="pill P">pracovní</span> pracovní telefon · <span class="pill S">soukromý</span> soukromý telefon</div></main></div>
+   <div id="savebar" hidden></div><div class="toast" id="toast" role="status" aria-live="polite"></div><div id="sheetHost"></div>`;
+  document.getElementById('q').value=q;
+}
+function fmtDate(s){const m=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?`Kontakty · aktualizováno ${+m[3]}. ${+m[2]}. ${m[1]}`:'';}
+function bar(){
+  document.getElementById('upd').textContent=fmtDate(D().updated);
+  document.getElementById('editToggle').hidden=!art||readOnly||!!draft;document.querySelectorAll('[data-et]').forEach(b=>b.hidden=!art||readOnly||!!draft);
+  const sb=document.getElementById('savebar');
+  if(!draft){sb.hidden=true;sb.innerHTML='';return;}
+  sb.hidden=false; sb.className='savebar';
+  sb.innerHTML=`<div class="msg">${dirty?`<b>Neuložené změny: ${dirty}</b>`:'Režim úprav. Klepněte na kartu.'}</div><button class="ghost" id="pinbtn" aria-label="Změnit PIN">PIN</button><button class="ghost" id="discard">${dirty?'Zahodit':'Hotovo'}</button><button class="go" id="save"${dirty?'':' disabled'}>Uložit</button>`;
+}
+let tt; function toast(m){const el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2400);}
+
+/* ---------- detail ---------- */
+function openSheet(html){document.getElementById('sheetHost').innerHTML=`<div class="scrim" id="scrim"><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div></div>`;document.body.style.overflow='hidden';}
+function closeSheet(){document.getElementById('sheetHost').innerHTML='';document.body.style.overflow='';sheet=null;}
+function line(href,val,k,tag){return `<div class="line"><div class="v"><a href="${esc(href)}">${esc(val)}</a><div class="kk">${esc(k)}${tag?` <span class="pill ${tag}">${TAGN[tag]}</span>`:''}</div></div><button class="mini" data-copy="${esc(val)}">Kopírovat</button></div>`;}
+function detail(c){
+  const ph=phonesOf(c), em=(c.em||[]).filter(Boolean), store=isStore(c);
+  const dept=(D().depts.find(d=>d.id===c.d)||{}).name||'';
+  let h=`<div class="hero-ph">${face(c)}${store?`<span class="storeno">${esc(c.no||'–')}</span>`:''}</div><div class="pad">`;
+  if(store){
+    h+=`<div class="s-nm">${esc(c.place||'Prodejna')}</div><div class="s-rl">Prodejna č. ${esc(c.no||'–')} · provozní ${esc(c.name||'nevyplněna')}</div>`;
+    h+=`<div class="s-sec"><div class="k">Prodejna</div><div class="card2">${c.sp?line(tel(c.sp),c.sp,'telefon prodejny'):'<div class="empty">Telefon prodejny zatím chybí</div>'}${em.map(e=>line('mailto:'+e,e,'e-mail prodejny')).join('')}</div></div>`;
+    h+=`<div class="s-sec"><div class="k">Provozní – ${esc(c.name||'')}</div><div class="card2">${ph.length?ph.map(p=>line(tel(p.n),p.n,'telefon provozní',p.t)).join(''):'<div class="empty">Telefon provozní zatím chybí</div>'}</div></div>`;
+  } else {
+    h+=`<div class="s-nm">${esc(c.name)}</div><div class="s-rl">${esc([c.role,dept].filter(Boolean).join(' · '))}</div>`;
+    if(c.about) h+=`<div class="s-sec"><div class="s-box">${esc(c.about)}</div></div>`;
+    if((c.topics||[]).length) h+=`<div class="s-sec"><div class="k">Obraťte se, když řešíte</div><div class="s-box"><ul class="topics">${c.topics.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${c.areas?`<div class="areas" style="margin-top:10px">${esc(c.areas)}</div>`:''}</div></div>`;
+    h+=`<div class="s-sec"><div class="k">Kontakt</div><div class="card2">${ph.map(p=>line(tel(p.n),p.n,'telefon',p.t)).join('')}${em.map(e=>line('mailto:'+e,e,'e-mail')).join('')}${!ph.length&&!em.length?'<div class="empty">Kontakt zatím chybí</div>':''}</div></div>`;
+  }
+  const pp=store?(c.sp||personPhone(c)):personPhone(c);
+  h+=`<div class="foot">${pp?`<a class="btn primary" href="${tel(pp)}">Zavolat</a>`:''}<button class="btn" data-close>Zavřít</button></div></div>`;
+  openSheet(h);
+}
+
+/* ---------- editors ---------- */
+function editor(c,isNew){
+  sheet={kind:'person',c:JSON.parse(JSON.stringify(c)),isNew,photo:c.photo||''};
+  const store=isStore(c);
+  const ph=phonesOf(c).slice(0,2); while(ph.length<2) ph.push({n:'',t:'P'});
+  const phHtml=ph.map((p,i)=>`<div class="phrow"><input id="ph${i}" type="tel" inputmode="tel" value="${esc(p.n)}" placeholder="${i?'další telefon':'telefon'}" aria-label="Telefon ${i+1}"><select id="pt${i}" aria-label="Typ telefonu ${i+1}"><option value="P"${p.t==='P'||!p.t&&!p.n?' selected':''}>pracovní</option><option value="S"${p.t==='S'?' selected':''}>soukromý</option><option value=""${!p.t&&p.n?' selected':''}>bez štítku</option></select></div>`).join('');
+  openSheet(`<form class="form" id="pform">
+   <h3>${isNew?(store?'Nová prodejna':'Nový člověk'):'Upravit'}</h3>
+   <div class="f"><label for="md">Oddělení</label><select id="md">${D().depts.map(d=>`<option value="${esc(d.id)}"${d.id===c.d?' selected':''}>${esc(d.name)}</option>`).join('')}</select></div>
+   <div class="group" id="storeFields"${store?'':' hidden'}><div class="flabel">Prodejna</div><div class="two"><div class="f"><label for="mno">Číslo prodejny</label><input id="mno" inputmode="numeric" value="${esc(c.no||'')}"></div><div class="f"><label for="msp">Telefon prodejny</label><input id="msp" type="tel" inputmode="tel" value="${esc(c.sp||'')}"></div></div><div class="f"><label for="mpl">Název prodejny</label><input id="mpl" value="${esc(c.place||'')}"></div></div>
+   <div class="group"><div class="flabel" id="personLabel">${store?'Provozní':'Člověk'}</div>
+    <div class="photo-ed"><div class="pv" id="mava">${face({name:c.name||'?',photo:sheet.photo})}</div><div class="b"><label class="mini" for="mphoto" style="display:grid;place-items:center;cursor:pointer;background:var(--surface)">${sheet.photo?'Změnit fotku':'Nahrát fotku'}</label><input id="mphoto" type="file" accept="image/*" hidden><button type="button" class="mini" id="mphotodel"${sheet.photo?'':' hidden'}>Odebrat fotku</button></div></div>
+    <div class="f"><label for="mn">Jméno</label><input id="mn" value="${esc(c.name)}" autocomplete="off"></div>
+    <div class="f"><label for="mr">Pozice</label><input id="mr" value="${esc(c.role||'')}"></div>
+    <label class="chk" id="leadRow"${store?' hidden':''}><input type="checkbox" id="mlead"${c.lead?' checked':''}> Vede oddělení</label>
+    <div class="f"><label>Telefon</label>${phHtml}</div>
+    <div class="f"><label for="me">E-mail</label><input id="me" type="text" inputmode="email" value="${esc((c.em||[]).join(', '))}" placeholder="více adres oddělte čárkou"></div>
+   </div>
+   <div class="group" id="infoFields"${store?' hidden':''}><div class="flabel">Na co se na něj obracet</div>
+    <div class="f"><label for="mab">Krátký popis</label><input id="mab" value="${esc(c.about||'')}" placeholder="např. Vedení personálního oddělení"></div>
+    <div class="f"><label for="mtop">Obraťte se, když řešíte</label>${LT}textarea id="mtop" placeholder="každé téma na nový řádek">${esc((c.topics||[]).join('\n'))}${LT}/textarea><span class="hint">Každé téma na samostatný řádek. Podle témat se dá i vyhledávat.</span></div>
+    <div class="f"><label for="mar">Oblasti (menší písmo)</label><input id="mar" value="${esc(c.areas||'')}" placeholder="např. Nábor • HR komunikace"></div>
+   </div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Hotovo</button></div>
+   ${isNew?'':'<button type="button" class="btn danger" id="pdel">Smazat</button>'}
+  </form>`);
+}
+function deptEditor(d){
+  sheet={kind:'dept',id:d.id};
+  openSheet(`<form class="form" id="dform"><h3>${esc(d.name)}</h3>
+   <div class="f"><label for="dn">Název oddělení</label><input id="dn" value="${esc(d.name)}"></div>
+   <div class="f"><label for="da">Krátký popis</label><input id="da" value="${esc(d.about||'')}" placeholder="kdy se na oddělení obrátit"></div>
+   <div class="f"><label for="dno">Poznámka</label><input id="dno" value="${esc(d.note||'')}" placeholder="např. společný e-mail"></div>
+   <div class="f"><label for="dtt">Nadpis rozbalovacího seznamu</label><input id="dtt" value="${esc(d.teamTitle||'')}" placeholder="Co oddělení řeší"></div>
+   <div class="f"><label for="dtm">Co oddělení řeší</label>${LT}textarea id="dtm" placeholder="každá položka na nový řádek">${esc((d.team||[]).join('\n'))}${LT}/textarea></div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Hotovo</button></div></form>`);
+}
+function quickEditor(x,isNew){
+  sheet={kind:'quick',x:JSON.parse(JSON.stringify(x)),isNew};
+  const people=D().contacts.filter(c=>!isStore(c)).slice().sort((a,b)=>a.name.localeCompare(b.name,'cs'));
+  openSheet(`<form class="form" id="qform"><h3>${isNew?'Nové téma':'Upravit téma'}</h3>
+   <div class="f"><label for="qt">Téma</label><input id="qt" value="${esc(x.t)}" placeholder="např. Benefity"></div>
+   <div class="f"><label for="qd">Upřesnění</label><input id="qd" value="${esc(x.d||'')}" placeholder="např. MultiSport, Edenred…"></div>
+   <div class="f"><label for="qw">Kdo to řeší</label><select id="qw">${people.map(c=>`<option value="${esc(c.id)}"${c.id===x.who?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Hotovo</button></div>
+   ${isNew?'':'<button type="button" class="btn danger" id="qdel">Smazat téma</button>'}</form>`);
+}
+function readPhoto(file){
+  return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>{const img=new Image();img.onload=()=>{const W=480,H=600,cv=document.createElement('canvas');cv.width=W;cv.height=H;const r=W/H;let sw=img.width,sh=img.height;if(sw/sh>r){sw=sh*r;}else{sh=sw/r;}const sx=(img.width-sw)/2,sy=Math.max(0,(img.height-sh)*0.3);cv.getContext('2d').drawImage(img,sx,sy,sw,sh,0,0,W,H);res(cv.toDataURL('image/jpeg',.78));};img.onerror=rej;img.src=fr.result;};fr.onerror=rej;fr.readAsDataURL(file);});
+}
+const val=id=>document.getElementById(id).value.trim();
+const lines=id=>document.getElementById(id).value.split('\n').map(s=>s.trim()).filter(Boolean);
+function submitPerson(){
+  const c=sheet.c; c.d=val('md'); c.name=val('mn'); c.role=val('mr'); c.photo=sheet.photo;
+  if(c.d==='prodejny'){c.no=val('mno');c.sp=val('msp');c.place=val('mpl');if(!c.role)c.role='provozní';c.lead=false;if(!c.place&&!c.name){toast('Doplňte název prodejny.');return;}}
+  else{delete c.no;delete c.sp;delete c.place;if(!c.name){toast('Doplňte jméno.');return;}c.lead=document.getElementById('mlead').checked;c.about=val('mab');c.topics=lines('mtop');c.areas=val('mar');}
+  c.ph=[0,1].map(i=>({n:val('ph'+i),t:document.getElementById('pt'+i).value})).filter(p=>p.n);
+  c.em=val('me').split(/[,;\s]+/).filter(Boolean);
+  const i=draft.contacts.findIndex(x=>x.id===c.id); if(i<0) draft.contacts.push(c); else draft.contacts[i]=c;
+  done();
+}
+function submitDept(){const d=draft.depts.find(x=>x.id===sheet.id);d.name=val('dn')||d.name;d.about=val('da');d.note=val('dno');d.teamTitle=val('dtt');d.team=lines('dtm');done();}
+function submitQuick(){const x=sheet.x;x.t=val('qt');x.d=val('qd');x.who=val('qw');if(!x.t){toast('Doplňte téma.');return;}const i=draft.quick.findIndex(k=>k.id===x.id);if(i<0)draft.quick.push(x);else draft.quick[i]=x;done();}
+function done(msg){dirty++;closeSheet();render();toast(msg||'Připraveno. Nezapomeňte uložit.');}
+
+/* ---------- GitHub ukládání ---------- */
+const GH={owner:'liberskelahudky',repo:'kontakty',branch:'main'};
+let memTok=''; const upl=new Map();
+function tok(){if(memTok)return memTok;try{return localStorage.getItem('ll_kontakty_token')||'';}catch(_){return '';}}
+function setTok(t){memTok=t;try{t?localStorage.setItem('ll_kontakty_token',t):localStorage.removeItem('ll_kontakty_token');}catch(_){}}
+const API=p=>`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}`;
+const hdr=()=>({Authorization:'Bearer '+tok(),Accept:'application/vnd.github+json'});
+const b64u=s=>btoa(unescape(encodeURIComponent(s)));
+async function putFile(path,content,msg){
+  let sha;
+  const g=await fetch(API(path)+'?ref='+GH.branch+'&t='+Date.now(),{headers:hdr(),cache:'no-store'});
+  if(g.status===200) sha=(await g.json()).sha;
+  else if(g.status!==404) throw {code:g.status};
+  const r=await fetch(API(path),{method:'PUT',headers:hdr(),body:JSON.stringify({message:msg,content,branch:GH.branch,sha})});
+  if(!r.ok) throw {code:r.status};
+  return r.json();
+}
+function askToken(){
+  sheet={kind:'token'};
+  openSheet(`<form class="form pinf" id="tokform"><div class="pin-ic">${I.lock}</div><h3>Připojit ukládání</h3>
+   <p class="pin-t">Změny se ukládají na GitHub. Na tomto zařízení je potřeba jednou zadat GitHub token s právem zapisovat do repozitáře kontakty.</p>
+   <div class="f"><label for="tok">GitHub token</label><input id="tok" type="password" autocomplete="off" placeholder="github_pat_…"></div>
+   <div class="pin-err" id="pinerr" role="alert"></div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Uložit</button></div></form>`);
+}
+function submitToken(){const t=val('tok');if(!t){document.getElementById('pinerr').textContent='Vložte token.';return;}setTok(t);closeSheet();save();}
+async function save(){
+  if(!tok()){askToken();return;}
+  const b=document.getElementById('save'); if(b){b.disabled=true;b.textContent='Ukládám…';}
+  const d=new Date(); draft.updated=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  try{
+    const out=JSON.parse(JSON.stringify(draft));
+    for(const c of out.contacts){
+      if(!c.photo||!c.photo.startsWith('data:')) continue;
+      let path=upl.get(c.photo);
+      if(!path){path=`fotky/${c.id}-${Date.now().toString(36)}.jpg`;await putFile(path,c.photo.split(',')[1],'Fotka: '+(c.name||c.place||c.id));upl.set(c.photo,path);}
+      c.photo=path;
+    }
+    await putFile('data.json',b64u(JSON.stringify(out,null,1)),'Úprava kontaktů');
+    data=draft; draft=null; dirty=0; render();
+    toast('Uloženo. Kolegové změnu uvidí zhruba do minuty.');
+  }catch(e){
+    const code=e&&e.code;
+    if(b){b.textContent='Uložit';b.disabled=false;}
+    if(code===401){setTok('');toast('Token nefunguje. Zadejte ho znovu.');askToken();}
+    else if(code===403||code===404) toast('Token nemá právo zapisovat do repozitáře kontakty.');
+    else if(code===409||code===422) toast('Někdo ukládal ve stejnou chvíli. Klepněte na Uložit znovu.');
+    else toast('Uložení se nepovedlo. Zkontrolujte připojení a zkuste to znovu.');
+  }
+}
+async function loadData(){
+  try{
+    let j=null;
+    if(tok()){
+      const r=await fetch(API('data.json')+'?ref='+GH.branch+'&t='+Date.now(),{headers:Object.assign(hdr(),{Accept:'application/vnd.github.raw+json'}),cache:'no-store'});
+      if(r.ok) j=await r.json();
+    }
+    if(!j){const r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(r.ok) j=await r.json();}
+    if(j&&j.contacts&&!draft){data=j;data.quick=data.quick||[];render();}
+  }catch(_){}
+}
+
+/* ---------- events ---------- */
+root.addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value;render();}});
+root.addEventListener('change',async e=>{
+  if(e.target.id==='md'&&sheet){const s=e.target.value==='prodejny';document.getElementById('storeFields').hidden=!s;document.getElementById('infoFields').hidden=s;document.getElementById('leadRow').hidden=s;document.getElementById('personLabel').textContent=s?'Provozní':'Člověk';}
+  if(e.target.id==='mphoto'&&sheet&&e.target.files[0]){
+    try{sheet.photo=await readPhoto(e.target.files[0]);document.getElementById('mava').innerHTML=face({name:val('mn')||'?',photo:sheet.photo});document.getElementById('mphotodel').hidden=false;}
+    catch(_){toast('Tenhle soubor nejde načíst jako obrázek.');}
+  }
+});
+root.addEventListener('submit',e=>{e.preventDefault();({pform:submitPerson,dform:submitDept,qform:submitQuick,pinform:submitPin,pinchange:submitPinChange,tokform:submitToken}[e.target.id]||(()=>{}))();});
+root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.open){e.preventDefault();e.target.click();}});
+root.addEventListener('click',e=>{
+  if(e.target.id==='scrim'){closeSheet();return;}
+  if(e.target.closest('[data-stop]')) return;
+  const t=e.target.closest('button,[data-open]'); if(!t) return;
+  const ds=t.dataset;
+  if(ds.go){view=ds.go;q='';document.getElementById('q').value='';render();window.scrollTo({top:0});return;}
+  if(ds.copy!==undefined){const v=ds.copy,fb=()=>{const i=document.createElement('textarea');i.value=v;document.body.appendChild(i);i.select();try{document.execCommand('copy');toast('Zkopírováno');}catch(_){toast(v);}i.remove();};if(navigator.clipboard)navigator.clipboard.writeText(v).then(()=>toast('Zkopírováno'),fb);else fb();return;}
+  if(ds.close!==undefined){closeSheet();return;}
+  if(ds.open){const c=D().contacts.find(x=>x.id===ds.open);if(c)draft?editor(c,false):detail(c);return;}
+  if(ds.quick){const x=D().quick.find(k=>k.id===ds.quick);if(!x)return;if(draft){quickEditor(x,false);return;}const c=D().contacts.find(k=>k.id===x.who);if(c)detail(c);return;}
+  if(ds.addq!==undefined){quickEditor({id:'q'+Date.now().toString(36),t:'',d:'',who:''},true);return;}
+  if(ds.dedit){deptEditor(D().depts.find(d=>d.id===ds.dedit));return;}
+  if(ds.add){editor({id:'c'+Date.now().toString(36),d:ds.add,name:'',role:'',ph:[],em:[],photo:'',lead:false,about:'',topics:[],areas:''},true);return;}
+  if(t.id==='editToggle'||ds.et!==undefined){requestEdit();return;}
+  if(t.id==='pinbtn'){pinChanger();return;}
+  if(t.id==='discard'){if(dirty&&ds.sure!=='1'){ds.sure='1';t.textContent='Opravdu?';return;}draft=null;dirty=0;render();return;}
+  if(t.id==='save'){save();return;}
+  if(t.id==='mphotodel'){sheet.photo='';document.getElementById('mava').innerHTML=face({name:val('mn')||'?',photo:''});t.hidden=true;return;}
+  if(t.id==='pdel'){if(ds.sure!=='1'){ds.sure='1';t.textContent='Opravdu smazat?';return;}const id=sheet.c.id;draft.contacts=draft.contacts.filter(c=>c.id!==id);draft.quick.forEach(x=>{if(x.who===id)x.who='';});done('Smazáno. Nezapomeňte uložit.');return;}
+  if(t.id==='qdel'){if(ds.sure!=='1'){ds.sure='1';t.textContent='Opravdu smazat?';return;}draft.quick=draft.quick.filter(x=>x.id!==sheet.x.id);done('Smazáno. Nezapomeňte uložit.');return;}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+
+/* ---------- PIN ---------- */
+const PSALT='LL-kontakty:';
+function cyrb(str,seed){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);}
+const pinHash=p=>cyrb(PSALT+p,7)+cyrb(PSALT+p,131);
+let pinFails=0, pinLockUntil=0;
+function pinOk(){try{return sessionStorage.getItem('ll-pin')===data.pinHash;}catch(_){return false;}}
+function pinRemember(){try{sessionStorage.setItem('ll-pin',data.pinHash);}catch(_){}}
+function startEdit(){draft=JSON.parse(JSON.stringify(data));dirty=0;closeSheet();render();toast('Režim úprav. Klepněte na kartu.');}
+function requestEdit(){
+  if(pinOk()){startEdit();return;}
+  sheet={kind:'pin'};
+  openSheet(`<form class="form pinf" id="pinform"><div class="pin-ic">${I.lock}</div><h3>Zadejte PIN</h3><p class="pin-t">Upravovat kontakty může jen ten, kdo zná PIN.</p>
+   <input id="pin" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="8" aria-label="PIN">
+   <div class="pin-err" id="pinerr" role="alert"></div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Pokračovat</button></div></form>`);
+  setTimeout(()=>{const i=document.getElementById('pin');if(i)i.focus();},60);
+}
+function submitPin(){
+  const err=document.getElementById('pinerr'), inp=document.getElementById('pin');
+  const now=Date.now();
+  if(now<pinLockUntil){err.textContent=`Moc pokusů. Zkuste to za ${Math.ceil((pinLockUntil-now)/1000)} s.`;return;}
+  if(pinHash(inp.value.trim())===data.pinHash){pinFails=0;pinRemember();startEdit();return;}
+  pinFails++; inp.value=''; inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
+  if(pinFails>=5){pinLockUntil=now+30000;pinFails=0;err.textContent='Moc pokusů. Zkuste to za 30 s.';}
+  else err.textContent='Špatný PIN. Zkuste to znovu.';
+  inp.focus();
+}
+function pinChanger(){
+  sheet={kind:'pinchange'};
+  openSheet(`<form class="form pinf" id="pinchange"><div class="pin-ic">${I.lock}</div><h3>Změnit PIN</h3><p class="pin-t">Nový PIN platí po uložení změn.</p>
+   <div class="f"><label for="np1">Nový PIN (4–8 číslic)</label><input id="np1" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="8"></div>
+   <div class="f"><label for="np2">Nový PIN znovu</label><input id="np2" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="8"></div>
+   <div class="pin-err" id="pinerr" role="alert"></div>
+   <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Nastavit</button></div></form>`);
+}
+function submitPinChange(){
+  const a=val('np1'),b=val('np2'),err=document.getElementById('pinerr');
+  if(!/^\d{4,8}$/.test(a)){err.textContent='PIN musí mít 4 až 8 číslic.';return;}
+  if(a!==b){err.textContent='PINy se neshodují.';return;}
+  draft.pinHash=pinHash(a); done('Nový PIN nastaven. Nezapomeňte uložit.');
+}
+
+shell(); render();
+(function hint(){
+  const inp=document.getElementById('q'); if(!inp) return;
+  const base='Jméno, oddělení nebo co řešíte';
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){inp.placeholder=base;return;}
+  const ex=['Petra Dlouhá','účetní','potřebuju čip','MultiSport','prodejna Letná','mzda Vestec'];
+  let i=0,j=0,del=false,wait=0;
+  setInterval(()=>{
+    const el=document.getElementById('q'); if(!el) return;
+    if(document.activeElement===el||el.value){el.placeholder=base;return;}
+    if(wait>0){wait--;return;}
+    const w=ex[i];
+    if(!del){j++;if(j>=w.length){del=true;wait=22;}}
+    else{j-=2;if(j<=0){j=0;del=false;i=(i+1)%ex.length;wait=4;}}
+    el.placeholder='Zkuste: '+w.slice(0,j)+(del&&j===0?'':'|');
+  },70);
+})();
+loadData();
+})();
+</script>
+
+</body>
+</html>
