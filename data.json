@@ -116,7 +116,7 @@
    "em": [
     "asistentka@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c1-muz3nc4a.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -136,7 +136,7 @@
    "em": [
     "marketing.asistentka@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c2-muz3ndi6.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -333,26 +333,6 @@
    "areas": ""
   },
   {
-   "id": "c12",
-   "d": "personalni",
-   "name": "Sandra Rafflerová",
-   "role": "personální administrativa",
-   "ph": [
-    {
-     "n": "733 125 025",
-     "t": ""
-    }
-   ],
-   "em": [
-    "rafflerova@liberskelahudky.cz"
-   ],
-   "photo": "",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
    "id": "c13",
    "d": "personalni",
    "name": "Aneta Řezníčková",
@@ -366,7 +346,7 @@
    "em": [
     "reznickova@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c13-muz3neuv.jpg",
    "lead": false,
    "about": "",
    "topics": [
@@ -396,27 +376,7 @@
    "em": [
     "bobruskova@liberskelahudky.cz"
    ],
-   "photo": "",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
-   "id": "c15",
-   "d": "personalni",
-   "name": "Daniela Horčičková",
-   "role": "nábor",
-   "ph": [
-    {
-     "n": "731 110 010",
-     "t": ""
-    }
-   ],
-   "em": [
-    "horcickova@liberskelahudky.cz"
-   ],
-   "photo": "",
+   "photo": "fotky/c14-muz3ng44.jpg",
    "lead": false,
    "about": "",
    "topics": [],
