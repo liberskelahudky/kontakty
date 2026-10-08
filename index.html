@@ -158,7 +158,19 @@ details.team li::marker{color:var(--gold)}
 .dtile{background:var(--surface);border:0;border-radius:20px;box-shadow:var(--shadow);padding:14px;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;cursor:pointer;color:var(--fg);min-height:132px}
 .dtile .dn{font-weight:700;font-size:1rem;line-height:1.2;margin-top:auto;text-wrap:balance}
 .dtile .dc{font-size:.8rem;color:var(--muted)}
-.stack{display:flex;margin-bottom:10px}
+.stack{display:flex}
+.dt-top{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-bottom:12px}
+.dic{flex:none;width:52px;height:52px;border-radius:16px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.dic svg{width:28px;height:28px}
+.dic.sm{width:42px;height:42px;border-radius:13px}.dic.sm svg{width:22px;height:22px}
+.dtile .stack .sf{width:28px;height:28px;margin-left:-8px}.dtile .stack .sf:first-child{margin-left:0}.dtile .stack .sf .mono{font-size:.6rem}
+.icopick{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+.icopick label{position:relative;cursor:pointer}
+.icopick input{position:absolute;opacity:0;pointer-events:none}
+.icopick span{display:grid;place-items:center;height:52px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+.icopick span svg{width:24px;height:24px}
+.icopick input:checked+span{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.icopick input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .sf{width:40px;height:40px;border-radius:50%;overflow:hidden;position:relative;border:2px solid var(--surface);margin-left:-10px;background:var(--surface-2)}
 .sf:first-child{margin-left:0}
 .sf img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
@@ -334,6 +346,25 @@ function deptSection(d,nq,dg,forceOpen){
   const showTop=nq||ab||draft;
   return {n:list.length,html:`<section class="dept"><div class="d-top"${showTop?'':' hidden'}><div class="tt">${nq?`<h2>${esc(d.name)}</h2>`:''}${ab?`<div class="ab">${esc(ab)}</div>`:''}</div>${draft?`<button class="d-edit" data-dedit="${esc(d.id)}">Upravit oddělení</button>`:''}</div>${team}<div class="grid${d.id==='prodejny'?' stores':''}">${list.map(tile).join('')}${draft?`<button class="addtile" data-add="${esc(d.id)}">+ Přidat ${d.id==='prodejny'?'prodejnu':'člověka'}</button>`:''}</div></section>`};
 }
+
+const sv=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const DI={
+ vedeni:{l:'Vedení',s:sv('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>')},
+ kancelar:{l:'Kancelář',s:sv('<path d="M4 4h16v12H4z"/><path d="M2 20h20M9 16v4M15 16v4"/>')},
+ personalni:{l:'Lidé',s:sv('<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14.2c2.6.3 4.5 2.6 4.5 5.8"/>')},
+ ucetni:{l:'Kalkulačka',s:sv('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/>')},
+ nakup:{l:'Nákup',s:sv('<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.7 12.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 7H6"/>')},
+ marketing:{l:'Marketing',s:sv('<path d="M3 11v2a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6M19.5 6.5a7.5 7.5 0 0 1 0 11"/>')},
+ vyroba:{l:'Výroba',s:sv('<path d="M6 13.9V20h12v-6.1"/><path d="M6 14a4 4 0 0 1-.8-7.9A5 5 0 0 1 12 3a5 5 0 0 1 6.8 3.1A4 4 0 0 1 18 14z"/><path d="M6 17h12"/>')},
+ lahovice:{l:'Pekárna',s:sv('<path d="M4 15c0-5 3.6-9 8-9s8 4 8 9v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 10l1 4M12 9.5v4.5M15 10l-1 4"/>')},
+ kvalita:{l:'Kvalita',s:sv('<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>')},
+ prodejny:{l:'Prodejna',s:sv('<path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 11v9h14v-9M10 20v-5h4v5"/>')},
+ ridici:{l:'Doprava',s:sv('<path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>')},
+ sklad:{l:'Sklad',s:sv('<path d="M3 8l9-5 9 5v12H3z"/><path d="M7 20v-8h10v8M7 15h10"/>')},
+ telefon:{l:'Telefon',s:sv('<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>')},
+ hvezda:{l:'Hvězda',s:sv('<path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/>')}
+};
+const dIcon=d=>(DI[d.icon]||DI[d.id]||DI.hvezda).s;
 function faces(d){
   const list=D().contacts.filter(c=>c.d===d.id).sort((a,b)=>(b.photo?1:0)-(a.photo?1:0)||(b.lead?1:0)-(a.lead?1:0)).slice(0,4);
   return `<div class="stack">${list.map(c=>`<span class="sf">${face(c)}</span>`).join('')}</div>`;
@@ -352,13 +383,13 @@ function render(){
   } else if(view==='home'){
     const qs=D().quick;
     if(qs.length||draft) out+=`<section class="quick"><div class="q-h"><h2>Co potřebujete vyřešit?</h2></div><div class="q-row">${qs.map(qcard).join('')}${draft?'<button class="qcard add-q" data-addq>+ Přidat téma</button>':''}</div></section>`;
-    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}">${faces(d)}<span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
+    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
     head.hidden=true;document.getElementById('top').hidden=false;
   } else {
     const d=D().depts.find(x=>x.id===view);
     if(!d){view='home';return render();}
     head.hidden=false;document.getElementById('top').hidden=true;
-    head.innerHTML=`<button class="back" data-go="home" aria-label="Zpět na přehled">${I.back}</button><div class="cr-t" style="flex:1"><div class="cr-n">${esc(d.name)}</div></div><button class="icon-btn" data-et aria-label="Upravit kontakty" title="Upravit kontakty"${!art||readOnly||draft?' hidden':''}>${I.pen}</button>`;
+    head.innerHTML=`<button class="back" data-go="home" aria-label="Zpět na přehled">${I.back}</button><span class="dic sm">${dIcon(d)}</span><div class="cr-t" style="flex:1"><div class="cr-n">${esc(d.name)}</div></div><button class="icon-btn" data-et aria-label="Upravit kontakty" title="Upravit kontakty"${!art||readOnly||draft?' hidden':''}>${I.pen}</button>`;
     out+=deptSection(d,'','',false).html||'<p class="none">Zatím tu nikdo není.</p>';
   }
   document.getElementById('out').innerHTML=out;
@@ -437,6 +468,7 @@ function deptEditor(d){
   sheet={kind:'dept',id:d.id};
   openSheet(`<form class="form" id="dform"><h3>${esc(d.name)}</h3>
    <div class="f"><label for="dn">Název oddělení</label><input id="dn" value="${esc(d.name)}"></div>
+   <div class="f"><span class="flabel">Ikonka</span><div class="icopick" role="radiogroup" aria-label="Ikonka oddělení">${Object.keys(DI).map(k=>`<label title="${esc(DI[k].l)}"><input type="radio" name="dic" value="${k}"${(d.icon||(DI[d.id]?d.id:'hvezda'))===k?' checked':''}><span>${DI[k].s}</span></label>`).join('')}</div></div>
    <div class="f"><label for="da">Krátký popis</label><input id="da" value="${esc(d.about||'')}" placeholder="kdy se na oddělení obrátit"></div>
    <div class="f"><label for="dno">Poznámka</label><input id="dno" value="${esc(d.note||'')}" placeholder="např. společný e-mail"></div>
    <div class="f"><label for="dtt">Nadpis rozbalovacího seznamu</label><input id="dtt" value="${esc(d.teamTitle||'')}" placeholder="Co oddělení řeší"></div>
@@ -467,7 +499,7 @@ function submitPerson(){
   const i=draft.contacts.findIndex(x=>x.id===c.id); if(i<0) draft.contacts.push(c); else draft.contacts[i]=c;
   done();
 }
-function submitDept(){const d=draft.depts.find(x=>x.id===sheet.id);d.name=val('dn')||d.name;d.about=val('da');d.note=val('dno');d.teamTitle=val('dtt');d.team=lines('dtm');done();}
+function submitDept(){const d=draft.depts.find(x=>x.id===sheet.id);const ic=document.querySelector('input[name=dic]:checked');if(ic)d.icon=ic.value;d.name=val('dn')||d.name;d.about=val('da');d.note=val('dno');d.teamTitle=val('dtt');d.team=lines('dtm');done();}
 function submitQuick(){const x=sheet.x;x.t=val('qt');x.d=val('qd');x.who=val('qw');if(!x.t){toast('Doplňte téma.');return;}const i=draft.quick.findIndex(k=>k.id===x.id);if(i<0)draft.quick.push(x);else draft.quick[i]=x;done();}
 function done(msg){dirty++;closeSheet();render();toast(msg||'Připraveno. Nezapomeňte uložit.');}
 
