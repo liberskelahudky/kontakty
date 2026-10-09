@@ -6,7 +6,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "kancelar",
@@ -14,7 +15,8 @@
    "note": "společný e-mail kancelar@liberskelahudky.cz",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "personalni",
@@ -34,7 +36,8 @@
     "řešení absence a dalších personálních situací",
     "ukončení pracovního poměru",
     "související personální administrativu"
-   ]
+   ],
+   "hr": "c73"
   },
   {
    "id": "ucetni",
@@ -42,7 +45,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "nakup",
@@ -50,7 +54,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "marketing",
@@ -58,7 +63,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "vyroba",
@@ -66,7 +72,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c_sara"
   },
   {
    "id": "lahovice",
@@ -74,7 +81,8 @@
    "note": "",
    "about": "",
    "teamTitle": "",
-   "team": []
+   "team": [],
+   "hr": "c73"
   },
   {
    "id": "kvalita",
@@ -166,12 +174,12 @@
    "id": "c73",
    "d": "personalni",
    "name": "Jana Vaněk",
-   "role": "",
+   "role": "HR partnerka",
    "ph": [],
    "em": [],
    "photo": "",
    "lead": false,
-   "about": "",
+   "about": "HR partnerka pro oblast Richarda Svitáka, pekárnu Lahovice a centrálu. Zastupuje se se Sárou.",
    "topics": [
     "pracovní smlouva – nástup, odchod nebo změna",
     "potvrzení pro úřady, banku apod.",
@@ -181,6 +189,27 @@
     "nábor a volná pracovní místa"
    ],
    "areas": "Nábor • HR komunikace • pracovní dokumentace • personální systémy"
+  },
+  {
+   "id": "c_sara",
+   "d": "personalni",
+   "name": "Sára",
+   "role": "HR partnerka",
+   "ph": [],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "HR partnerka pro oblast Davida Fendrycha a výrobnu Vestec. Zastupuje se s Janou.",
+   "topics": [
+    "pracovní smlouva – nástup, odchod nebo změna",
+    "potvrzení pro úřady, banku apod.",
+    "osobní údaje a personální dokumenty",
+    "lékařská prohlídka",
+    "Munipolis nebo FABIS",
+    "nábor a volná pracovní místa"
+   ],
+   "areas": "Nábor • HR komunikace • pracovní dokumentace • personální systémy",
+   "hr": ""
   },
   {
    "id": "c4",
@@ -200,7 +229,8 @@
    "lead": false,
    "about": "",
    "topics": [],
-   "areas": ""
+   "areas": "",
+   "hr": "c_sara"
   },
   {
    "id": "c5",
@@ -220,7 +250,8 @@
    "lead": false,
    "about": "",
    "topics": [],
-   "areas": ""
+   "areas": "",
+   "hr": "c73"
   },
   {
    "id": "c6",
@@ -1466,6 +1497,12 @@
  ],
  "quick": [
   {
+   "id": "q_hr",
+   "t": "Personální záležitosti",
+   "d": "nástup, absence, změny, ukončení – kdo je moje HR partnerka?",
+   "who": "hr"
+  },
+  {
    "id": "q1",
    "t": "Benefity",
    "d": "MultiSport, Edenred, masáže, jazykové kurzy, penzijní spoření, slevová karta pro rodinu",
@@ -1493,19 +1530,19 @@
    "id": "q5",
    "t": "Pracovní smlouva",
    "d": "nástup, odchod nebo změna smlouvy",
-   "who": "c73"
+   "who": "hr"
   },
   {
    "id": "q6",
    "t": "Potvrzení",
    "d": "pro úřady, banku apod.",
-   "who": "c73"
+   "who": "hr"
   },
   {
    "id": "q7",
    "t": "Nábor a volná místa",
    "d": "",
-   "who": "c73"
+   "who": "hr"
   },
   {
    "id": "q8",
