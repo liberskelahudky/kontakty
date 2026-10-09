@@ -1680,6 +1680,46 @@
    "about": "",
    "topics": [],
    "areas": ""
+  },
+  {
+   "id": "cmv0xmxel",
+   "d": "vedeni",
+   "name": "Jan Vala",
+   "role": "generální ředitel",
+   "ph": [
+    {
+     "n": "731 063 263",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "vala@liberskelahudky.cz"
+   ],
+   "photo": "fotky/cmv0xmxel-mv0xpf74.jpg",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "cmv0xo7uu",
+   "d": "vedeni",
+   "name": "Vladimír Gurčík",
+   "role": "výrobní ředitel",
+   "ph": [
+    {
+     "n": "731508612",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "gurcik@liberskelahudky.cz"
+   ],
+   "photo": "fotky/cmv0xo7uu-mv0xpgov.jpg",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
   }
  ],
  "quick": [
