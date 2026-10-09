@@ -135,6 +135,34 @@ details.team li::marker{color:var(--gold)}
 .omhead .omn{font-weight:700;font-size:1.05rem;line-height:1.2}
 .omhead .omc{font-size:.8rem;color:var(--muted)}
 .omhead .oa{position:static;flex:none}
+
+.alllink{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--accent);font-weight:600;font-size:.85rem;cursor:pointer}
+.alllink svg{width:16px;height:16px}
+.q-h{flex-wrap:wrap}
+.allbar{display:flex;flex-direction:column;gap:10px;margin:14px 0 6px}
+.fchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.fchips::-webkit-scrollbar{display:none}
+.fchip{flex:none;height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:.86rem;cursor:pointer;color:var(--fg)}
+.fchip span{color:var(--muted);font-weight:500;margin-left:2px}
+.fchip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}.fchip[aria-pressed="true"] span{color:inherit;opacity:.7}
+.sortsw{display:inline-flex;align-self:flex-start;background:var(--surface-2);border-radius:12px;padding:3px}
+.sortsw button{height:32px;padding:0 12px;border:0;border-radius:9px;background:transparent;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer}
+.sortsw button[aria-pressed="true"]{background:var(--surface);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.arow-h{display:flex;align-items:center;gap:8px;margin:20px 2px 8px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.arow-h span:last-child{opacity:.7;font-weight:500}
+.dic.xs{width:26px;height:26px;border-radius:8px}.dic.xs svg{width:15px;height:15px}
+.alist{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
+.arow-h+.alist{margin-top:0}
+.arow{display:flex;align-items:center;gap:12px;padding:9px 12px;border-top:1px solid var(--line);cursor:pointer;min-height:64px}
+.arow:first-child{border-top:0}.arow:hover{background:var(--surface-2)}
+.aav{flex:none;width:46px;height:46px;border-radius:50%;overflow:hidden;position:relative;background:var(--surface-2)}
+.aav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.aav .mono{position:absolute;inset:0;font-size:.85rem}
+.aav.nophoto{box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--priv)}
+.arow .who{flex:1;min-width:0}
+.arow .nm{font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .rl{font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .miss{font-size:.72rem;color:var(--priv);font-weight:600;margin-top:1px}
+.oa.sm{position:static;width:40px;height:40px;box-shadow:none;flex:none}.oa.sm svg{width:18px;height:18px}
+.edit-dot{flex:none;font-size:.75rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:4px 10px}
 /* wide tile */
 .tile.wide{grid-column:1/-1}
 .tile.wide .body{padding:14px 14px 4px;display:flex;flex-direction:column;gap:8px}
@@ -290,6 +318,7 @@ const I={
  tel:svg('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>'),
  mail:svg('<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/>'),
  search:svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'),
+ list:svg('<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/>'),
  lock:svg('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
  back:svg('<path d="M15 18l-6-6 6-6"/>'),
  pen:svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>')
@@ -397,6 +426,28 @@ function faces(d){
   const list=D().contacts.filter(c=>c.d===d.id).sort((a,b)=>(b.photo?1:0)-(a.photo?1:0)||(b.lead?1:0)-(a.lead?1:0)).slice(0,4);
   return `<div class="stack">${list.map(c=>`<span class="sf">${face(c)}</span>`).join('')}</div>`;
 }
+let allF='vse', allSort='dept';
+function allView(){
+  const deps=D().depts, di=id=>deps.findIndex(d=>d.id===id), dn=id=>(deps.find(d=>d.id===id)||{}).name||'';
+  const all=D().contacts;
+  const F={vse:['Všichni',()=>true],foto:['Bez fotky',c=>!c.photo],tel:['Bez telefonu',c=>!personPhone(c)&&!(isStore(c)&&c.sp)],mail:['Bez e-mailu',c=>!(c.em||[]).filter(Boolean).length]};
+  if(!F[allF]) allF='vse';
+  let list=all.filter(F[allF][1]);
+  const title=c=>isStore(c)?(c.place||'Prodejna'):c.name;
+  list.sort(allSort==='az'?(a,b)=>title(a).localeCompare(title(b),'cs'):(a,b)=>di(a.d)-di(b.d)||(b.lead?1:0)-(a.lead?1:0)||title(a).localeCompare(title(b),'cs'));
+  const chips=`<div class="allbar"><div class="fchips" role="group" aria-label="Filtr">${Object.entries(F).map(([k,[l,f]])=>`<button class="fchip" data-af="${k}" aria-pressed="${k===allF}">${l} <span>${all.filter(f).length}</span></button>`).join('')}</div><div class="sortsw" role="group" aria-label="Řazení"><button data-as="dept" aria-pressed="${allSort==='dept'}">Podle oddělení</button><button data-as="az" aria-pressed="${allSort==='az'}">A–Z</button></div></div>`;
+  if(!list.length) return chips+`<p class="none">Tady nikdo není. 🎉</p>`;
+  let html='', cur=null;
+  for(const c of list){
+    if(allSort==='dept'&&c.d!==cur){if(cur!==null)html+='</div>';cur=c.d;const n=list.filter(x=>x.d===cur).length;html+=`<div class="arow-h"><span class="dic xs">${dIcon(deps.find(d=>d.id===cur)||{id:cur})}</span>${esc(dn(cur))}<span>${n}</span></div><div class="alist">`;}
+    else if(allSort==='az'&&cur===null){cur='az';html+='<div class="alist">';}
+    const pp=isStore(c)?(c.sp||personPhone(c)):personPhone(c);
+    const miss=[!c.photo?'fotka':'',!pp?'telefon':'',!(c.em||[]).filter(Boolean).length?'e-mail':''].filter(Boolean);
+    const sub=isStore(c)?`${c.name||'provozní nevyplněna'} · č. ${c.no||'–'}`:[c.role,allSort==='az'?dn(c.d):''].filter(Boolean).join(' · ');
+    html+=`<div class="arow" role="button" tabindex="0" data-open="${esc(c.id)}"><span class="aav${c.photo?'':' nophoto'}">${face(c)}</span><div class="who"><div class="nm">${esc(title(c))}</div><div class="rl">${esc(sub)}</div>${allF==='vse'&&miss.length?`<div class="miss">chybí: ${miss.join(', ')}</div>`:''}</div>${draft?'<span class="edit-dot">Upravit</span>':pp?`<a class="oa call sm" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(title(c))}">${I.tel}</a>`:''}</div>`;
+  }
+  return chips+html+'</div>';
+}
 function render(){
   const nq=norm(q.trim()), dg=nq.replace(/\D/g,'');
   const head=document.getElementById('crumb');
@@ -411,8 +462,12 @@ function render(){
   } else if(view==='home'){
     const qs=D().quick;
     if(qs.length||draft) out+=`<section class="quick"><div class="q-h"><h2>Co potřebujete vyřešit?</h2></div><div class="q-row">${qs.map(qcard).join('')}${draft?'<button class="qcard add-q" data-addq>+ Přidat téma</button>':''}</div></section>`;
-    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
+    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2><button class="alllink" data-go="all">${I.list}Všechny kontakty</button></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
     head.hidden=true;document.getElementById('top').hidden=false;
+  } else if(view==='all'){
+    head.hidden=false;document.getElementById('top').hidden=true;
+    head.innerHTML=`<button class="back" data-go="home" aria-label="Zpět na přehled">${I.back}</button><span class="dic sm">${I.list}</span><div class="cr-t" style="flex:1"><div class="cr-n">Všechny kontakty</div></div><button class="icon-btn" data-et aria-label="Upravit kontakty" title="Upravit kontakty"${!art||readOnly||draft?' hidden':''}>${I.pen}</button>`;
+    out+=allView();
   } else {
     const d=D().depts.find(x=>x.id===view);
     if(!d){view='home';return render();}
@@ -610,6 +665,8 @@ root.addEventListener('click',e=>{
   if(e.target.closest('[data-stop]')) return;
   const t=e.target.closest('button,[data-open]'); if(!t) return;
   const ds=t.dataset;
+  if(ds.af){allF=ds.af;render();return;}
+  if(ds.as){allSort=ds.as;render();return;}
   if(ds.go){view=ds.go;q='';document.getElementById('q').value='';render();window.scrollTo({top:0});return;}
   if(ds.copy!==undefined){const v=ds.copy,fb=()=>{const i=document.createElement('textarea');i.value=v;document.body.appendChild(i);i.select();try{document.execCommand('copy');toast('Zkopírováno');}catch(_){toast(v);}i.remove();};if(navigator.clipboard)navigator.clipboard.writeText(v).then(()=>toast('Zkopírováno'),fb);else fb();return;}
   if(ds.close!==undefined){closeSheet();return;}
