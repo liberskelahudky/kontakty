@@ -88,7 +88,7 @@ details.team[open] summary::after{content:"–"}
 details.team ul{margin:0;padding:0 16px 14px 34px;columns:2 260px;column-gap:28px;font-size:.88rem;color:var(--fg)}
 details.team li{break-inside:avoid;padding:2px 0}
 details.team li::marker{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
 @media (min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}}
 @media (min-width:980px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:1180px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
@@ -201,7 +201,7 @@ details.team li::marker{color:var(--gold)}
 .areas{font-size:.78rem;color:var(--muted)}
 @media (min-width:640px){
   .tile.wide{grid-column:span 2;flex-direction:row}
-  .tile.wide .ph{aspect-ratio:auto;width:46%;min-height:100%;flex:none}
+  .tile.wide .ph{aspect-ratio:4/5;width:46%;min-height:0;flex:none;align-self:stretch}
   .tile.wide .right{flex:1;min-width:0;display:flex;flex-direction:column}
   .tile.wide .body{flex:1}
 }
@@ -367,7 +367,7 @@ const phonesOf=c=>(c.ph||[]).filter(p=>p.n);
 const firstName=n=>String(n||'').split(/[\s,]+/)[0]||'';
 function personPhone(c){const p=phonesOf(c);return (p.find(x=>x.t!=='S')||p[0]||{}).n||'';}
 const isStore=c=>c.d==='prodejny';
-const isWide=c=>!isStore(c)&&(c.lead||(c.topics||[]).length>0);
+const isWide=c=>!isStore(c)&&((c.topics||[]).length>0||!!c.about);
 
 /* ---------- tiles ---------- */
 function actions(c){
