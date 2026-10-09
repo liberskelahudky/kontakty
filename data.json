@@ -114,15 +114,15 @@
    "id": "c1",
    "d": "kancelar",
    "name": "Kamila Anna Linderová",
-   "role": "asistentka provozu",
+   "role": "marketingová asistentka",
    "ph": [
     {
-     "n": "703 636 921",
-     "t": ""
+     "n": "604 345 716",
+     "t": "P"
     }
    ],
    "em": [
-    "asistentka@liberskelahudky.cz"
+    "marketing.asistentka@liberskelahudky.cz"
    ],
    "photo": "fotky/c1-muz3nc4a.jpg",
    "lead": false,
@@ -137,12 +137,13 @@
    "role": "asistentka vedení",
    "ph": [
     {
-     "n": "604 345 716",
-     "t": ""
+     "n": "703 636 921",
+     "t": "P"
     }
    ],
    "em": [
-    "marketing.asistentka@liberskelahudky.cz"
+    "asistentka@liberskelahudky.cz",
+    "kancelar@liberskelahudky.cz"
    ],
    "photo": "fotky/c2-muz3ndi6.jpg",
    "lead": false,
@@ -667,6 +668,26 @@
    "areas": ""
   },
   {
+   "id": "c_truchly",
+   "d": "vyroba",
+   "name": "Rastislav Trúchly",
+   "role": "technický vedoucí",
+   "ph": [
+    {
+     "n": "704 975 975",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "truchly@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
    "id": "c30",
    "d": "lahovice",
    "name": "Martin Kolankiewicz",
@@ -764,7 +785,12 @@
    "d": "prodejny",
    "name": "Maryana Yurchyk",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 607 973",
+     "t": "S"
+    }
+   ],
    "em": [
     "palmovka@liberskelahudky.cz"
    ],
@@ -783,9 +809,14 @@
    "d": "prodejny",
    "name": "Irena Bažová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 603 775",
+     "t": "P"
+    }
+   ],
    "em": [
-    "dukelskychhrdinu@liberskelahudky.cz"
+    "letna@liberskelahudky.cz"
    ],
    "photo": "fotky/c36-mv0vjke9.jpg",
    "lead": false,
@@ -802,7 +833,12 @@
    "d": "prodejny",
    "name": "Marie Navrátilová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 603 783",
+     "t": "P"
+    }
+   ],
    "em": [
     "vodickova@liberskelahudky.cz"
    ],
@@ -821,7 +857,12 @@
    "d": "prodejny",
    "name": "Gabriela Dvořáková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 603 139",
+     "t": "P"
+    }
+   ],
    "em": [
     "hlavak@liberskelahudky.cz"
    ],
@@ -840,7 +881,12 @@
    "d": "prodejny",
    "name": "Kateřina Pavelková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 605 140",
+     "t": "P"
+    }
+   ],
    "em": [
     "prodejnaliber@liberskelahudky.cz"
    ],
@@ -859,7 +905,12 @@
    "d": "prodejny",
    "name": "Kateřina Pavelková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 605 140",
+     "t": "P"
+    }
+   ],
    "em": [
     "jesenice@liberskelahudky.cz"
    ],
@@ -878,7 +929,12 @@
    "d": "prodejny",
    "name": "Radka Přibylová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 604 539",
+     "t": "P"
+    }
+   ],
    "em": [
     "krc@liberskelahudky.cz"
    ],
@@ -895,9 +951,14 @@
   {
    "id": "c42",
    "d": "prodejny",
-   "name": "Olga Fritchová",
+   "name": "Olga Fritschová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 602 524",
+     "t": "P"
+    }
+   ],
    "em": [
     "porici@liberskelahudky.cz"
    ],
@@ -916,7 +977,12 @@
    "d": "prodejny",
    "name": "Farzanh Yazdaniová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 604 737",
+     "t": "P"
+    }
+   ],
    "em": [
     "budejovicka@liberskelahudky.cz"
    ],
@@ -935,7 +1001,12 @@
    "d": "prodejny",
    "name": "Monika Mihalová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 606 347",
+     "t": "P"
+    }
+   ],
    "em": [
     "modrany@liberskelahudky.cz"
    ],
@@ -954,7 +1025,12 @@
    "d": "prodejny",
    "name": "Jakub Hermánek",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 606 181",
+     "t": "P"
+    }
+   ],
    "em": [
     "ruzyne@liberskelahudky.cz"
    ],
@@ -973,7 +1049,12 @@
    "d": "prodejny",
    "name": "Lucie Murtingerová",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 607 535",
+     "t": "P"
+    }
+   ],
    "em": [
     "haje@liberskelahudky.cz"
    ],
@@ -992,7 +1073,12 @@
    "d": "prodejny",
    "name": "Veronika Hromková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 607 642",
+     "t": "P"
+    }
+   ],
    "em": [
     "arkady@liberskelahudky.cz"
    ],
@@ -1009,13 +1095,18 @@
   {
    "id": "c48",
    "d": "prodejny",
-   "name": "Erszébet Rápová",
+   "name": "Iryna Palinchak",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 609 589",
+     "t": "P"
+    }
+   ],
    "em": [
     "dbk@liberskelahudky.cz"
    ],
-   "photo": "fotky/c48-mv0vjwrt.jpg",
+   "photo": "fotky/c54-mv0vk54f.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1030,7 +1121,12 @@
    "d": "prodejny",
    "name": "Petr Šindelář",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 607 300",
+     "t": "P"
+    }
+   ],
    "em": [
     "dejvice@liberskelahudky.cz"
    ],
@@ -1049,7 +1145,12 @@
    "d": "prodejny",
    "name": "Ivona Skrbková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 609 290",
+     "t": "P"
+    }
+   ],
    "em": [
     "vysocany@liberskelahudky.cz"
    ],
@@ -1066,9 +1167,14 @@
   {
    "id": "c51",
    "d": "prodejny",
-   "name": "Miroslava Smuk",
+   "name": "Myroslava Smuk",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 608 227",
+     "t": "P"
+    }
+   ],
    "em": [
     "holesovice@liberskelahudky.cz"
    ],
@@ -1085,9 +1191,14 @@
   {
    "id": "c52",
    "d": "prodejny",
-   "name": "Zdenka Pavlíková",
+   "name": "Zdeňka Pavlíková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 608 904",
+     "t": "P"
+    }
+   ],
    "em": [
     "cb.krajinska@liberskelahudky.cz"
    ],
@@ -1106,7 +1217,12 @@
    "d": "prodejny",
    "name": "Tetiana Kravets",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 609 281",
+     "t": "P"
+    }
+   ],
    "em": [
     "ippavlova@liberskelahudky.cz"
    ],
@@ -1123,13 +1239,18 @@
   {
    "id": "c54",
    "d": "prodejny",
-   "name": "Iryna Palinchak",
+   "name": "Martina Sadílková",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "703 150 378",
+     "t": "P"
+    }
+   ],
    "em": [
     "novysmichov@liberskelahudky.cz"
    ],
-   "photo": "fotky/c54-mv0vk54f.jpg",
+   "photo": "",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1138,6 +1259,71 @@
    "no": "76",
    "sp": "734 569 346",
    "om": "c5"
+  },
+  {
+   "id": "c_vestec",
+   "d": "prodejny",
+   "name": "Erszébet Rápová",
+   "role": "provozní",
+   "ph": [
+    {
+     "n": "737 608 144",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "prodejnavestec@liberskelahudky.cz"
+   ],
+   "photo": "fotky/c48-mv0vjwrt.jpg",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Vestec",
+   "no": "",
+   "sp": "703 150 362",
+   "om": ""
+  },
+  {
+   "id": "c_cb2",
+   "d": "prodejny",
+   "name": "Barbora Staňková",
+   "role": "provozní",
+   "ph": [
+    {
+     "n": "703 150 376",
+     "t": "P"
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "České Budějovice II.",
+   "no": "",
+   "sp": "",
+   "om": ""
+  },
+  {
+   "id": "c_hlavak2",
+   "d": "prodejny",
+   "name": "",
+   "role": "provozní",
+   "ph": [],
+   "em": [
+    "hlavak@liberskelahudky.cz"
+   ],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "place": "Hlavní nádraží II.",
+   "no": "",
+   "sp": "739 375 970",
+   "om": ""
   },
   {
    "id": "c55",
@@ -1151,6 +1337,7 @@
     }
    ],
    "em": [
+    "elisakova@liberskelahudky.cz",
     "elis.masa@seznam.cz"
    ],
    "photo": "fotky/c55-muz479ag.jpg",
