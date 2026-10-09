@@ -163,6 +163,23 @@ details.team li::marker{color:var(--gold)}
 .arow .miss{font-size:.72rem;color:var(--priv);font-weight:600;margin-top:1px}
 .oa.sm{position:static;width:40px;height:40px;box-shadow:none;flex:none}.oa.sm svg{width:18px;height:18px}
 .edit-dot{flex:none;font-size:.75rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:4px 10px}
+
+.qpanel{background:var(--accent);color:var(--accent-fg);border-radius:22px;padding:16px 8px 8px;box-shadow:var(--shadow)}
+.qp-h{display:flex;align-items:center;gap:10px;padding:0 10px 10px}
+.qp-h h2{margin:0;font-size:1.15rem;font-weight:800;letter-spacing:-.02em}
+.qp-ic{width:30px;height:30px;display:grid;place-items:center;opacity:.9}.qp-ic svg{width:24px;height:24px}
+.qlist{display:flex;flex-direction:column;gap:2px}
+.qrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;border-radius:14px;padding:11px 10px;color:inherit;cursor:pointer;min-height:52px}
+.qrow{position:relative}.qrow+.qrow::before{content:"";position:absolute;left:10px;right:10px;top:-1px;height:1px;background:rgba(255,255,255,.14)}
+.qrow:hover,.qrow:focus-visible{background:rgba(255,255,255,.1)}
+.qx{flex:1;min-width:0;display:flex;flex-direction:column}
+.qrow .qt{font-weight:700;font-size:1rem;line-height:1.25}
+.qrow .qd{font-size:.8rem;opacity:.75;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qwho{flex:none;font-size:.78rem;font-weight:600;background:rgba(255,255,255,.16);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.qar{flex:none;font-size:1.3rem;opacity:.7;width:12px;text-align:center}
+.qrow.add .qt{opacity:.85}
+.qmore{border:0;background:rgba(255,255,255,.12);color:inherit;border-radius:12px;height:42px;margin:6px 2px 2px;font-weight:600;cursor:pointer}
+.qmore span{opacity:.7;margin-left:4px}
 /* wide tile */
 .tile.wide{grid-column:1/-1}
 .tile.wide .body{padding:14px 14px 4px;display:flex;flex-direction:column;gap:8px}
@@ -318,6 +335,7 @@ const I={
  tel:svg('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>'),
  mail:svg('<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/>'),
  search:svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'),
+ help:svg('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/>'),
  list:svg('<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/>'),
  lock:svg('<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
  back:svg('<path d="M15 18l-6-6 6-6"/>'),
@@ -366,6 +384,16 @@ function tile(c){
     return `<div class="tile wide" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${badge}${cap}${flag}${actions(c)}</div><div class="right"><div class="body">${c.about?`<div class="about">${esc(c.about)}</div>`:''}${t.length?`<div class="k">Obraťte se, když řešíte</div><ul class="topics">${t.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${c.areas?`<div class="areas">${esc(c.areas)}</div>`:''}</div></div></div>`;
   }
   return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${badge}${cap}${flag}${actions(c)}</div></div>`;
+}
+let qOpen=false;
+function qrow(x){
+  const c=D().contacts.find(k=>k.id===x.who);
+  return `<button class="qrow" data-quick="${esc(x.id)}"><span class="qx"><span class="qt">${esc(x.t)}</span>${x.d?`<span class="qd">${esc(x.d)}</span>`:''}</span><span class="qwho">${c?esc(shortName(c.name)):'nepřiřazeno'}</span><span class="qar">${draft?'✎':'›'}</span></button>`;
+}
+function qpanel(qs,title,limit){
+  const many=limit&&!qOpen&&qs.length>limit+1;
+  const shown=many?qs.slice(0,limit):qs;
+  return `<section class="quick"><div class="qpanel"><div class="qp-h"><span class="qp-ic">${I.help}</span><h2>${title}</h2></div><div class="qlist">${shown.map(qrow).join('')}${many?`<button class="qmore" data-qmore>Všechna témata (${qs.length}) <span>⌄</span></button>`:''}${draft?'<button class="qrow add" data-addq><span class="qx"><span class="qt">+ Přidat téma</span></span></button>':''}</div></div></section>`;
 }
 function qcard(x){
   const c=D().contacts.find(k=>k.id===x.who);
@@ -455,13 +483,13 @@ function render(){
   if(nq){
     let total=0;
     const qs=D().quick.filter(x=>hit(x.t+' '+x.d,nq));
-    if(qs.length){out+=`<section class="quick"><div class="q-h"><h2>Na tohle je</h2></div><div class="q-row">${qs.map(qcard).join('')}</div></section>`;total+=qs.length;}
+    if(qs.length){out+=qpanel(qs,'Na tohle je',0);total+=qs.length;}
     for(const d of D().depts){const r=deptSection(d,nq,dg,false);if(r.n){total+=r.n;out+=r.html;}}
     if(!total) out=`<p class="none">Nic jsme nenašli.<br>Zkuste jméno, prodejnu, téma (třeba „multisport“) nebo část čísla.</p>`;
     head.hidden=true;document.getElementById('top').hidden=false;
   } else if(view==='home'){
     const qs=D().quick;
-    if(qs.length||draft) out+=`<section class="quick"><div class="q-h"><h2>Co potřebujete vyřešit?</h2></div><div class="q-row">${qs.map(qcard).join('')}${draft?'<button class="qcard add-q" data-addq>+ Přidat téma</button>':''}</div></section>`;
+    if(qs.length||draft) out+=qpanel(qs,'Co potřebujete vyřešit?',5);
     out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2><button class="alllink" data-go="all">${I.list}Všechny kontakty</button></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
     head.hidden=true;document.getElementById('top').hidden=false;
   } else if(view==='all'){
@@ -665,6 +693,7 @@ root.addEventListener('click',e=>{
   if(e.target.closest('[data-stop]')) return;
   const t=e.target.closest('button,[data-open]'); if(!t) return;
   const ds=t.dataset;
+  if(ds.qmore!==undefined){qOpen=true;render();return;}
   if(ds.af){allF=ds.af;render();return;}
   if(ds.as){allSort=ds.as;render();return;}
   if(ds.go){view=ds.go;q='';document.getElementById('q').value='';render();window.scrollTo({top:0});return;}
