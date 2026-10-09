@@ -663,6 +663,9 @@ function done(msg){dirty++;closeSheet();render();toast(msg||'Připraveno. Nezapo
 
 /* ---------- GitHub ukládání ---------- */
 const GH={owner:'liberskelahudky',repo:'kontakty',branch:'main'};
+const WORKER='https://ll-kontakty.literova.workers.dev';
+let pinRaw='', pinNew='';
+try{pinRaw=sessionStorage.getItem('ll-pin-raw')||'';}catch(_){}
 let memTok=''; const upl=new Map();
 function tok(){if(memTok)return memTok;try{return localStorage.getItem('ll_kontakty_token')||'';}catch(_){return '';}}
 function setTok(t){memTok=t;try{t?localStorage.setItem('ll_kontakty_token',t):localStorage.removeItem('ll_kontakty_token');}catch(_){}}
@@ -687,7 +690,7 @@ function askToken(){
    <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Uložit</button></div></form>`);
 }
 function submitToken(){const t=val('tok');if(!t){document.getElementById('pinerr').textContent='Vložte token.';return;}setTok(t);closeSheet();save();}
-async function save(){
+async function saveDirect(){
   if(!tok()){askToken();return;}
   const b=document.getElementById('save'); if(b){b.disabled=true;b.textContent='Ukládám…';}
   const d=new Date(); draft.updated=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -710,6 +713,38 @@ async function save(){
     else if(code===409||code===422) toast('Někdo ukládal ve stejnou chvíli. Klepněte na Uložit znovu.');
     else toast('Uložení se nepovedlo. Zkontrolujte připojení a zkuste to znovu.');
   }
+}
+function stamp(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+async function save(){
+  if(!pinRaw){afterPin=save;requestPin();return;}
+  const b=document.getElementById('save'); if(b){b.disabled=true;b.textContent='Ukládám…';}
+  draft.updated=stamp();
+  const out=JSON.parse(JSON.stringify(draft)), files=[];
+  for(const c of out.contacts){
+    if(!c.photo||!c.photo.startsWith('data:')) continue;
+    let path=upl.get(c.photo);
+    if(!path){path=`fotky/${c.id.replace(/[^A-Za-z0-9_-]/g,'')}-${Date.now().toString(36)}.jpg`;files.push({path,content:c.photo.split(',')[1],message:'Fotka: '+(c.name||c.place||c.id)});}
+    c.photo=path;
+  }
+  files.push({path:'data.json',content:b64u(JSON.stringify(out,null,1)),message:'Úprava kontaktů'});
+  let r,j={};
+  try{r=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:pinRaw,files})});j=await r.json().catch(()=>({}));}
+  catch(_){r=null;}
+  if(b){b.textContent='Uložit';b.disabled=false;}
+  if(r&&r.ok&&j.ok){
+    files.forEach(f=>{if(f.path!=='data.json'){const c=draft.contacts.find(x=>f.path.startsWith('fotky/'+x.id.replace(/[^A-Za-z0-9_-]/g,'')+'-'));if(c)upl.set(c.photo,f.path);}});
+    if(pinNew){pinRaw=pinNew;pinNew='';try{sessionStorage.setItem('ll-pin-raw',pinRaw);sessionStorage.setItem('ll-pin',draft.pinHash);}catch(_){}}
+    data=draft; draft=null; dirty=0; render();
+    toast('Uloženo. Kolegové změnu uvidí zhruba do minuty.');return;
+  }
+  if(r&&r.status===403){pinRaw='';try{sessionStorage.removeItem('ll-pin-raw');}catch(_){}afterPin=save;requestPin('PIN nesouhlasí – možná ho mezitím někdo změnil. Zadejte ho znovu.');return;}
+  if(r&&r.status===429){toast('Moc špatných pokusů o PIN. Zkuste to za 10 minut.');return;}
+  if(!r&&tok()){return saveDirect();}
+  toast('Uložení se nepovedlo. Zkontrolujte připojení a zkuste to znovu.');
+}
+async function freshData(){
+  try{const r=await fetch(WORKER+'?t='+Date.now(),{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.contacts){j.quick=j.quick||[];return j;}}}catch(_){}
+  return null;
 }
 async function loadData(){
   try{
@@ -765,13 +800,17 @@ const PSALT='LL-kontakty:';
 function cyrb(str,seed){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);}
 const pinHash=p=>cyrb(PSALT+p,7)+cyrb(PSALT+p,131);
 let pinFails=0, pinLockUntil=0;
-function pinOk(){try{return sessionStorage.getItem('ll-pin')===data.pinHash;}catch(_){return false;}}
+function pinOk(){return !!pinRaw&&pinHash(pinRaw)===data.pinHash;}
+let afterPin=null;
 function pinRemember(){try{sessionStorage.setItem('ll-pin',data.pinHash);}catch(_){}}
-function startEdit(){draft=JSON.parse(JSON.stringify(data));dirty=0;closeSheet();render();toast('Režim úprav. Klepněte na kartu.');}
+async function startEdit(){closeSheet();const f=await freshData();if(f){data=f;}draft=JSON.parse(JSON.stringify(data));dirty=0;render();toast('Režim úprav. Klepněte na kartu.');}
 function requestEdit(){
   if(pinOk()){startEdit();return;}
+  afterPin=null;requestPin();
+}
+function requestPin(msg){
   sheet={kind:'pin'};
-  openSheet(`<form class="form pinf" id="pinform"><div class="pin-ic">${I.lock}</div><h3>Zadejte PIN</h3><p class="pin-t">Upravovat kontakty může jen ten, kdo zná PIN.</p>
+  openSheet(`<form class="form pinf" id="pinform"><div class="pin-ic">${I.lock}</div><h3>Zadejte PIN</h3><p class="pin-t">${esc(msg||'Upravovat kontakty může jen ten, kdo zná PIN.')}</p>
    <input id="pin" class="pin-in" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="8" aria-label="PIN">
    <div class="pin-err" id="pinerr" role="alert"></div>
    <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Pokračovat</button></div></form>`);
@@ -781,7 +820,7 @@ function submitPin(){
   const err=document.getElementById('pinerr'), inp=document.getElementById('pin');
   const now=Date.now();
   if(now<pinLockUntil){err.textContent=`Moc pokusů. Zkuste to za ${Math.ceil((pinLockUntil-now)/1000)} s.`;return;}
-  if(pinHash(inp.value.trim())===data.pinHash){pinFails=0;pinRemember();startEdit();return;}
+  if(pinHash(inp.value.trim())===data.pinHash){pinFails=0;pinRaw=inp.value.trim();try{sessionStorage.setItem('ll-pin-raw',pinRaw);}catch(_){}pinRemember();if(afterPin){const f=afterPin;afterPin=null;closeSheet();f();}else startEdit();return;}
   pinFails++; inp.value=''; inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
   if(pinFails>=5){pinLockUntil=now+30000;pinFails=0;err.textContent='Moc pokusů. Zkuste to za 30 s.';}
   else err.textContent='Špatný PIN. Zkuste to znovu.';
@@ -799,7 +838,7 @@ function submitPinChange(){
   const a=val('np1'),b=val('np2'),err=document.getElementById('pinerr');
   if(!/^\d{4,8}$/.test(a)){err.textContent='PIN musí mít 4 až 8 číslic.';return;}
   if(a!==b){err.textContent='PINy se neshodují.';return;}
-  draft.pinHash=pinHash(a); done('Nový PIN nastaven. Nezapomeňte uložit.');
+  draft.pinHash=pinHash(a);pinNew=a; done('Nový PIN nastaven. Nezapomeňte uložit.');
 }
 
 shell(); render();

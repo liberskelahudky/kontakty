@@ -11,7 +11,8 @@ Běží na GitHub Pages: https://liberskelahudky.github.io/kontakty/
 ## Úpravy
 1. Na stránce klepnout na tužku a zadat PIN.
 2. Upravit, co je potřeba, a dát **Uložit**.
-3. Na každém zařízení je napoprvé potřeba zadat GitHub token (pak si ho prohlížeč pamatuje).
+
+Ukládá se přes Cloudflare Worker `ll-kontakty` (složka `worker/`), který ověří PIN a zapíše změny na GitHub. GitHub token zná jen Worker (Secret `GH_TOKEN`), editoři ho nepotřebují.
 
 Kolegové uvidí změny zhruba do minuty (GitHub Pages se musí přegenerovat).
 

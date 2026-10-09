@@ -1,0 +1,4 @@
+name = "ll-kontakty"
+main = "index.js"
+compatibility_date = "2025-01-01"
+# Secret GH_TOKEN nastavit v Cloudflare: Settings → Variables and Secrets
