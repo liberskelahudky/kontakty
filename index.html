@@ -188,6 +188,7 @@ details.team li::marker{color:var(--gold)}
 .hrcard{background:var(--surface-2);border-radius:18px;padding:14px}
 .hrtop{display:flex;align-items:center;gap:12px;cursor:pointer}.hrtop .who{flex:1;min-width:0}
 .hint{font-size:.78rem;color:var(--muted)}
+.card2:empty,.s-sec:has(>.card2:empty){display:none}
 /* wide tile */
 .tile.wide{grid-column:1/-1}
 .tile.wide .body{padding:14px 14px 4px;display:flex;flex-direction:column;gap:8px}
@@ -383,7 +384,7 @@ const shortName=n=>{const p=String(n||'').trim().split(/\s+/);return p.length>1?
 function tile(c){
   const flag=draft?'<span class="edit-flag">Upravit</span>':'';
   if(isStore(c)){
-    return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${(()=>{const m=omOf(c);return m?`<span class="omchip" title="Oblastní manažer: ${esc(m.name)}"><span class="omf">${face(m)}</span>${esc(shortName(m.name))}</span>`:'';})()}<span class="shade"></span><div class="cap"><div class="nm">${esc(c.place||'Prodejna')}</div><div class="rl">${esc(c.name||'provozní nevyplněna')}</div></div>${flag}${actions(c)}</div></div>`;
+    return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${(()=>{const m=omOf(c);return m?`<span class="omchip" title="Oblastní manažer: ${esc(m.name)}"><span class="omf">${face(m)}</span>${esc(shortName(m.name))}</span>`:'';})()}<span class="shade"></span><div class="cap"><div class="nm">${esc(c.place||'Prodejna')}</div><div class="rl">${esc(c.name||'')}</div></div>${flag}${actions(c)}</div></div>`;
   }
   const cap=`<span class="shade"></span><div class="cap"><div class="nm">${esc(c.name)}</div>${c.role?`<div class="rl">${esc(c.role)}</div>`:''}</div>`;
   const badge=c.lead?'<span class="badge">Vede oddělení</span>':'';
@@ -409,7 +410,7 @@ function hrChooser(){
   const hs=hrPartners();
   let h=`<div class="pad"><div class="s-nm" style="margin-top:4px">Kdo je moje HR partnerka?</div><div class="s-rl">Sára i Jana mají stejnou agendu, liší se jen podle střediska. Navzájem se zastupují.</div>`;
   for(const x of hs){const pp=personPhone(x);const ar=hrAreas(x);
-    h+=`<div class="s-sec"><div class="hrcard"><div class="hrtop" role="button" tabindex="0" data-open="${esc(x.id)}"><span class="omf lg">${face(x)}</span><div class="who"><div style="font-weight:700;font-size:1.1rem">${esc(x.name)}</div><div style="font-size:.85rem;color:var(--muted)">${esc(x.role||'HR partnerka')}</div></div>${pp?`<a class="oa call" style="position:static" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(x.name)}">${I.tel}</a>`:''}</div><div class="k" style="margin:12px 2px 6px">Má na starosti</div><ul class="topics">${ar.map(a=>`<li><span>${esc(a.t)}${a.s?` <span style="color:var(--muted)">· ${esc(a.s)}</span>`:''}</span></li>`).join('')||'<li>zatím nepřiřazeno</li>'}</ul></div></div>`;}
+    h+=`<div class="s-sec"><div class="hrcard"><div class="hrtop" role="button" tabindex="0" data-open="${esc(x.id)}"><span class="omf lg">${face(x)}</span><div class="who"><div style="font-weight:700;font-size:1.1rem">${esc(x.name)}</div><div style="font-size:.85rem;color:var(--muted)">${esc(x.role||'HR partnerka')}</div></div>${pp?`<a class="oa call" style="position:static" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(x.name)}">${I.tel}</a>`:''}</div><div class="k" style="margin:12px 2px 6px">Má na starosti</div><ul class="topics">${ar.map(a=>`<li><span>${esc(a.t)}${a.s?` <span style="color:var(--muted)">· ${esc(a.s)}</span>`:''}</span></li>`).join('')}</ul></div></div>`;}
   if(!hs.length) h+=`<div class="s-sec"><div class="empty">HR partnerky zatím nejsou přiřazené.</div></div>`;
   h+=`<div class="foot"><button class="btn" data-close>Zavřít</button></div></div>`;
   openSheet(h);
@@ -447,7 +448,7 @@ function storeGroups(list){
   if(keys.length===1&&!keys[0]) return `<div class="grid stores">${list.map(tile).join('')}${add}</div>`;
   return keys.map((k,i)=>{const m=k?D().contacts.find(x=>x.id===k):null;const items=groups.get(k);const pp=m?personPhone(m):'';
     const head=m?`<div class="omhead" role="button" tabindex="0" data-open="${esc(m.id)}"><span class="omf lg">${face(m)}</span><div class="omt"><div class="k">Oblastní manažer</div><div class="omn">${esc(m.name)}</div><div class="omc">${items.length} ${items.length>=5?'prodejen':items.length===1?'prodejna':'prodejny'}${m.hr&&byId(m.hr)?' · HR: '+esc(byId(m.hr).name.split(' ')[0]):''}</div></div>${pp&&!draft?`<a class="oa call" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(m.name)}">${I.tel}</a>`:''}</div>`
-      :`<div class="omhead plain"><div class="omt"><div class="k">Bez oblastního manažera</div><div class="omc">${items.length} ${items.length>=5?'prodejen':items.length===1?'prodejna':'prodejny'}</div></div></div>`;
+      :`<div class="omhead plain"><div class="omt"><div class="k">Další prodejny</div><div class="omc">${items.length} ${items.length>=5?'prodejen':items.length===1?'prodejna':'prodejny'}</div></div></div>`;
     return `<div class="omgroup">${head}<div class="grid stores">${items.map(tile).join('')}${i===keys.length-1?add:''}</div></div>`;}).join('');
 }
 function deptSection(d,nq,dg,forceOpen){
@@ -490,11 +491,11 @@ function allView(){
   const deps=D().depts, di=id=>deps.findIndex(d=>d.id===id), dn=id=>(deps.find(d=>d.id===id)||{}).name||'';
   const all=D().contacts;
   const F={vse:['Všichni',()=>true],foto:['Bez fotky',c=>!c.photo],tel:['Bez telefonu',c=>!personPhone(c)&&!(isStore(c)&&c.sp)],mail:['Bez e-mailu',c=>!(c.em||[]).filter(Boolean).length]};
-  if(!F[allF]) allF='vse';
+  if(!F[allF]||!draft) allF='vse';
   let list=all.filter(F[allF][1]);
   const title=c=>isStore(c)?(c.place||'Prodejna'):c.name;
   list.sort(allSort==='az'?(a,b)=>title(a).localeCompare(title(b),'cs'):(a,b)=>di(a.d)-di(b.d)||(b.lead?1:0)-(a.lead?1:0)||title(a).localeCompare(title(b),'cs'));
-  const chips=`<div class="allbar"><div class="fchips" role="group" aria-label="Filtr">${Object.entries(F).map(([k,[l,f]])=>`<button class="fchip" data-af="${k}" aria-pressed="${k===allF}">${l} <span>${all.filter(f).length}</span></button>`).join('')}</div><div class="sortsw" role="group" aria-label="Řazení"><button data-as="dept" aria-pressed="${allSort==='dept'}">Podle oddělení</button><button data-as="az" aria-pressed="${allSort==='az'}">A–Z</button></div></div>`;
+  const chips=`<div class="allbar">${draft?'':'<!--'}<div class="fchips" role="group" aria-label="Filtr">${Object.entries(F).map(([k,[l,f]])=>`<button class="fchip" data-af="${k}" aria-pressed="${k===allF}">${l} <span>${all.filter(f).length}</span></button>`).join('')}</div>${draft?'':'-->'}<div class="sortsw" role="group" aria-label="Řazení"><button data-as="dept" aria-pressed="${allSort==='dept'}">Podle oddělení</button><button data-as="az" aria-pressed="${allSort==='az'}">A–Z</button></div></div>`;
   if(!list.length) return chips+`<p class="none">Tady nikdo není. 🎉</p>`;
   let html='', cur=null;
   for(const c of list){
@@ -502,8 +503,8 @@ function allView(){
     else if(allSort==='az'&&cur===null){cur='az';html+='<div class="alist">';}
     const pp=isStore(c)?(c.sp||personPhone(c)):personPhone(c);
     const miss=[!c.photo?'fotka':'',!pp?'telefon':'',!(c.em||[]).filter(Boolean).length?'e-mail':''].filter(Boolean);
-    const sub=isStore(c)?`${c.name||'provozní nevyplněna'} · č. ${c.no||'–'}`:[c.role,allSort==='az'?dn(c.d):''].filter(Boolean).join(' · ');
-    html+=`<div class="arow" role="button" tabindex="0" data-open="${esc(c.id)}"><span class="aav${c.photo?'':' nophoto'}">${face(c)}</span><div class="who"><div class="nm">${esc(title(c))}</div><div class="rl">${esc(sub)}</div>${allF==='vse'&&miss.length?`<div class="miss">chybí: ${miss.join(', ')}</div>`:''}</div>${draft?'<span class="edit-dot">Upravit</span>':pp?`<a class="oa call sm" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(title(c))}">${I.tel}</a>`:''}</div>`;
+    const sub=isStore(c)?[c.name,c.no?'č. '+c.no:''].filter(Boolean).join(' · '):[c.role,allSort==='az'?dn(c.d):''].filter(Boolean).join(' · ');
+    html+=`<div class="arow" role="button" tabindex="0" data-open="${esc(c.id)}"><span class="aav${c.photo||!draft?'':' nophoto'}">${face(c)}</span><div class="who"><div class="nm">${esc(title(c))}</div><div class="rl">${esc(sub)}</div>${false?'':''}</div>${draft?'<span class="edit-dot">Upravit</span>':pp?`<a class="oa call sm" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(title(c))}">${I.tel}</a>`:''}</div>`;
   }
   return chips+html+'</div>';
 }
@@ -564,20 +565,20 @@ function line(href,val,k,tag){return `<div class="line"><div class="v"><a href="
 function detail(c){
   const ph=phonesOf(c), em=(c.em||[]).filter(Boolean), store=isStore(c);
   const dept=(D().depts.find(d=>d.id===c.d)||{}).name||'';
-  let h=`<div class="hero-ph">${face(c)}${store?`<span class="storeno">${esc(c.no||'–')}</span>`:''}</div><div class="pad">`;
+  let h=`<div class="hero-ph">${face(c)}${store&&c.no?`<span class="storeno">${esc(c.no)}</span>`:''}</div><div class="pad">`;
   if(store){
-    h+=`<div class="s-nm">${esc(c.place||'Prodejna')}</div><div class="s-rl">Prodejna č. ${esc(c.no||'–')} · provozní ${esc(c.name||'nevyplněna')}</div>`;
-    h+=`<div class="s-sec"><div class="k">Prodejna</div><div class="card2">${c.sp?line(tel(c.sp),c.sp,'telefon prodejny'):'<div class="empty">Telefon prodejny zatím chybí</div>'}${em.map(e=>line('mailto:'+e,e,'e-mail prodejny')).join('')}</div></div>`;
+    h+=`<div class="s-nm">${esc(c.place||'Prodejna')}</div><div class="s-rl">${esc([c.no?'Prodejna č. '+c.no:'',c.name?'provozní '+c.name:''].filter(Boolean).join(' · '))}</div>`;
+    h+=`<div class="s-sec"><div class="k">Prodejna</div><div class="card2">${c.sp?line(tel(c.sp),c.sp,'telefon prodejny'):''}${em.map(e=>line('mailto:'+e,e,'e-mail prodejny')).join('')}</div></div>`;
     {const m=omOf(c);if(m){const mp=phonesOf(m);h+=`<div class="s-sec"><div class="k">Oblastní manažer</div><div class="card2"><div class="d-person" style="display:flex;gap:12px;align-items:center;padding:12px 14px"><span class="omf lg">${face(m)}</span><div><div style="font-weight:700">${esc(m.name)}</div><div style="font-size:.85rem;color:var(--muted)">${esc(m.role||'')}</div></div></div>${mp.map(p=>line(tel(p.n),p.n,'telefon',p.t)).join('')}</div></div>`;}}
     h+=hrSection(hrFor(c));
-    h+=`<div class="s-sec"><div class="k">Provozní – ${esc(c.name||'')}</div><div class="card2">${ph.length?ph.map(p=>line(tel(p.n),p.n,'telefon provozní',p.t)).join(''):'<div class="empty">Telefon provozní zatím chybí</div>'}</div></div>`;
+    h+=`<div class="s-sec"><div class="k">Provozní – ${esc(c.name||'')}</div><div class="card2">${ph.map(p=>line(tel(p.n),p.n,'telefon provozní',p.t)).join('')}</div></div>`;
   } else {
     h+=`<div class="s-nm">${esc(c.name)}</div><div class="s-rl">${esc([c.role,dept].filter(Boolean).join(' · '))}</div>`;
     if(c.about) h+=`<div class="s-sec"><div class="s-box">${esc(c.about)}</div></div>`;
     {const ar=hrAreas(c);if(ar.length) h+=`<div class="s-sec"><div class="k">HR partnerka pro</div><div class="s-box"><ul class="topics">${ar.map(a=>`<li><span>${esc(a.t)}${a.s?` <span style="color:var(--muted)">· ${esc(a.s)}</span>`:''}</span></li>`).join('')}</ul></div></div>`;}
     {const hm=D().contacts.find(k=>k.id===c.hr);if(hm&&!isStore(c)) h+=`<div class="s-sec"><div class="k">HR partnerka pro jeho oblast</div><div class="s-box">${esc(hm.name)}</div></div>`;}
     if((c.topics||[]).length) h+=`<div class="s-sec"><div class="k">Obraťte se, když řešíte</div><div class="s-box"><ul class="topics">${c.topics.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${c.areas?`<div class="areas" style="margin-top:10px">${esc(c.areas)}</div>`:''}</div></div>`;
-    h+=`<div class="s-sec"><div class="k">Kontakt</div><div class="card2">${ph.map(p=>line(tel(p.n),p.n,'telefon',p.t)).join('')}${em.map(e=>line('mailto:'+e,e,'e-mail')).join('')}${!ph.length&&!em.length?'<div class="empty">Kontakt zatím chybí</div>':''}</div></div>`;
+    h+=`<div class="s-sec"><div class="k">Kontakt</div><div class="card2">${ph.map(p=>line(tel(p.n),p.n,'telefon',p.t)).join('')}${em.map(e=>line('mailto:'+e,e,'e-mail')).join('')}</div></div>`;
   }
   const pp=store?(c.sp||personPhone(c)):personPhone(c);
   h+=`<div class="foot">${pp?`<a class="btn primary" href="${tel(pp)}">Zavolat</a>`:''}<button class="btn" data-close>Zavřít</button></div></div>`;
