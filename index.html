@@ -381,12 +381,20 @@ function actions(c){
 const omOf=c=>c&&c.om?D().contacts.find(k=>k.id===c.om):null;
 const omCands=()=>D().contacts.filter(k=>!isStore(k)).sort((a,b)=>(/oblastn/i.test(b.role)?1:0)-(/oblastn/i.test(a.role)?1:0)||a.name.localeCompare(b.name,'cs'));
 const shortName=n=>{const p=String(n||'').trim().split(/\s+/);return p.length>1?p[0]+' '+p[p.length-1][0]+'.':p[0]||'';};
+const MGMT='vedeni';
+function membersOf(d,noVirtual){
+  const own=D().contacts.filter(c=>c.d===d.id);
+  if(d.id!==MGMT||noVirtual) return own;
+  return own.concat(D().contacts.filter(c=>c.lead&&c.d!==MGMT&&!isStore(c)));
+}
+let tileCtx='';
 function tile(c){
   const flag=draft?'<span class="edit-flag">Upravit</span>':'';
   if(isStore(c)){
     return `<div class="tile" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}${(()=>{const m=omOf(c);return m?`<span class="omchip" title="Oblastní manažer: ${esc(m.name)}"><span class="omf">${face(m)}</span>${esc(shortName(m.name))}</span>`:'';})()}<span class="shade"></span><div class="cap"><div class="nm">${esc(c.place||'Prodejna')}</div><div class="rl">${esc(c.name||'')}</div></div>${flag}${actions(c)}</div></div>`;
   }
-  const cap=`<span class="shade"></span><div class="cap"><div class="nm">${esc(c.name)}</div>${c.role?`<div class="rl">${esc(c.role)}</div>`:''}</div>`;
+  const roleTxt=tileCtx===MGMT&&c.d!==MGMT?[c.role,(D().depts.find(x=>x.id===c.d)||{}).name].filter(Boolean).join(' · '):c.role;
+  const cap=`<span class="shade"></span><div class="cap"><div class="nm">${esc(c.name)}</div>${roleTxt?`<div class="rl">${esc(roleTxt)}</div>`:''}</div>`;
   const badge=c.lead?'<span class="badge">Vede oddělení</span>':'';
   if(isWide(c)){
     const t=(c.topics||[]);
@@ -452,9 +460,9 @@ function storeGroups(list){
     return `<div class="omgroup">${head}<div class="grid stores">${items.map(tile).join('')}${i===keys.length-1?add:''}</div></div>`;}).join('');
 }
 function deptSection(d,nq,dg,forceOpen){
-  let list=D().contacts.filter(c=>c.d===d.id);
+  let list=membersOf(d,!!nq);tileCtx=d.id;
   if(d.id==='prodejny') list.sort((a,b)=>(+a.no||999)-(+b.no||999));
-  else list.sort((a,b)=>(b.lead?1:0)-(a.lead?1:0));
+  else list.sort((a,b)=>((a.d!==d.id)-(b.d!==d.id))||(b.lead?1:0)-(a.lead?1:0));
   const deptHit=nq&&hit(d.name+' '+d.about+' '+(d.team||[]).join(' '),nq);
   if(nq&&!deptHit) list=list.filter(c=>matches(c,nq,dg));
   if(!list.length&&!draft) return {html:'',n:0};
@@ -483,7 +491,7 @@ const DI={
 };
 const dIcon=d=>(DI[d.icon]||DI[d.id]||DI.hvezda).s;
 function faces(d){
-  const list=D().contacts.filter(c=>c.d===d.id).sort((a,b)=>(b.photo?1:0)-(a.photo?1:0)||(b.lead?1:0)-(a.lead?1:0)).slice(0,4);
+  const list=membersOf(d).sort((a,b)=>(b.photo?1:0)-(a.photo?1:0)||(b.lead?1:0)-(a.lead?1:0)).slice(0,4);
   return `<div class="stack">${list.map(c=>`<span class="sf">${face(c)}</span>`).join('')}</div>`;
 }
 let allF='vse', allSort='dept';
@@ -522,7 +530,7 @@ function render(){
   } else if(view==='home'){
     const qs=D().quick;
     if(qs.length||draft) out+=qpanel(qs,'Co potřebujete vyřešit?',5);
-    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2><button class="alllink" data-go="all">${I.list}Všechny kontakty</button></div><div class="dgrid">${D().depts.map(d=>{const n=D().contacts.filter(c=>c.d===d.id).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
+    out+=`<section class="home-depts"><div class="q-h"><h2>Oddělení</h2><button class="alllink" data-go="all">${I.list}Všechny kontakty</button></div><div class="dgrid">${D().depts.map(d=>{const n=membersOf(d).length;return `<button class="dtile" data-go="${esc(d.id)}"><span class="dt-top"><span class="dic">${dIcon(d)}</span>${faces(d)}</span><span class="dn">${esc(d.name)}</span><span class="dc">${n} ${d.id==='prodejny'?(n>=5||n===0?'prodejen':'prodejny'):(n===1?'člověk':n>=2&&n<=4?'lidé':'lidí')}</span></button>`;}).join('')}</div></section>`;
     head.hidden=true;document.getElementById('top').hidden=false;
   } else if(view==='all'){
     head.hidden=false;document.getElementById('top').hidden=true;
@@ -599,7 +607,7 @@ function editor(c,isNew){
     <div class="photo-ed"><div class="pv" id="mava">${face({name:c.name||'?',photo:sheet.photo})}</div><div class="b"><label class="mini" for="mphoto" style="display:grid;place-items:center;cursor:pointer;background:var(--surface)">${sheet.photo?'Změnit fotku':'Nahrát fotku'}</label><input id="mphoto" type="file" accept="image/*" hidden><button type="button" class="mini" id="mphotodel"${sheet.photo?'':' hidden'}>Odebrat fotku</button></div></div>
     <div class="f"><label for="mn">Jméno</label><input id="mn" value="${esc(c.name)}" autocomplete="off"></div>
     <div class="f"><label for="mr">Pozice</label><input id="mr" value="${esc(c.role||'')}"></div>
-    <label class="chk" id="leadRow"${store?' hidden':''}><input type="checkbox" id="mlead"${c.lead?' checked':''}> Vede oddělení</label>
+    <label class="chk" id="leadRow"${store?' hidden':''}><input type="checkbox" id="mlead"${c.lead?' checked':''}> Vede oddělení <span class="hint" style="font-weight:400">(zobrazí se i ve Vedení a managementu)</span></label>
     ${!store&&(/oblastn/i.test(c.role||'')||D().contacts.some(k=>k.om===c.id)||c.hr)?`<div class="f"><label for="mhr">HR partnerka pro jeho prodejny</label><select id="mhr"><option value="">– nevybráno –</option>${D().contacts.filter(k=>k.d==='personalni').map(k=>`<option value="${esc(k.id)}"${k.id===c.hr?' selected':''}>${esc(k.name)}</option>`).join('')}</select></div>`:''}
     <div class="f"><label>Telefon</label>${phHtml}</div>
     <div class="f"><label for="me">E-mail</label><input id="me" type="text" inputmode="email" value="${esc((c.em||[]).join(', '))}" placeholder="více adres oddělte čárkou"></div>

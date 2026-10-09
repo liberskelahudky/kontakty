@@ -255,21 +255,6 @@
    "hr": "c73"
   },
   {
-   "id": "c6",
-   "d": "vedeni",
-   "name": "Anna Herdová",
-   "role": "finanční manažer",
-   "ph": [],
-   "em": [
-    "herdova@liberskelahudky.cz"
-   ],
-   "photo": "",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
    "id": "c7",
    "d": "marketing",
    "name": "Jitka Hallerová",
@@ -488,6 +473,26 @@
    ],
    "photo": "fotky/c20-muz4734o.jpg",
    "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "cmv0xo7uu",
+   "d": "vyroba",
+   "name": "Vladimír Gurčík",
+   "role": "výrobní ředitel",
+   "ph": [
+    {
+     "n": "731508612",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "gurcik@liberskelahudky.cz"
+   ],
+   "photo": "fotky/cmv0xo7uu-mv0xpgov.jpg",
+   "lead": true,
    "about": "",
    "topics": [],
    "areas": ""
@@ -1661,7 +1666,9 @@
    "name": "Anna Herdová",
    "role": "finanční ředitelka",
    "ph": [],
-   "em": [],
+   "em": [
+    "herdova@liberskelahudky.cz"
+   ],
    "photo": "",
    "lead": true,
    "about": "",
@@ -1696,26 +1703,6 @@
     "vala@liberskelahudky.cz"
    ],
    "photo": "fotky/cmv0xmxel-mv0xr03h.jpg",
-   "lead": false,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
-   "id": "cmv0xo7uu",
-   "d": "vedeni",
-   "name": "Vladimír Gurčík",
-   "role": "výrobní ředitel",
-   "ph": [
-    {
-     "n": "731508612",
-     "t": "P"
-    }
-   ],
-   "em": [
-    "gurcik@liberskelahudky.cz"
-   ],
-   "photo": "fotky/cmv0xo7uu-mv0xpgov.jpg",
    "lead": false,
    "about": "",
    "topics": [],
