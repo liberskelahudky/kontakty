@@ -1106,7 +1106,7 @@
    "em": [
     "dbk@liberskelahudky.cz"
    ],
-   "photo": "fotky/c54-mv0vk54f.jpg",
+   "photo": "fotky/c48-mv0wi3c0.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1250,7 +1250,7 @@
    "em": [
     "novysmichov@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c54-mv0wi4ry.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1274,7 +1274,7 @@
    "em": [
     "prodejnavestec@liberskelahudky.cz"
    ],
-   "photo": "fotky/c48-mv0vjwrt.jpg",
+   "photo": "fotky/c_vestec-mv0wi61o.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1282,7 +1282,7 @@
    "place": "Vestec",
    "no": "",
    "sp": "703 150 362",
-   "om": ""
+   "om": "c4"
   },
   {
    "id": "c_cb2",
@@ -1296,7 +1296,7 @@
     }
    ],
    "em": [],
-   "photo": "",
+   "photo": "fotky/c_cb2-mv0wi8a3.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1304,18 +1304,18 @@
    "place": "České Budějovice II.",
    "no": "",
    "sp": "",
-   "om": ""
+   "om": "c5"
   },
   {
    "id": "c_hlavak2",
    "d": "prodejny",
-   "name": "",
+   "name": "Gabriela Dvořáková",
    "role": "provozní",
    "ph": [],
    "em": [
     "hlavak@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c_hlavak2-mv0wi9lw.jpg",
    "lead": false,
    "about": "",
    "topics": [],
@@ -1323,7 +1323,7 @@
    "place": "Hlavní nádraží II.",
    "no": "",
    "sp": "739 375 970",
-   "om": ""
+   "om": "c4"
   },
   {
    "id": "c55",
