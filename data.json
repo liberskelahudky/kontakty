@@ -439,7 +439,7 @@
   {
    "id": "c20",
    "d": "nakup",
-   "name": "Lenka Kmentová, Věra Malá",
+   "name": "Lenka Kmentová",
    "role": "objednávkové oddělení",
    "ph": [
     {
@@ -725,43 +725,46 @@
    "areas": "",
    "place": "Smíchov – Ostrovského",
    "no": "50",
-   "sp": "731 151 313"
+   "sp": "731 151 313",
+   "om": "c5"
   },
   {
    "id": "c35",
    "d": "prodejny",
-   "name": "Gabriela Dvořáková",
+   "name": "Maryana Yurchyk",
    "role": "provozní",
    "ph": [],
    "em": [
     "palmovka@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c35-mv0vjj1p.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Palmovka",
    "no": "51",
-   "sp": "731 151 317"
+   "sp": "731 151 317",
+   "om": "c5"
   },
   {
    "id": "c36",
    "d": "prodejny",
-   "name": "Jitka Kosíková, Erika Sýkorová",
+   "name": "Irena Bažová",
    "role": "provozní",
    "ph": [],
    "em": [
     "dukelskychhrdinu@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c36-mv0vjke9.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Letná",
    "no": "52",
-   "sp": "739 047 959"
+   "sp": "739 047 959",
+   "om": "c4"
   },
   {
    "id": "c37",
@@ -772,32 +775,34 @@
    "em": [
     "vodickova@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c37-mv0vjlud.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Vodičkova",
    "no": "53",
-   "sp": "733 766 054"
+   "sp": "733 766 054",
+   "om": "c4"
   },
   {
    "id": "c38",
    "d": "prodejny",
-   "name": "Ivona Skrbková",
+   "name": "Gabriela Dvořáková",
    "role": "provozní",
    "ph": [],
    "em": [
     "hlavak@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c38-mv0vjnhq.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Hlavní nádraží",
    "no": "54",
-   "sp": "731 259 525"
+   "sp": "731 259 525",
+   "om": "c4"
   },
   {
    "id": "c39",
@@ -815,7 +820,8 @@
    "areas": "",
    "place": "Libeř",
    "no": "57",
-   "sp": "739 642 680"
+   "sp": "739 642 680",
+   "om": "c4"
   },
   {
    "id": "c40",
@@ -833,7 +839,8 @@
    "areas": "",
    "place": "Jesenice",
    "no": "58",
-   "sp": "731 151 311"
+   "sp": "731 151 311",
+   "om": "c4"
   },
   {
    "id": "c41",
@@ -844,32 +851,34 @@
    "em": [
     "krc@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c41-mv0vjoob.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Krč",
    "no": "60",
-   "sp": "734 233 714"
+   "sp": "734 233 714",
+   "om": "c5"
   },
   {
    "id": "c42",
    "d": "prodejny",
-   "name": "Věra Málková",
+   "name": "Olga Fritchová",
    "role": "provozní",
    "ph": [],
    "em": [
     "porici@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c42-mv0vjpq0.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Poříčí",
    "no": "64",
-   "sp": "734 233 715"
+   "sp": "734 233 715",
+   "om": "c4"
   },
   {
    "id": "c43",
@@ -880,14 +889,15 @@
    "em": [
     "budejovicka@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c43-mv0vjrie.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Budějovická",
    "no": "65",
-   "sp": "734 233 712"
+   "sp": "734 233 712",
+   "om": "c5"
   },
   {
    "id": "c44",
@@ -898,14 +908,15 @@
    "em": [
     "modrany@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c44-mv0vjst1.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Modřany",
    "no": "66",
-   "sp": "731 344 934"
+   "sp": "731 344 934",
+   "om": "c5"
   },
   {
    "id": "c45",
@@ -923,7 +934,8 @@
    "areas": "",
    "place": "Ruzyně",
    "no": "67",
-   "sp": "703 635 650"
+   "sp": "703 635 650",
+   "om": "c4"
   },
   {
    "id": "c46",
@@ -934,14 +946,15 @@
    "em": [
     "haje@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c46-mv0vju3l.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Háje",
    "no": "68",
-   "sp": "703 636 919"
+   "sp": "703 636 919",
+   "om": "c5"
   },
   {
    "id": "c47",
@@ -952,14 +965,15 @@
    "em": [
     "arkady@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c47-mv0vjvh9.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Arkády",
    "no": "69",
-   "sp": "703 635 653"
+   "sp": "703 635 653",
+   "om": "c5"
   },
   {
    "id": "c48",
@@ -970,14 +984,15 @@
    "em": [
     "dbk@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c48-mv0vjwrt.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "DBK",
    "no": "70",
-   "sp": "703 635 637"
+   "sp": "703 635 637",
+   "om": "c5"
   },
   {
    "id": "c49",
@@ -988,32 +1003,34 @@
    "em": [
     "dejvice@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c49-mv0vjyew.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Dejvická",
    "no": "71",
-   "sp": "703 635 658"
+   "sp": "703 635 658",
+   "om": "c4"
   },
   {
    "id": "c50",
    "d": "prodejny",
-   "name": "Jaroslava Krejčí",
+   "name": "Ivona Skrbková",
    "role": "provozní",
    "ph": [],
    "em": [
     "vysocany@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c50-mv0vjzql.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Vysočany",
    "no": "72",
-   "sp": "604 271 071"
+   "sp": "604 271 071",
+   "om": "c5"
   },
   {
    "id": "c51",
@@ -1024,14 +1041,15 @@
    "em": [
     "holesovice@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c51-mv0vk11m.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "Holešovice",
    "no": "73",
-   "sp": "605 549 235"
+   "sp": "605 549 235",
+   "om": "c4"
   },
   {
    "id": "c52",
@@ -1042,14 +1060,15 @@
    "em": [
     "cb.krajinska@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c52-mv0vk2mj.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "České Budějovice",
    "no": "74",
-   "sp": "603 755 230"
+   "sp": "603 755 230",
+   "om": "c5"
   },
   {
    "id": "c53",
@@ -1060,14 +1079,15 @@
    "em": [
     "ippavlova@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c53-mv0vk3ss.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "I. P. Pavlova",
    "no": "75",
-   "sp": "604 786 462"
+   "sp": "604 786 462",
+   "om": "c4"
   },
   {
    "id": "c54",
@@ -1078,14 +1098,15 @@
    "em": [
     "novysmichov@liberskelahudky.cz"
    ],
-   "photo": "",
+   "photo": "fotky/c54-mv0vk54f.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "OC Nový Smíchov",
    "no": "76",
-   "sp": "734 569 346"
+   "sp": "734 569 346",
+   "om": "c5"
   },
   {
    "id": "c55",
@@ -1433,7 +1454,7 @@
    "id": "cmuz3woya",
    "d": "nakup",
    "name": "Věra Malá",
-   "role": "",
+   "role": "objednávkové oddělení",
    "ph": [],
    "em": [],
    "photo": "fotky/cmuz3woya-muz47bqn.jpg",
@@ -1494,5 +1515,5 @@
   }
  ],
  "pinHash": "5pvqgxoq3423bv9v404t4",
- "updated": "2026-10-08"
+ "updated": "2026-10-09"
 }
