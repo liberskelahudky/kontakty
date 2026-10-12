@@ -178,7 +178,7 @@
    "role": "HR partnerka",
    "ph": [],
    "em": [],
-   "photo": "",
+   "photo": "fotky/c73-mv52v6lb.jpg",
    "lead": false,
    "about": "HR partnerka pro oblast Richarda Svitáka, pekárnu Lahovice a centrálu. Zastupuje se se Sárou.",
    "topics": [
@@ -198,7 +198,7 @@
    "role": "HR partnerka",
    "ph": [],
    "em": [],
-   "photo": "",
+   "photo": "fotky/c_sara-mv52v6lb.jpg",
    "lead": false,
    "about": "HR partnerka pro oblast Davida Fendrycha a výrobnu Vestec. Zastupuje se s Janou.",
    "topics": [
@@ -1781,5 +1781,5 @@
   }
  ],
  "pinHash": "5pvqgxoq3423bv9v404t4",
- "updated": "2026-10-10"
+ "updated": "2026-10-12"
 }
