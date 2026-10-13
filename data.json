@@ -127,7 +127,9 @@
    "photo": "fotky/c1-muz3nc4a.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "interní e-shop"
+   ],
    "areas": ""
   },
   {
@@ -148,7 +150,9 @@
    "photo": "fotky/c2-muz3ndi6.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "pracovní oblečení"
+   ],
    "areas": ""
   },
   {
@@ -366,7 +370,10 @@
    "photo": "fotky/c14-muz3ng44.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "služební telefon",
+    "kontakty"
+   ],
    "areas": ""
   },
   {
@@ -386,7 +393,9 @@
    "photo": "fotky/c16-muz3t2oy.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "účetní doklady"
+   ],
    "areas": ""
   },
   {
@@ -406,7 +415,9 @@
    "photo": "fotky/c17-muz3t3yd.jpg",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "účetní doklady"
+   ],
    "areas": ""
   },
   {
@@ -689,7 +700,9 @@
    "photo": "",
    "lead": false,
    "about": "",
-   "topics": [],
+   "topics": [
+    "technické problémy a závady"
+   ],
    "areas": ""
   },
   {
@@ -1732,22 +1745,61 @@
    "who": "hr"
   },
   {
+   "id": "q5",
+   "t": "Nástupy a výstupy",
+   "d": "nástup, odchod nebo změna smlouvy",
+   "who": "c73"
+  },
+  {
+   "id": "q3",
+   "t": "PowerKey a čipy",
+   "d": "docházkový čip, PowerKey",
+   "who": "c13"
+  },
+  {
    "id": "q1",
    "t": "Benefity",
    "d": "MultiSport, Edenred, masáže, jazykové kurzy, penzijní spoření, slevová karta pro rodinu",
    "who": "c13"
   },
   {
-   "id": "q2",
-   "t": "Mzda – Vestec a Lahovice",
-   "d": "",
-   "who": "c13"
+   "id": "q_tech",
+   "t": "Technický problém",
+   "d": "závada, oprava, vybavení",
+   "who": "c_truchly"
   },
   {
-   "id": "q3",
-   "t": "Docházka a čip",
-   "d": "docházkový čip, PowerKey",
-   "who": "c13"
+   "id": "q_dokl",
+   "t": "Účetní doklady",
+   "d": "faktury a doklady",
+   "who": "c17",
+   "also": [
+    "c16"
+   ]
+  },
+  {
+   "id": "q_tel",
+   "t": "Telefon a kontakty",
+   "d": "služební telefon, změna kontaktu",
+   "who": "c14"
+  },
+  {
+   "id": "q_tv",
+   "t": "Televize a Wolt",
+   "d": "obrazovky na prodejně, Wolt",
+   "who": "c8"
+  },
+  {
+   "id": "q_obl",
+   "t": "Oblečení",
+   "d": "pracovní oblečení",
+   "who": "c2"
+  },
+  {
+   "id": "q_esh",
+   "t": "Interní e-shop",
+   "d": "",
+   "who": "c1"
   },
   {
    "id": "q4",
@@ -1756,10 +1808,10 @@
    "who": "c14"
   },
   {
-   "id": "q5",
-   "t": "Pracovní smlouva",
-   "d": "nástup, odchod nebo změna smlouvy",
-   "who": "hr"
+   "id": "q2",
+   "t": "Mzda – Vestec a Lahovice",
+   "d": "",
+   "who": "c13"
   },
   {
    "id": "q6",
@@ -1778,8 +1830,19 @@
    "t": "Munipolis a FABIS",
    "d": "",
    "who": "c73"
+  },
+  {
+   "id": "q_ost",
+   "t": "Všechno ostatní",
+   "d": "vše, co není v seznamu",
+   "who": "om"
   }
  ],
  "pinHash": "5pvqgxoq3423bv9v404t4",
- "updated": "2026-10-13"
+ "updated": "2026-10-13",
+ "qrules": [
+  "Když to nehoří, zadejte úkol do ClickUpu odpovědné osobě nebo oddělení.",
+  "Personální věci řešte přes Munipolis.",
+  "E-mailem ne!"
+ ]
 }

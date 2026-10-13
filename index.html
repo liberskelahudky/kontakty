@@ -178,6 +178,12 @@ details.team li::marker{color:var(--gold)}
 .qwho{flex:none;font-size:.78rem;font-weight:600;background:rgba(255,255,255,.16);border-radius:999px;padding:4px 10px;white-space:nowrap}
 .qar{flex:none;font-size:1.3rem;opacity:.7;width:12px;text-align:center}
 .qrow.add .qt{opacity:.85}
+.qrules{margin:8px 2px 2px;padding:12px 12px 10px;border-radius:16px;background:rgba(0,0,0,.16);display:flex;flex-direction:column;gap:7px}
+.qrules[data-qrules]{cursor:pointer}
+.qr-h{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;opacity:.75}
+.qr{display:flex;gap:9px;align-items:flex-start;font-size:.88rem;line-height:1.35}
+.qr-i{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.7rem;font-weight:800;background:rgba(255,255,255,.2);margin-top:1px}
+.qr.no{font-weight:700}.qr.no .qr-i{background:#fff;color:var(--accent)}
 .qmore{border:0;background:rgba(255,255,255,.12);color:inherit;border-radius:12px;height:42px;margin:6px 2px 2px;font-weight:600;cursor:pointer}
 .qmore span{opacity:.7;margin-left:4px}
 
@@ -455,15 +461,33 @@ function hrChooser(){
 }
 function hrStrip(x){if(!x)return '';return `<div class="hrstrip" role="button" tabindex="0" data-open="${esc(x.id)}"><span class="omf">${face(x)}</span><span class="hrs-t"><span class="k">HR partnerka</span><b>${esc(x.name)}</b></span><span class="qar">›</span></div>`;}
 function hrSection(x){if(!x)return '';const p=phonesOf(x),e=(x.em||[]).filter(Boolean);return `<div class="s-sec"><div class="k">HR partnerka</div><div class="card2"><div class="d-person" style="display:flex;gap:12px;align-items:center;padding:12px 14px"><span class="omf lg">${face(x)}</span><div><div style="font-weight:700">${esc(x.name)}</div><div style="font-size:.85rem;color:var(--muted)">personální záležitosti, nábor, smlouvy</div></div></div>${p.map(q=>line(tel(q.n),q.n,'telefon',q.t)).join('')}${e.map(m=>line('mailto:'+m,m,'e-mail')).join('')}</div></div>`;}
+const omList=()=>D().contacts.filter(m=>!isStore(m)&&D().contacts.some(s=>isStore(s)&&s.om===m.id));
+function qPeople(x){return [x.who,...(x.also||[])].map(id=>D().contacts.find(k=>k.id===id)).filter(Boolean);}
 function qrow(x){
-  const c=D().contacts.find(k=>k.id===x.who);
-  const who=x.who==='hr'?hrPartners().map(h=>h.name.split(' ')[0]).join(' / ')||'HR':c?shortName(c.name):'nepřiřazeno';
+  const ps=qPeople(x);
+  const who=x.who==='hr'?hrPartners().map(h=>h.name.split(' ')[0]).join(' / ')||'HR':x.who==='om'?'oblastní manažer':ps.length>1?ps.map(c=>c.name.split(' ')[0]).join(' / '):ps.length?shortName(ps[0].name):'nepřiřazeno';
   return `<button class="qrow" data-quick="${esc(x.id)}"><span class="qx"><span class="qt">${esc(x.t)}</span>${x.d?`<span class="qd">${esc(x.d)}</span>`:''}</span><span class="qwho">${esc(who)}</span><span class="qar">${draft?'✎':'›'}</span></button>`;
 }
 function qpanel(qs,title,limit){
   const many=limit&&!qOpen&&qs.length>limit+1;
   const shown=many?qs.slice(0,limit):qs;
-  return `<section class="quick"><div class="qpanel"><div class="qp-h"><span class="qp-ic">${I.help}</span><h2>${title}</h2></div><div class="qlist">${shown.map(qrow).join('')}${many?`<button class="qmore" data-qmore>Všechna témata (${qs.length}) <span>⌄</span></button>`:''}${draft?'<button class="qrow add" data-addq><span class="qx"><span class="qt">+ Přidat téma</span></span></button>':''}</div></div></section>`;
+  return `<section class="quick"><div class="qpanel"><div class="qp-h"><span class="qp-ic">${I.help}</span><h2>${title}</h2></div><div class="qlist">${shown.map(qrow).join('')}${many?`<button class="qmore" data-qmore>Všechna témata (${qs.length}) <span>⌄</span></button>`:''}${draft?'<button class="qrow add" data-addq><span class="qx"><span class="qt">+ Přidat téma</span></span></button>':''}</div>${qrulesHtml()}</div></section>`;
+}
+function qrulesHtml(){
+  const r=D().qrules||[];if(!r.length&&!draft)return '';
+  return `<div class="qrules"${draft?' role="button" tabindex="0" data-qrules':''}><div class="qr-h">Jak to zadat${draft?' <span>✎</span>':''}</div>${r.map(t=>{const no=/\bne!?$/i.test(t)||/^ne\b/i.test(t);return `<div class="qr${no?' no':''}"><span class="qr-i">${no?'✕':'✓'}</span><span>${esc(t)}</span></div>`;}).join('')}${!r.length?'<div class="qr"><span>+ Přidat pravidla</span></div>':''}</div>`;
+}
+function peopleChooser(title,note,ps){
+  let h=`<div class="pad"><div class="s-nm" style="margin-top:4px">${esc(title)}</div>${note?`<div class="s-rl">${esc(note)}</div>`:''}`;
+  for(const x of ps){const pp=personPhone(x),em=(x.em||[])[0];const sub=x._sub||x.role||'';
+    h+=`<div class="s-sec"><div class="hrcard"><div class="hrtop" role="button" tabindex="0" data-open="${esc(x.id)}"><span class="omf lg">${face(x)}</span><div class="who"><div style="font-weight:700;font-size:1.1rem">${esc(x.name)}</div><div style="font-size:.85rem;color:var(--muted)">${esc(sub)}</div></div>${pp?`<a class="oa call" style="position:static" href="${tel(pp)}" data-stop aria-label="Zavolat ${esc(x.name)}">${I.tel}</a>`:''}</div></div></div>`;}
+  h+=`<div class="foot"><button class="btn" data-close>Zavřít</button></div></div>`;
+  openSheet(h);
+}
+function openQuick(x){
+  if(x.who==='hr'){hrChooser();return;}
+  if(x.who==='om'){const ps=omList().map(m=>{const st=D().contacts.filter(s=>isStore(s)&&s.om===m.id).map(s=>s.place||s.name);return {...m,_sub:st.join(', ')};});peopleChooser('Oblastní manažer vaší prodejny','Najděte svou prodejnu a obraťte se na jejího manažera.',ps);return;}
+  const ps=qPeople(x);if(ps.length>1){peopleChooser(x.t,x.d||'',ps);return;}if(ps[0])detail(ps[0]);
 }
 function qcard(x){
   const c=D().contacts.find(k=>k.id===x.who);
@@ -672,9 +696,15 @@ function quickEditor(x,isNew){
   openSheet(`<form class="form" id="qform"><h3>${isNew?'Nové téma':'Upravit téma'}</h3>
    <div class="f"><label for="qt">Téma</label><input id="qt" value="${esc(x.t)}" placeholder="např. Benefity"></div>
    <div class="f"><label for="qd">Upřesnění</label><input id="qd" value="${esc(x.d||'')}" placeholder="např. MultiSport, Edenred…"></div>
-   <div class="f"><label for="qw">Kdo to řeší</label><select id="qw"><option value="hr"${x.who==='hr'?' selected':''}>HR partnerka podle střediska (Sára / Jana)</option>${people.map(c=>`<option value="${esc(c.id)}"${c.id===x.who?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
+   <div class="f"><label for="qw">Kdo to řeší</label><select id="qw"><option value="hr"${x.who==='hr'?' selected':''}>HR partnerka podle střediska (Sára / Jana)</option><option value="om"${x.who==='om'?' selected':''}>Oblastní manažer podle prodejny</option>${people.map(c=>`<option value="${esc(c.id)}"${c.id===x.who?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
+   <div class="f"><label for="qa">Řeší i (nepovinné)</label><select id="qa"><option value="">– nikdo další –</option>${people.map(c=>`<option value="${esc(c.id)}"${(x.also||[])[0]===c.id?' selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
    <div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Hotovo</button></div>
    ${isNew?'':'<button type="button" class="btn danger" id="qdel">Smazat téma</button>'}</form>`);
+}
+function submitRules(){draft.qrules=lines('rr');done();}
+function rulesEditor(){
+  sheet={kind:'rules'};
+  openSheet(`<form class="form" id="rform"><h3>Jak to zadat</h3><div class="f"><label for="rr">Pravidla – každé na nový řádek</label><textarea id="rr" rows="5">${esc((D().qrules||[]).join('\n'))}</textarea><div class="hint">Řádek, který končí „ne!“, se ukáže s křížkem.</div></div><div class="foot"><button type="button" class="btn" data-close>Zrušit</button><button type="submit" class="btn primary">Hotovo</button></div></form>`);
 }
 function readPhoto(file){
   return new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>{const img=new Image();img.onload=()=>{const W=480,H=600,cv=document.createElement('canvas');cv.width=W;cv.height=H;const r=W/H;let sw=img.width,sh=img.height;if(sw/sh>r){sw=sh*r;}else{sh=sw/r;}const sx=(img.width-sw)/2,sy=Math.max(0,(img.height-sh)*0.3);cv.getContext('2d').drawImage(img,sx,sy,sw,sh,0,0,W,H);res(cv.toDataURL('image/jpeg',.78));};img.onerror=rej;img.src=fr.result;};fr.onerror=rej;fr.readAsDataURL(file);});
@@ -691,7 +721,7 @@ function submitPerson(){
   done();
 }
 function submitDept(){const d=draft.depts.find(x=>x.id===sheet.id);const ic=document.querySelector('input[name=dic]:checked');if(ic)d.icon=ic.value;d.name=val('dn')||d.name;{const e=document.getElementById('dhr');if(e)d.hr=e.value;}d.about=val('da');d.note=val('dno');d.teamTitle=val('dtt');d.team=lines('dtm');done();}
-function submitQuick(){const x=sheet.x;x.t=val('qt');x.d=val('qd');x.who=val('qw');if(!x.t){toast('Doplňte téma.');return;}const i=draft.quick.findIndex(k=>k.id===x.id);if(i<0)draft.quick.push(x);else draft.quick[i]=x;done();}
+function submitQuick(){const x=sheet.x;x.t=val('qt');x.d=val('qd');x.who=val('qw');{const a=val('qa');if(a&&a!==x.who&&x.who!=='hr'&&x.who!=='om')x.also=[a];else delete x.also;}if(!x.t){toast('Doplňte téma.');return;}const i=draft.quick.findIndex(k=>k.id===x.id);if(i<0)draft.quick.push(x);else draft.quick[i]=x;done();}
 function done(msg){dirty++;closeSheet();render();toast(msg||'Připraveno. Nezapomeňte uložit.');}
 
 /* ---------- GitHub ukládání ---------- */
@@ -800,12 +830,12 @@ root.addEventListener('change',async e=>{
     catch(_){toast('Tenhle soubor nejde načíst jako obrázek.');}
   }
 });
-root.addEventListener('submit',e=>{e.preventDefault();({pform:submitPerson,dform:submitDept,qform:submitQuick,pinform:submitPin,pinchange:submitPinChange,tokform:submitToken}[e.target.id]||(()=>{}))();});
+root.addEventListener('submit',e=>{e.preventDefault();({pform:submitPerson,dform:submitDept,qform:submitQuick,rform:submitRules,pinform:submitPin,pinchange:submitPinChange,tokform:submitToken}[e.target.id]||(()=>{}))();});
 root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.open){e.preventDefault();e.target.click();}});
 root.addEventListener('click',e=>{
   if(e.target.id==='scrim'){closeSheet();return;}
   if(e.target.closest('[data-stop]')) return;
-  const t=e.target.closest('button,[data-open]'); if(!t) return;
+  const t=e.target.closest('button,[data-open],[data-qrules]'); if(!t) return;
   const ds=t.dataset;
   if(ds.qmore!==undefined){qOpen=true;render();return;}
   if(ds.af){allF=ds.af;render();return;}
@@ -814,7 +844,8 @@ root.addEventListener('click',e=>{
   if(ds.copy!==undefined){const v=ds.copy,fb=()=>{const i=document.createElement('textarea');i.value=v;document.body.appendChild(i);i.select();try{document.execCommand('copy');toast('Zkopírováno');}catch(_){toast(v);}i.remove();};if(navigator.clipboard)navigator.clipboard.writeText(v).then(()=>toast('Zkopírováno'),fb);else fb();return;}
   if(ds.close!==undefined){closeSheet();return;}
   if(ds.open){const c=D().contacts.find(x=>x.id===ds.open);if(c)draft?editor(c,false):detail(c);return;}
-  if(ds.quick){const x=D().quick.find(k=>k.id===ds.quick);if(!x)return;if(draft){quickEditor(x,false);return;}if(x.who==='hr'){hrChooser();return;}const c=D().contacts.find(k=>k.id===x.who);if(c)detail(c);return;}
+  if(ds.quick){const x=D().quick.find(k=>k.id===ds.quick);if(!x)return;if(draft){quickEditor(x,false);return;}openQuick(x);return;}
+  if(ds.qrules!==undefined){rulesEditor();return;}
   if(ds.addq!==undefined){quickEditor({id:'q'+Date.now().toString(36),t:'',d:'',who:''},true);return;}
   if(ds.dedit){deptEditor(D().depts.find(d=>d.id===ds.dedit));return;}
   if(ds.add){editor({id:'c'+Date.now().toString(36),d:ds.add,name:'',role:'',ph:[],em:[],photo:'',lead:false,about:'',topics:[],areas:''},true);return;}
