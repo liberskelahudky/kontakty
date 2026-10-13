@@ -95,7 +95,7 @@ details.team li::marker{color:var(--gold)}
 /* person tile */
 .tile{position:relative;background:var(--surface);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;min-width:0;cursor:pointer;text-align:left;border:0;padding:0;color:var(--fg)}
 .ph{position:relative;aspect-ratio:4/5;background:var(--surface-2);overflow:hidden}
-.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .mono{display:grid;place-items:center;font-weight:800;letter-spacing:-.02em}
 .ph .mono{position:absolute;inset:0;font-size:2.6rem}
 .ph.np .shade{display:none}.ph.np .cap{color:var(--fg)}.ph.np .mono{padding-bottom:22%}
@@ -124,7 +124,7 @@ details.team li::marker{color:var(--gold)}
 
 .omchip{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;max-width:calc(100% - 64px);background:rgba(255,255,255,.94);color:#3a2019;border-radius:999px;padding:3px 10px 3px 3px;font-size:.72rem;font-weight:700;box-shadow:0 2px 8px rgba(20,10,8,.15);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:2}
 .omf{flex:none;width:24px;height:24px;border-radius:50%;overflow:hidden;position:relative;background:var(--surface-2)}
-.omf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.omf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .omf .mono{position:absolute;inset:0;font-size:.55rem}
 .omf.lg{width:52px;height:52px}.omf.lg .mono{font-size:1rem}
 .omgroup .omchip{display:none}
@@ -155,7 +155,7 @@ details.team li::marker{color:var(--gold)}
 .arow{display:flex;align-items:center;gap:12px;padding:9px 12px;border-top:1px solid var(--line);cursor:pointer;min-height:64px}
 .arow:first-child{border-top:0}.arow:hover{background:var(--surface-2)}
 .aav{flex:none;width:46px;height:46px;border-radius:50%;overflow:hidden;position:relative;background:var(--surface-2)}
-.aav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.aav .mono{position:absolute;inset:0;font-size:.85rem}
+.aav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}.aav .mono{position:absolute;inset:0;font-size:.85rem}
 .aav.nophoto{box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--priv)}
 .arow .who{flex:1;min-width:0}
 .arow .nm{font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -241,11 +241,10 @@ details.team li::marker{color:var(--gold)}
 .icopick input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .sf{width:40px;height:40px;border-radius:50%;overflow:hidden;position:relative;border:2px solid var(--surface);margin-left:-10px;background:var(--surface-2)}
 .sf:first-child{margin-left:0}
-.sf img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.sf img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;position:absolute;inset:0}
 .sf .mono{position:absolute;inset:0;font-size:.8rem}
 @media (max-width:639px){
-  .ph{aspect-ratio:1/1}
-  .tile.wide .ph{aspect-ratio:5/4}
+  .tile.wide .ph{aspect-ratio:4/5}
   .tbar .act{height:42px}
   .act.call{font-size:.85rem}
   .grid.stores .ph{aspect-ratio:1/1}
@@ -299,8 +298,8 @@ details.team li::marker{color:var(--gold)}
 @media (min-width:760px){.scrim{align-items:center;padding:24px}.sheet{border-radius:26px;padding-bottom:22px}}
 @keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.hero-ph{position:relative;margin:0 20px;aspect-ratio:1/1;max-height:340px;width:calc(100% - 40px);border-radius:22px;overflow:hidden;background:var(--surface-2)}
-.hero-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-ph{position:relative;margin:0 auto;aspect-ratio:4/5;height:min(56vh,440px);max-width:calc(100% - 40px);border-radius:22px;overflow:hidden;background:var(--surface-2)}
+.hero-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 .hero-ph .mono{position:absolute;inset:0;font-size:4rem}
 .hero-ph .storeno{width:60px;height:60px;font-size:1.6rem;top:14px;left:14px;border-radius:18px}
 .s-nm{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-top:16px}
