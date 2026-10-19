@@ -269,26 +269,25 @@ details.team li::marker{color:var(--gold)}
 @media (prefers-reduced-motion:reduce){.shake{animation:none}}
 
 /* org layout */
-.mgrid{columns:2;column-gap:10px}
-@media (min-width:640px){.mgrid{columns:3;column-gap:12px}}
-@media (min-width:980px){.mgrid{columns:4}}
-.mgrid>*{break-inside:avoid;margin-bottom:10px;width:100%;display:flex}
-@media (min-width:640px){.mgrid>*{margin-bottom:12px}}
-.mgrid>.addtile{display:grid}
+.mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+@media (min-width:640px){.mgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}}
+@media (min-width:980px){.mgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1180px){.mgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .tbody{padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px;font-size:.86rem}
 .tbody .about{font-size:.86rem;line-height:1.4}
 .tbody .topics li{font-size:.84rem}
 .tbody .k{font-size:.66rem;margin-top:2px}
 .heads{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
-.headcard{width:min(380px,82%);background:var(--surface);border-radius:26px;box-shadow:0 2px 4px rgba(60,30,20,.06),0 14px 34px rgba(60,30,20,.12);overflow:hidden;cursor:pointer;position:relative;display:flex;flex-direction:column}
-.headcard .ph{aspect-ratio:4/5}
-.headcard .ph .cap{left:18px;right:18px;bottom:16px}
-.headcard .ph .cap .nm{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
-.headcard .ph .cap .rl{font-size:.92rem}
-.headcard .ph .mono{font-size:4rem}
-.headcard .badge{top:14px;left:14px;font-size:.72rem;padding:5px 10px}
-.hc-a{display:flex;gap:8px;padding:12px;justify-content:center}
-.hc-a .pillbtn{flex:1;justify-content:center;height:44px;font-size:.92rem}
+.headcard{width:100%;max-width:560px;background:var(--surface);border-radius:22px;box-shadow:0 2px 4px rgba(60,30,20,.06),0 12px 28px rgba(60,30,20,.10);overflow:hidden;cursor:pointer;position:relative;display:flex;align-items:stretch;text-align:left}
+.headcard .ph{width:112px;flex:none;aspect-ratio:4/5;align-self:center;margin:10px 0 10px 10px;border-radius:16px}
+.headcard .ph .mono{font-size:2.2rem}
+.hc-b{flex:1;min-width:0;padding:12px 14px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.hc-badge{align-self:flex-start;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 9px;margin-bottom:4px}
+.hc-b .nm{font-size:1.2rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.hc-b .rl{font-size:.86rem;color:var(--muted);line-height:1.3}
+.hc-a{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.hc-a .pillbtn{height:38px;font-size:.86rem;padding:0 14px}
+@media (min-width:640px){.headcard .ph{width:140px}.hc-b{padding:16px 20px}.hc-b .nm{font-size:1.4rem}}
 .pillbtn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:.84rem;text-decoration:none}
 .pillbtn.call{background:var(--accent);color:var(--accent-fg)}
 .pillbtn svg{width:17px;height:17px}
@@ -419,7 +418,8 @@ const MGMT='vedeni';
 function membersOf(d,noVirtual){
   const own=D().contacts.filter(c=>c.d===d.id);
   if(d.id!==MGMT||noVirtual) return own;
-  return own.concat(D().contacts.filter(c=>c.lead&&c.d!==MGMT&&!isStore(c)));
+  const rank=c=>/majitel|předseda/i.test(c.role||'')?0:/generální/i.test(c.role||'')?1:/oblastní/i.test(c.role||'')?4:/ředitel|vedoucí/i.test(c.role||'')||c.lead?2:3;
+  return own.concat(D().contacts.filter(c=>c.lead&&c.d!==MGMT&&!isStore(c))).map((c,i)=>[c,i]).sort((a,b)=>rank(a[0])-rank(b[0])||a[1]-b[1]).map(x=>x[0]);
 }
 let tileCtx='';
 function tile(c){
@@ -436,7 +436,7 @@ function tile(c){
 }
 function headCard(c){
   const em=(c.em||[])[0], pp=personPhone(c);
-  return `<div class="headcard" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}<span class="badge">Vede oddělení</span><span class="shade"></span><div class="cap"><div class="nm">${esc(c.name)}</div>${c.role?`<div class="rl">${esc(c.role)}</div>`:''}</div>${draft?'<span class="edit-flag">Upravit</span>':''}</div>${draft?'':`<div class="hc-a">${pp?`<a class="pillbtn call" href="${tel(pp)}" data-stop>${I.tel}Zavolat</a>`:''}${em?`<a class="pillbtn" href="mailto:${esc(em)}" data-stop>${I.mail}E-mail</a>`:''}</div>`}</div>`;
+  return `<div class="headcard" role="button" tabindex="0" data-open="${esc(c.id)}"><div class="ph${c.photo?'':' np'}">${face(c)}</div><div class="hc-b"><span class="hc-badge">Vede oddělení</span><div class="nm">${esc(c.name)}</div>${c.role?`<div class="rl">${esc(c.role)}</div>`:''}${draft?'<span class="rl" style="color:var(--accent);font-weight:600">Upravit</span>':`<div class="hc-a">${pp?`<a class="pillbtn call" href="${tel(pp)}" data-stop>${I.tel}Zavolat</a>`:''}${em?`<a class="pillbtn" href="mailto:${esc(em)}" data-stop>${I.mail}E-mail</a>`:''}</div>`}</div></div>`;
 }
 let qOpen=false;
 /* ---------- HR partnerky ---------- */
@@ -516,7 +516,7 @@ function storeGroups(list){
 function deptSection(d,nq,dg,forceOpen){
   let list=membersOf(d,!!nq);tileCtx=d.id;
   if(d.id==='prodejny') list.sort((a,b)=>(+a.no||999)-(+b.no||999));
-  else list.sort((a,b)=>((a.d!==d.id)-(b.d!==d.id))||(b.lead?1:0)-(a.lead?1:0));
+  else if(d.id!==MGMT) list.sort((a,b)=>((a.d!==d.id)-(b.d!==d.id))||(b.lead?1:0)-(a.lead?1:0));
   const deptHit=nq&&hit(d.name+' '+d.about+' '+(d.team||[]).join(' '),nq);
   if(nq&&!deptHit) list=list.filter(c=>matches(c,nq,dg));
   if(!list.length&&!draft) return {html:'',n:0};

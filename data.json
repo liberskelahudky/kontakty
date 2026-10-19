@@ -180,8 +180,15 @@
    "d": "personalni",
    "name": "Jana Vaněk",
    "role": "HR partnerka",
-   "ph": [],
-   "em": [],
+   "ph": [
+    {
+     "n": "731 110 010",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "vanek@liberskelahudky.cz"
+   ],
    "photo": "fotky/c73-mv52v6lb.jpg",
    "lead": false,
    "about": "HR partnerka pro oblast Richarda Svitáka, pekárnu Lahovice a centrálu. Zastupuje se se Sárou.",
@@ -200,8 +207,15 @@
    "d": "personalni",
    "name": "Sára Němcová",
    "role": "HR partnerka",
-   "ph": [],
-   "em": [],
+   "ph": [
+    {
+     "n": "733 125 025",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "nemcova@liberskelahudky.cz"
+   ],
    "photo": "fotky/c_sara-mv52v6lb.jpg",
    "lead": false,
    "about": "HR partnerka pro oblast Davida Fendrycha a výrobnu Vestec. Zastupuje se s Janou.",
@@ -287,6 +301,10 @@
     {
      "n": "731 198 894",
      "t": ""
+    },
+    {
+     "n": "777 735 420",
+     "t": "S"
     }
    ],
    "em": [
@@ -402,7 +420,7 @@
    "id": "c17",
    "d": "ucetni",
    "name": "Simona Zoulíková",
-   "role": "fakturant",
+   "role": "účetní",
    "ph": [
     {
      "n": "734 233 713",
@@ -596,13 +614,11 @@
    "role": "vedoucí skladu",
    "ph": [
     {
-     "n": "737 800 653",
-     "t": ""
+     "n": "739 907 216",
+     "t": "S"
     }
    ],
-   "em": [
-    "sklad@liberskelahudky.cz"
-   ],
+   "em": [],
    "photo": "",
    "lead": false,
    "about": "",
@@ -617,6 +633,10 @@
    "ph": [
     {
      "n": "737 419 369",
+     "t": ""
+    },
+    {
+     "n": "737 800 653",
      "t": ""
     }
    ],
@@ -685,7 +705,7 @@
   },
   {
    "id": "c_truchly",
-   "d": "vyroba",
+   "d": "vedeni",
    "name": "Rastislav Trúchly",
    "role": "technický vedoucí",
    "ph": [
@@ -780,11 +800,34 @@
    "areas": ""
   },
   {
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "em": [],
+   "id": "c_moravec",
+   "d": "lahovice",
+   "name": "Karel Moravec",
+   "role": "řidič Lahovice",
+   "ph": [
+    {
+     "n": "777 427 017",
+     "t": ""
+    }
+   ]
+  },
+  {
    "id": "c34",
    "d": "prodejny",
-   "name": "Taisa",
+   "name": "Taisiia Shkiria",
    "role": "provozní",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 536 829",
+     "t": "P"
+    }
+   ],
    "em": [
     "ostrovskeho@liberskelahudky.cz"
    ],
@@ -1298,7 +1341,7 @@
    "topics": [],
    "areas": "",
    "place": "Vestec",
-   "no": "",
+   "no": "61",
    "sp": "703 150 362",
    "om": "c4"
   },
@@ -1313,14 +1356,16 @@
      "t": "P"
     }
    ],
-   "em": [],
+   "em": [
+    "cb.prazska@liberskelahudky.cz"
+   ],
    "photo": "fotky/c_cb2-mv0wi8a3.jpg",
    "lead": false,
    "about": "",
    "topics": [],
    "areas": "",
    "place": "České Budějovice II.",
-   "no": "",
+   "no": "77",
    "sp": "",
    "om": "c5"
   },
@@ -1575,7 +1620,12 @@
    "d": "ridici",
    "name": "Jan Češka",
    "role": "E-shop",
-   "ph": [],
+   "ph": [
+    {
+     "n": "737 801 039",
+     "t": ""
+    }
+   ],
    "em": [],
    "photo": "",
    "lead": false,
@@ -1674,11 +1724,34 @@
    "areas": ""
   },
   {
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": "",
+   "em": [],
+   "id": "c_raulim",
+   "d": "ridici",
+   "name": "Radim Raulím",
+   "role": "pulty",
+   "ph": [
+    {
+     "n": "721 165 132",
+     "t": ""
+    }
+   ]
+  },
+  {
    "id": "cmuz3seox",
    "d": "ucetni",
    "name": "Anna Herdová",
    "role": "finanční ředitelka",
-   "ph": [],
+   "ph": [
+    {
+     "n": "773 638 629",
+     "t": ""
+    }
+   ],
    "em": [
     "herdova@liberskelahudky.cz"
    ],
@@ -1693,8 +1766,19 @@
    "d": "nakup",
    "name": "Věra Malá",
    "role": "objednávkové oddělení",
-   "ph": [],
-   "em": [],
+   "ph": [
+    {
+     "n": "734 449 901",
+     "t": ""
+    },
+    {
+     "n": "241 941 901",
+     "t": ""
+    }
+   ],
+   "em": [
+    "objednavky@liberskelahudky.cz"
+   ],
    "photo": "fotky/cmuz3woya-muz47bqn.jpg",
    "lead": false,
    "about": "",
@@ -1726,7 +1810,12 @@
    "d": "vedeni",
    "name": "Jiří Kulhánek",
    "role": "majitel",
-   "ph": [],
+   "ph": [
+    {
+     "n": "736 756 453",
+     "t": ""
+    }
+   ],
    "em": [
     "kulhanek@liberskelahudky.cz"
    ],
@@ -1752,26 +1841,6 @@
    ],
    "photo": "fotky/cmvf4rfqn-mvf4x6ni.jpg",
    "lead": true,
-   "about": "",
-   "topics": [],
-   "areas": ""
-  },
-  {
-   "id": "cmvf4wphl",
-   "d": "kancelar",
-   "name": "Rastislav Trúchly",
-   "role": "technický vedoucí",
-   "ph": [
-    {
-     "n": "704 975 975",
-     "t": "P"
-    }
-   ],
-   "em": [
-    "truchly@liberskelahudky.cz"
-   ],
-   "photo": "",
-   "lead": false,
    "about": "",
    "topics": [],
    "areas": ""
