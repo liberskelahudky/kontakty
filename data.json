@@ -1750,7 +1750,27 @@
    "em": [
     "sustkova@liberskelahudky.cz"
    ],
-   "photo": "fotky/cmvf4rfqn-mvf4u1cs.jpg",
+   "photo": "fotky/cmvf4rfqn-mvf4x6ni.jpg",
+   "lead": false,
+   "about": "",
+   "topics": [],
+   "areas": ""
+  },
+  {
+   "id": "cmvf4wphl",
+   "d": "kancelar",
+   "name": "Rastislav Trúchly",
+   "role": "technický vedoucí",
+   "ph": [
+    {
+     "n": "704 975 975",
+     "t": "P"
+    }
+   ],
+   "em": [
+    "truchly@liberskelahudky.cz"
+   ],
+   "photo": "",
    "lead": false,
    "about": "",
    "topics": [],
