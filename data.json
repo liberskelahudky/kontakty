@@ -76,6 +76,16 @@
    "hr": "c_sara"
   },
   {
+   "id": "udrzba",
+   "name": "Údržba a technika",
+   "note": "",
+   "about": "",
+   "teamTitle": "",
+   "team": [],
+   "icon": "udrzba",
+   "hr": "c_sara"
+  },
+  {
    "id": "lahovice",
    "name": "Pekárna Lahovice",
    "note": "",
@@ -705,7 +715,7 @@
   },
   {
    "id": "c_truchly",
-   "d": "vedeni",
+   "d": "udrzba",
    "name": "Rastislav Trúchly",
    "role": "technický vedoucí",
    "ph": [
@@ -718,10 +728,30 @@
     "truchly@liberskelahudky.cz"
    ],
    "photo": "",
-   "lead": false,
+   "lead": true,
    "about": "",
    "topics": [
     "technické problémy a závady"
+   ],
+   "areas": ""
+  },
+  {
+   "id": "c_stajner",
+   "d": "udrzba",
+   "name": "René Štajner",
+   "role": "údržba",
+   "ph": [
+    {
+     "n": "736 542 420",
+     "t": ""
+    }
+   ],
+   "em": [],
+   "photo": "",
+   "lead": false,
+   "about": "",
+   "topics": [
+    "opravy a údržba"
    ],
    "areas": ""
   },
