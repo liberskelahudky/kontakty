@@ -60,11 +60,12 @@
   {
    "id": "marketing",
    "name": "Marketing",
-   "note": "",
+   "note": "marketing@liberskelahudky.cz",
    "about": "",
    "teamTitle": "",
    "team": [],
-   "hr": "c73"
+   "hr": "c73",
+   "icon": "marketing"
   },
   {
    "id": "vyroba",
@@ -400,7 +401,8 @@
    "about": "",
    "topics": [
     "služební telefon",
-    "kontakty"
+    "kontakty",
+    "mzdy prodejen"
    ],
    "areas": ""
   },
